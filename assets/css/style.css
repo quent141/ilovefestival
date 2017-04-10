@@ -91,18 +91,18 @@ a, a:hover, a:focus {
 /*Theme Buttons*/
 
 .btn-theme {
-  color: #fff;
-  background-color: #68dff0;
-  border-color: #48bcb4;
+  color: #000;
+  background-color: #FFFC00;
+  border-color: #cac600;
 }
 .btn-theme:hover,
 .btn-theme:focus,
 .btn-theme:active,
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
-  color: #fff;
-  background-color: #48bcb4;
-  border-color: #48bcb4;
+    color: #fff;
+    background-color: #d7d400;
+    border-color: #cac600;
 }
 
 .btn-theme02 {
@@ -1918,7 +1918,7 @@ label {
 }
 .switch-square label {
     border-radius: 0 6px 6px 0;
-    border-color: #41cac0;
+    border-color: #cab023;
 }
 
 
@@ -1933,16 +1933,16 @@ label {
 }
 
 .form-login h2.form-login-heading {
-	margin: 0;
-	padding: 25px 20px;
-	text-align: center;
-	background: #68dff0;
-	border-radius: 5px 5px 0 0;
-	-webkit-border-radius: 5px 5px 0 0;
-	color: #fff;
-	font-size: 20px;
-	text-transform: uppercase;
-	font-weight: 300;
+    margin: 0;
+    padding: 25px 20px;
+    text-align: center;
+    background: #FFFC00;
+    border-radius: 5px 5px 0 0;
+    -webkit-border-radius: 5px 5px 0 0;
+    color: #53c3ff;
+    font-size: 30px;
+    font-weight: 600;
+    font-family: "open sans",serif;
 }
 .login-wrap {
 	padding: 20px;
