@@ -92,8 +92,8 @@ a, a:hover, a:focus {
 
 .btn-theme {
   color: #000;
-  background-color: #FFFC00;
-  border-color: #cac600;
+  background-color: RGBA(75, 201, 20, 0.65);
+  border-color: #89d8db;
 }
 .btn-theme:hover,
 .btn-theme:focus,
@@ -151,9 +151,9 @@ a, a:hover, a:focus {
 }
 
 .btn-clear-g {
-	color: #48bcb4;
+	color: #86f212;
 	background: transparent;
-	border-color: #48bcb4;
+	border-color: #da4453;
 }
 
 .btn-clear-g:hover {
@@ -1936,13 +1936,13 @@ label {
     margin: 0;
     padding: 25px 20px;
     text-align: center;
-    background: #FFFC00;
+    background: RGBA(255, 252, 0, 0);
     border-radius: 5px 5px 0 0;
     -webkit-border-radius: 5px 5px 0 0;
-    color: #53c3ff;
-    font-size: 30px;
+    color: #4bc914;
+    font-size: 40px;
     font-weight: 600;
-    font-family: "open sans",serif;
+    font-family: Ruda,serif;
 }
 .login-wrap {
 	padding: 20px;
