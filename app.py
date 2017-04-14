@@ -2,7 +2,7 @@ from flask import Flask, render_template,json, request
 app = Flask(__name__)
 
 
-@app.route("/")
+@app.route('/')
 def main():
     return render_template('index.html')
 
@@ -15,16 +15,16 @@ def topten():
     return render_template('top10.html')
 
 @app.route('/classement2016')
-def classement():
+def classement2016():
 	return render_template('classement2016.html')
 
 @app.route('/classement2015')
-def classement():
+def classement2015():
 	return render_template('classement2015.html')
 
 @app.route('/classement2014')
-def classement():
+def classement2014():
 	return render_template('classement2014.html')
 
-if __name__ == "__main__":
-    app.run()
+if __name__ == '__main__':
+    app.run(debug=True)
