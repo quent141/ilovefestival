@@ -14,6 +14,10 @@ def decouverte():
 def topten():
     return render_template('top10.html')
 
+@app.route('/hot')
+def hot():
+    return render_template('hot.html')
+
 @app.route('/classement2016')
 def classement2016():
 	return render_template('classement2016.html')
