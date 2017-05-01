@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="Dashboard">
+    <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
+
+    <title>DASHGUM - Bootstrap Admin Template</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <!--external css-->
+    <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
+    <link href="assets/js/fullcalendar/bootstrap-fullcalendar.css" rel="stylesheet" />
+
+    <!-- Custom styles for this template -->
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/style-responsive.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
+  
+    <script src="assets/js/chart-master/Chart.js"></script>
+    <link href="../css/style.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <link href="../css/bootstrap.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <link href="../css/style-responsive.css" rel="stylesheet"><!--PLUUUUUUUS -->
+   
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+
+
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="index.html" class="logo"><b>I Love Festivals</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                  
+                <!-- inbox dropdown start-->
+                <li id="header_inbox_bar" class="dropdown">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="index.html#">
+                        <i class="fa fa-envelope-o"></i>
+                        <span class="badge bg-theme">5</span>
+                    </a>
+                    <ul class="dropdown-menu extended inbox">
+                        <div class="notify-arrow notify-arrow-green"></div>
+                        <li>
+                            <p class="green">You have 5 new messages</p>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-zac.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Zac Snider</span>
+                                    <span class="time">Just now</span>
+                                    </span>
+                                <span class="message">
+                                        Hi mate, how is everything?
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-divya.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Divya Manian</span>
+                                    <span class="time">40 mins.</span>
+                                    </span>
+                                <span class="message">
+                                     Hi, I need your help with this.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-danro.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Dan Rogers</span>
+                                    <span class="time">2 hrs.</span>
+                                    </span>
+                                <span class="message">
+                                        Love your new Dashboard.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">
+                                <span class="photo"><img alt="avatar" src="assets/img/ui-sherman.jpg"></span>
+                                <span class="subject">
+                                    <span class="from">Dj Sherman</span>
+                                    <span class="time">4 hrs.</span>
+                                    </span>
+                                <span class="message">
+                                        Please, answer asap.
+                                    </span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="index.html#">See all messages</a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- inbox dropdown end -->
+            </ul>
+            <!--  notification end -->
+        </div>
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">
+                <li><a class="logout" href="login.html">Déconnexion</a></li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
+
+    <!-- **********************************************************************************************************************************************************
+          MAIN SIDEBAR MENU
+              Infos pour les modifs :
+                  -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
+                  -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
+                  -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
+          *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
+
+
+                  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                  <h5 class="centered">I Love Festivals</h5>
+
+                  <li class="mt">
+                      <a href="form_component.html">
+                          <i class="fa fa-tasks"></i>
+                          <li role="presentation"><a href="decouverte">Decourvrir</a> <!--PLUUUUUS-->
+                        </li>
+                      </a>
+                  </li>
+
+
+                <li class="sub-menu">
+                    <a href="gallery.html">
+                        <i class="fa fa-cogs"></i>
+                        <span>Festivals</span>
+                    </a>
+                </li>
+
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop" href="basic_table.html"></i>
+                          <span>Classements</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="classement2016.html">2016</a></li>
+                          <li><a  href="classement2015.html">2015</a></li>
+                          <li><a  href="classement2014.html">2014</a></li>
+                      </ul>
+                  </li>
+
+                <li class="sub-menu">
+                    <a href="gallery.html">
+                        <i class="fa fa-cogs"></i>
+                        <span>Artistes</span>
+                    </a>
+                </li>
+
+                <li class="sub-menu">
+                    <a href="chartjs.html">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>A Propos</span>
+                    </a>
+                </li>
+
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
+
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+
+            <div class="row">
+                <div class="col-lg-9 main-chart">
+
+                    <!-- DEBUT BARRE DE RECHERCHE -->
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label"></label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control round-form" placeholder="Recherche par Festival, Artiste ou plus...">
+                        </div>
+                    </div>
+                    <!-- FIN BARRE DE RECHERCHE -->
+
+                </div><!-- /col-lg-9 END SECTION MIDDLE -->
+
+            </div><! --/row -->
+
+            <!-- page start-->
+            <div class="row mt">
+
+                <aside class="col-lg-9 mt">
+                    <section class="panel">
+                        <div class="panel-body">
+                            <div class="has-toolbar fc">
+                                <table class="fc-header" style="width:100%">
+                                    <tbody>
+                                    <tr>
+                                        <td class="fc-header-right">
+                                            <span class="fc-button fc-button-month fc-state-default fc-corner-left">
+                                                <span class="fc-button-inner">
+                                                    <span class="fc-button-content">Pépites</span>
+                                                    <span class="fc-button-effect">
+                                                        <span></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                            <span class="fc-button fc-button-basicWeek fc-state-default fc-state-active">
+                                                <span class="fc-button-inner">
+                                                    <span class="fc-button-content">News</span>
+                                                    <span class="fc-button-effect">
+                                                        <span></span>
+                                                    </span>
+                                                </span>
+                                            </span>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                                <div class="fc-content" style="position: relative; min-height: 1px;">
+                                    <div class="fc-view fc-view-month fc-grid" style="position: relative; display: none;" unselectable="on"></div>
+                                    <div class="fc-view fc-view-basicWeek fc-grid" style="position: relative; display: block;" unselectable="on"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </aside>
+            </div>
+            <!-- page end-->
+        </section><! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            2014 - Alvarez.is
+            <a href="calendar.html#" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="assets/js/jquery.js"></script>
+<script src="assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+<script src="assets/js/bootstrap.min.js"></script>
+<script class="include" type="text/javascript" src="assets/js/jquery.dcjqaccordion.2.7.js"></script>
+<script src="assets/js/jquery.scrollTo.min.js"></script>
+<script src="assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+
+<!--common script for all pages-->
+<script src="assets/js/common-scripts.js"></script>
+
+<script>
+    //custom select box
+
+    $(function(){
+        $("select.styled").customSelect();
+    });
+
+</script>
+
+</body>
+</html>
