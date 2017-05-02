@@ -2,7 +2,7 @@
 from flask import Flask, render_template,json, request
 app = Flask(__name__)
 
-@app.route('/index/') # BIP a eviter de decorer une fonction avec plusieurs routes (referencement), mais utile si user non identifie encore etc
+#@app.route('/index/') # BIP a eviter de decorer une fonction avec plusieurs routes (referencement), mais utile si user non identifie encore etc
 @app.route('/')
 def main():
     return render_template('index.html')
@@ -31,6 +31,7 @@ def classement2015():
 @app.route('/classement2014/')
 def classement2014():
 	return render_template('classement2014.html')
+
 
 if __name__ == '__main__':
     app.run(debug=True) #BIP mettre false a la fin
