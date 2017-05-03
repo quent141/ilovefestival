@@ -1,4 +1,3 @@
-
 from flask import Flask, render_template,json, request
 app = Flask(__name__)
 
@@ -16,9 +15,14 @@ def acc():
 def decouverte():
     return render_template('decouverte.html')
 
-@app.route('/topten/')
+@app.route('/decouverte/topten/')
 def topten():
     return render_template('top10.html')
+
+   
+@app.route('/decouverte/hot/')
+def hot():
+    return render_template('hot.html')
 
 @app.route('/classement2016/')
 def classement2016():
@@ -36,3 +40,4 @@ def classement2014():
 if __name__ == '__main__':
     app.run(debug=True) #BIP mettre false a la fin
     #app.secret_key = '2d9-E2.)f&e,A$p@fpa+zSU03e09_'
+
