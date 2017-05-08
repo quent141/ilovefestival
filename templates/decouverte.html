@@ -2,6 +2,7 @@
 <html lang="fr">
   <head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
@@ -11,17 +12,34 @@
 
     <!-- Bootstrap core CSS -->
     <link href="assets/css/bootstrap.css" rel="stylesheet">
+    <link href='https://fonts.googleapis.com/css?family=Lato:400,300,700' rel='stylesheet' type='text/css'>
     <link href="http://getbootstrap.com/dist/css/bootstrap.min.css" rel="stylesheet"><!--PLUUUUUUUS -->
     <link href="http://getbootstrap.com/examples/jumbotron-narrow/jumbotron-narrow.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <!-- Bootstrap Core CSS -->
+    <link href="static/bootstrap.min.css" rel="stylesheet"><!--PLUUUUUUUS -->
+
+    <!-- Custom CSS -->
+    <link href="static/shop-homepage.css" rel="stylesheet"><!--PLUUUUUUUS -->
+    <link href="{{url_for('static',filename='style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
     <!--external css-->
     <link href="assets/font-awesome/css/font-awesome.css" rel="stylesheet" />
     <link href="assets/js/fancybox/jquery.fancybox.css" rel="stylesheet" />
-    <!-- Custom styles for this template -->
-    <link href="assets/css/style.css" rel="stylesheet">
-    <link href="assets/css/style-responsive.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet"><!--PLUUUUUUUS -->
-    <link href="../css/bootstrap.css" rel="stylesheet"><!--PLUUUUUUUS -->
-    <link href="../css/style-responsive.css" rel="stylesheet"><!--PLUUUUUUUS -->
+       <!-- Custom styles for this template -->
+    <link href="{{ url_for('static', filename='zabuto_calendar.css') }}" rel="stylesheet" type="text/css" /><!--PLUUUUUUUS -->
+    <link href="{{ url_for('static', filename='style-responsive.css') }}" rel="stylesheet" type="text/css" /><!--PLUUUUUUUS -->
+    <link href="{{ url_for('static', filename='bootstrap.css') }}" rel="stylesheet" type="text/css" /><!--PLUUUUUUUS -->
+   <link href="{{ url_for('static', filename='to-do.css') }}" rel="stylesheet" type="text/css" /><!--PLUUUUUUUS -->
+   <link href="{{ url_for('static', filename='style-responsive.css') }}" rel="stylesheet" type="text/css" /> <!--PLUUUUUUUS -->
+
+<!--PLUUUUUUUS slider-->
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<style>
+.mySlides {display:none}
+.w3-left, .w3-right, .w3-badge {cursor:pointer}
+.w3-badge {height:13px;width:13px;padding:0}
+</style>
+
 
     <script src="assets/js/jquery.js"></script>
 
@@ -45,7 +63,7 @@
                   <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
               </div>
             <!--logo start-->
-            <a href="index.html" class="logo"><b>I Love Festival</b></a>
+            <a href="{{url_for('main')}}" class="logo"><b>I Love Festival</b></a>
             <!--logo end-->
             <div class="nav notify-row" id="top_menu">
                 <!--  notification start -->
@@ -208,12 +226,12 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="profile.html"><img src="assets/img/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                  <p class="centered"><a href="profile.html"><img src="{{url_for('static',filename='images/ui-sam.jpg')}}"class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festival</h5>
 
                   <li class="mt">
                       <a href="form_component.html">
-                          <li role="presentation"><a href="decouverte">Decourvrir</a>
+                          <li role="presentation"><a href="decouverte">Decouvrir</a>
                          </li>
                       </a>
                   </li>
@@ -264,131 +282,98 @@
       <section id="main-content">
           <section class="wrapper site-min-height">
           	<h3><i class="fa fa-angle-right"></i> Discovery </h3>
-          	<hr>
-				<div class="row mt">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port04.jpg"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt=""></a>
-                                  <li role="presentation"><a href="topten">Top10</a><!--PLUUUUUUUS -->
+              
+<!--beginslider-->
+ <div class="row">
+  <div id="container">
+    <center>
+            <div class="thumbnail_slider flexslider">
+                      <a href="topten">Top10</a>
+                       <div class="w3-content w3-display-container">
+
+                              <div class="w3-display-container mySlides">
+                                <img src="{{url_for('static',filename='images/euro.jpg')}}" style="width:100%">
+                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                 <td> 
+                                  <a href="https://www.festicket.com/fr/packages/les-eurockeennes-2017/?referrer=google-ppc&FestivalFR%20%7C%20FR%20%7C%20Google%20PPC%20%7C%20Les%20Eurockeennes%202017%20%7C%20Belfort%20%7C%20France%20%7C%20INTERNAL&gclid=CjwKCAjw_6XIBRAiEiwANnDbTPpOKfRj3o31uD8d807WVzyS_Ze6uChwhyvIUKuQpGfRuhWKX7EF_xoCbUoQAvD_BwE&buy=tickets">   Les Eurockéennes </a>
+                                  </td>
+                              
+                                </div>
+                              </div>
+
+                              <div class="w3-display-container mySlides">
+                                <img src="{{url_for('static',filename='images/euro.jpg')}}"style="width:100%">
+                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                   <td>
+                                    <a href="https://www.festicket.com/fr/packages/les-eurockeennes-2017/?referrer=google-ppc&FestivalFR%20%7C%20FR%20%7C%20Google%20PPC%20%7C%20Les%20Eurockeennes%202017%20%7C%20Belfort%20%7C%20France%20%7C%20INTERNAL&gclid=CjwKCAjw_6XIBRAiEiwANnDbTPpOKfRj3o31uD8d807WVzyS_Ze6uChwhyvIUKuQpGfRuhWKX7EF_xoCbUoQAvD_BwE&buy=tickets">   Les Eurockéennes </a>
+                                  </td>
+                                </div>
+                              </div>
+
+                              <div class="w3-display-container mySlides">
+                                <img src="{{url_for('static',filename='images/hell.jpg')}}" style="width:100%">
+                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                  <td>
+                                    <a href="http://www.hellfest.fr/">   Hellfest Open Air</a>
+                                  </td>
+                                </div>
+                              </div>
+
+                              <div class="w3-display-container mySlides">
+                                <img src="{{url_for('static',filename='images/rock.jpg')}}" style="width:100%">
+                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                  <td>
+                                    <a href="https://www.rockenseine.com/billetterie/">   Rock En Seine </a>
+                                  </td>
+                                </div>
+                              </div>
+
+                              <div class="w3-display-container mySlides">
+                                <img src="{{url_for('static',filename='images/rock.jpg')}}" style="width:100%">
+                               <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                  <td>
+                                    <a href="https://www.rockenseine.com/billetterie/">   Rock En Seine </a>
+                                  </td>
+                                </div>
+                              </div>
+
+                              <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
+                              <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+
+                              </div>
+                           </div>
+                         </center>
+                      </div>
+                  </div>
+<!--end slider-->
+
+
+
+
+        </div><!-- /row -->
+          <center>
+          <div class="row mt">
+            <div class="project-wrapper">
+                        <div class="project">
+                            <div class="photo-wrapper">
+                                <div class="photo">
+                                  <a class="fancybox" href="hot"><img class="img-responsive" src="{{url_for('static',filename='images/flame.png')}}" alt="" style="width: 10%"></a>
+                                  <a href="hot">Hot</a><!--PLUUUUUUUS -->
                                   </li>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port05.jpg"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port06.jpg"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-				</div><!-- /row -->
+                                </div>
+                                <div class="overlay"></div>
+                            </div>
+                        </div>
+                    </div>
+          
+            </center>
+          
+        </div><!-- /row -->
 
-				<div class="row mt">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port01.jpg"><img class="img-responsive" src="assets/img/portfolio/port01.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
+                				
 					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port02.jpg"><img class="img-responsive" src="assets/img/portfolio/port02.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port03.jpg"><img class="img-responsive" src="assets/img/portfolio/port03.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-				</div><!-- /row -->
 
-				<div class="row mt mb">
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port04.jpg"><img class="img-responsive" src="assets/img/portfolio/port04.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port05.jpg"><img class="img-responsive" src="assets/img/portfolio/port05.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-					
-					<div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
-						<div class="project-wrapper">
-		                    <div class="project">
-		                        <div class="photo-wrapper">
-		                            <div class="photo">
-		                            	<a class="fancybox" href="assets/img/portfolio/port06.jpg"><img class="img-responsive" src="assets/img/portfolio/port06.jpg" alt=""></a>
-		                            </div>
-		                            <div class="overlay"></div>
-		                        </div>
-		                    </div>
-		                </div>
-					</div><!-- col-lg-4 -->
-				</div><!-- /row -->
+				
 
 		</section><!--/wrapper -->
       </section><!-- /MAIN CONTENT -->
@@ -426,6 +411,8 @@
       });
 
   </script>
+
+
   
   <script>
       //custom select box
@@ -435,6 +422,72 @@
       });
 
   </script>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="js/jquery.flexslider-min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.flexslider').flexslider({
+            animation: 'fade',
+            controlsContainer: '.flex-container'
+        });
+
+           $('.header_slider.flexslider').flexslider({
+        animation: "fade",
+        controlsContainer: '.flex-container'
+
+         });
+    });
+
+ 
+
+</script>
+
+
+  <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="js/bootstrap.min.js"></script>
+
+<script>
+var slideIndex = 1;
+showDivs(slideIndex);
+
+
+
+function plusDivs(n) {
+  showDivs(slideIndex += n);
+}
+
+function showDivs(n) {
+  var i;
+  var x = document.getElementsByClassName("mySlides");
+  if (n > x.length) {slideIndex = 1}    
+  if (n < 1) {slideIndex = x.length}
+  for (i = 0; i < x.length; i++) {
+     x[i].style.display = "none";  
+  }
+  x[slideIndex-1].style.display = "block";  
+}
+</script>
+
+<script type="text/javascript">
+(function() {
+
+var img = document.getElementById('container').firstChild;
+img.onload = function() {
+    if(img.height > img.width) {
+        img.height = '100%';
+        img.width = 'auto';
+    }
+};
+
+}());
+</script>
+  
 
   </body>
 </html>

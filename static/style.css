@@ -101,8 +101,8 @@ a, a:hover, a:focus {
 .btn-theme.active,
 .open .dropdown-toggle.btn-theme {
     color: #fff;
-    background-color: #d7d400;
-    border-color: #cac600;
+    background-color: rgba(65, 221, 255, 0.51);
+    border-color: rgba(113, 196, 202, 0.54);
 }
 
 .btn-theme02 {
@@ -232,7 +232,7 @@ ul.top-menu > li > .logout {
     width: 210px;
     height: 100%;
     position: fixed;
-    background: #424a5d;
+    background: #616367;
 }
 
 #sidebar h5 {
@@ -257,7 +257,7 @@ ul.top-menu > li > .logout {
     height:17px;
     width:17px;
     display:inline-block;
-    background: url("../img/nav-expand.png") no-repeat top;
+    background: url("../static/images/nav-expand.png") no-repeat top;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -266,7 +266,7 @@ ul.top-menu > li > .logout {
     top:15px;
 }
 .active .dcjq-icon {
-    background: url("../img/nav-expand.png") no-repeat bottom;
+    background: url("../static/images/nav-expand.png") no-repeat bottom;
     border-radius:3px;
     -moz-border-radius:3px;
     -webkit-border-radius:3px;
@@ -295,7 +295,7 @@ ul.sidebar-menu {
 }
 
 ul.sidebar-menu li ul.sub li{
-    background: #424a5d;
+    background: #616367;
     margin-bottom: 0;
     margin-left: 0;
     margin-right: 0;
@@ -413,8 +413,8 @@ ul.sidebar-menu li a.active i {
 }
 
 .black-bg {
-    background: #ffd777;
-    border-bottom: 1px solid #c9aa5f;
+    background: #25cbdc;
+    border-bottom: 1px solid #25cbdc;
 }
 
 .wrapper {
@@ -695,7 +695,7 @@ ul.top-menu > li > a:hover, ul.top-menu > li > a:focus {
 }
 
 .log-arrow-up {
-    background: url("../img/arrow-up.png") no-repeat;
+    background: url("../static/images/arrow-up.png") no-repeat;
     width: 20px;
     height: 11px;
     position: absolute;
@@ -1166,7 +1166,7 @@ PANELS CONFIGURATIONS
 
 /* Weather 1 */
 .weather {
-	background: url(../img/weather.jpg) no-repeat center top;
+	background: url(../static/images/weather.jpg) no-repeat center top;
 	text-align: center;
 	background-position: center center;
 }
@@ -1273,7 +1273,7 @@ PANELS CONFIGURATIONS
 
 /* Instagram Panel*/
 .instagram-panel {
-	background: url(../img/instagram.jpg) no-repeat center top;
+	background: url(../static/images/instagram.jpg) no-repeat center top;
 	text-align: center;
 	background-position: center center;
 }
@@ -1317,11 +1317,11 @@ PANELS CONFIGURATIONS
 
 /* Soptify Panel */
 #spotify {
-	background: url(../img/lorde.jpg) no-repeat center top;
+	background: url(../static/images/lorde.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
-	min-height: 220px;
+	min-height: 100px;
 	width: 100%;
     -webkit-background-size: 100%;
     -moz-background-size: 100%;
@@ -1339,7 +1339,7 @@ PANELS CONFIGURATIONS
 	margin-top: 5px;
 }
 #spotify .sp-title {
-	bottom: 15%;
+	bottom: 75%;
 	left: 25px;
 	position: absolute;
 	color: #efefef;
@@ -1359,9 +1359,210 @@ PANELS CONFIGURATIONS
 	margin-top: 5px;
 }
 
+/* Spotify2 Panel */
+#spotify2 {
+    background: url(../static/images/lorde.jpg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotify2 .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotify2 .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #efefef;
+}
+#spotify2 .sp-title h3 {
+    font-weight: 900;
+}
+#spotify2 .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+/* Spotify3 Panel */
+#spotify3 {
+    background: url(../static/images/lorde.jpg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotify3 .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotify3 .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #efefef;
+}
+#spotify3 .sp-title h3 {
+    font-weight: 900;
+}
+#spotify3 .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+/* Spotify4 Panel */
+#spotify4 {
+    background: url(../static/images/lorde.jpg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotify4 .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotify4 .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #efefef;
+}
+#spotify4 .sp-title h3 {
+    font-weight: 900;
+}
+#spotify4 .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+/* Spotify5 Panel */
+#spotify5 {
+    background: url(../static/images/lorde.jpg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotify5 .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotify5 .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #efefef;
+}
+#spotify5 .sp-title h3 {
+    font-weight: 900;
+}
+#spotify5 .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+/* Spotify6 Panel */
+#spotify6 {
+    background: url(../static/images/lorde.jpg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotify6 .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotify6 .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #efefef;
+}
+#spotify6 .sp-title h3 {
+    font-weight: 900;
+}
+#spotify6 .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+
 /* BLOG PANEL */
 #blog-bg {
-	background: url(../img/blog-bg.jpg) no-repeat center top;
+	background: url(../static/images/blog-bg.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
@@ -1486,7 +1687,7 @@ PANELS CONFIGURATIONS
 /* PROFILE PANELS */
 /* Profile 01*/
 #profile-01 {
-	background: url(../img/profile-01.jpg) no-repeat center top;
+	background: url(../static/images/profile-01.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
@@ -1534,7 +1735,7 @@ PANELS CONFIGURATIONS
 
 /* Profile 02*/
 #profile-02 {
-	background: url(../img/profile-02.jpg) no-repeat center top;
+	background: url(../static/images/profile-02.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
@@ -1694,7 +1895,7 @@ PANELS CONFIGURATIONS
 
 .project:hover .photo-wrapper {
   background-color: #68dff0;
-	background-image:url(../img/zoom.png);
+	background-image:url(../static/images/zoom.png);
 	background-repeat:no-repeat;
 	background-position:center;
 	top: 0;
@@ -1790,8 +1991,8 @@ label {
     position: relative;
     text-align: left;
     width: 80px;
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../static/images/mask.png') 0 0 no-repeat;
+    mask: url('../static/images/mask.png') 0 0 no-repeat;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -1897,8 +2098,8 @@ label {
 .switch-square {
     border-radius: 6px;
     -webkit-border-radius: 6px;
-    -webkit-mask: url('../img/mask.png') 0 0 no-repeat;
-    mask: url('../img/mask.png') 0 0 no-repeat;
+    -webkit-mask: url('../static/images/mask.png') 0 0 no-repeat;
+    mask: url('../static/images/mask.png') 0 0 no-repeat;
 }
 .switch-square > div.switch-off label {
     border-color: #7f8c9a;
@@ -2216,7 +2417,7 @@ label {
 
 /*footer*/
 .site-footer {
-    background: #68dff0;
+    background: #25cbdc;
     color: #fff;
     padding: 10px 0;
 }
