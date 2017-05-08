@@ -10,19 +10,19 @@
     <title>classement 2016</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/bootstrap.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/bootstrap.css')}}" rel="stylesheet">
     <!--external css-->
-    <link href="static/font-awesome/css/font-awesome.css" rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="static/zabuto_calendar.css"><!--DU PLUS-->
-    <link rel="stylesheet" type="text/css" href="static/js/gritter/css/jquery.gritter.css" /><!--DU PLUS-->
-    <link rel="stylesheet" type="text/css" href="static/lineicons/style.css"><!--DU PLUS-->
+    <link href="{{url_for('static',filename='assets/font-awesome/css/font-awesome.css')}} " rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/zabuto_calendar.css')}}"><!--DU PLUS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/js/gritter/css/jquery.gritter.css')}}" /><!--DU PLUS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/lineicons/style.css')}}"><!--DU PLUS-->
 
     <!-- Custom styles for this template -->
-    <link href="static/style.css" rel="stylesheet">
-    <link href="static/style-responsive.css" rel="stylesheet">
-    <link href="{{url_for('static',filename='style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
+    <link href="{{url_for('static',filename='assets/style.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/style-responsive.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
-    <script src="static/js/chart-master/Chart.js"></script> <!--DU PLUS-->
+    <script src="static/assets/js/chart-master/Chart.js"></script> <!--DU PLUS-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -53,9 +53,9 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="login">Déconnexion</a></li>
-            	</ul>
+              <ul class="nav pull-right top-menu">
+                    <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
+              </ul>
             </div>
         </header>
       <!--header end-->
@@ -73,11 +73,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="profile"><img src="{{url_for('static',filename='images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered"><a href="profile"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
-                      <a href="form_component">
+                      <a href= "{{url_for('decouverte')}}">
                           <i class="fa fa-tasks"></i>
                           <span>Découvrir</span>
                       </a>
@@ -92,13 +92,13 @@
 
                   <li class="sub-menu">
                       <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop" href="basic_table"></i>
+                          <i class="fa fa-desktop" ></i> <!--href="basic_table"--> 
                           <span>Classements</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="classement2016">2016</a></li>
-                          <li><a  href="classement2015">2015</a></li>
-                          <li><a  href="classement2014">2014</a></li>
+                          <li class="active"><a  href="{{url_for('classement2016')}}">2016</a></li>
+                          <li><a  href="{{url_for('classement2015')}}">2015</a></li>
+                          <li><a  href="{{url_for('classement2014')}}">2014</a></li>
                       </ul>
                   </li>
 
@@ -240,17 +240,17 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="static/js/jquery.js"></script>
-    <script src="static/js/bootstrap.min.js"></script>
-    <script src="static/js/jquery-ui-1.9.2.custom.min.js"></script>
-    <script src="static/js/jquery.ui.touch-punch.min.js"></script>
-    <script class="include" type="text/javascript" src="static/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="static/js/jquery.scrollTo.min.js"></script>
-    <script src="static/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="static/assets/js/jquery.js"></script>
+    <script src="static/assets/js/bootstrap.min.js"></script>
+    <script src="static/assets/js/jquery-ui-1.9.2.custom.min.js"></script>
+    <script src="static/assets/js/jquery.ui.touch-punch.min.js"></script>
+    <script class="include" type="text/javascript" src="static/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="static/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="static/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
 
 
     <!--common script for all pages-->
-    <script src="static/js/common-scripts.js"></script>
+    <script src="static/assets/js/common-scripts.js"></script>
 
     <!--script for this page-->
     
@@ -263,12 +263,12 @@
 
   </script>
 
-<script type="text/javascript" src="static/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="static/js/gritter-conf.js"></script>
+<script type="text/javascript" src="static/assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="static/assets/js/gritter-conf.js"></script>
 
     <!--script for this page-->
-    <script src="static/js/sparkline-chart.js"></script>    
-  <script src="static/js/zabuto_calendar.js"></script>
+    <script src="static/assets/js/sparkline-chart.js"></script>    
+  <script src="static/assets/js/zabuto_calendar.js"></script>
   
   <script type="application/javascript">
         $(document).ready(function () {
