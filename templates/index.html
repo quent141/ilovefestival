@@ -10,19 +10,19 @@
     <title>Page d'accueil</title>
 
     <!-- Bootstrap core CSS -->
-    <link href="static/assets/bootstrap.css" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
     <!--external css-->
     <link href="{{url_for('static',filename='assets/font-awesome/css/font-awesome.css')}} " rel="stylesheet" />
-    <link rel="stylesheet" type="text/css" href="assets/static/assets/zabuto_calendar.css"><!--DU PLUS-->
-    <link rel="stylesheet" type="text/css" href="assets/static/assets/js/gritter/css/jquery.gritter.css" /><!--DU PLUS-->
-    <link rel="stylesheet" type="text/css" href="assets/static/assets/lineicons/style.css">    <!--DU PLUS-->
-    
-    <!-- Custom styles for this template -->
-    <link href="{{url_for('static',filename='assets/style.css')}}" rel="stylesheet">
-    <link href="{{url_for('static',filename='assets/style-responsive.css')}}" rel="stylesheet">
-    <link href="{{url_for('static',filename='assets/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/css/zabuto_calendar.css')}}"><!--DU PLUS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/js/gritter/css/jquery.gritter.css')}}" /><!--DU PLUS-->
+    <link rel="stylesheet" type="text/css" href="{{url_for('static',filename='assets/lineicons/style.css')}}"><!--DU PLUS-->
 
-    <script src="static/assets/js/chart-master/Chart.js"></script><!--DU PLUS-->
+    <!-- Custom styles for this template -->
+    <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/css/style-responsive.css')}}" rel="stylesheet">
+    <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
+
+    <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -73,7 +73,7 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="profile"><img src="static/assets/images/ui-sam.jpg" class="img-circle" width="60"></a></p>
+                  <p class="centered"><a href="/profile/"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
@@ -96,9 +96,9 @@
                           <span>Classements</span>
                       </a>
                       <ul class="sub">
-                          <li><a  href="classement2016">2016</a></li>
-                          <li><a  href="classement2015">2015</a></li>
-                          <li><a  href="classement2014">2014</a></li>
+                          <li><a  href="{{url_for('classement2016')}}">2016</a></li>
+                          <li><a  href="{{url_for('classement2015')}}">2015</a></li>
+                          <li><a  href="{{url_for('classement2014')}}">2014</a></li>
                       </ul>
                   </li>
 
