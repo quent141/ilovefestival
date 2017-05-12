@@ -1315,7 +1315,7 @@ PANELS CONFIGURATIONS
 	border-radius: 100%;
 }
 
-/* Soptify Panel */
+/* Spotify Panel */
 #spotify {
 	background: url(../images/muse.jpeg) no-repeat center top;
 	margin-top: -15px;
@@ -1558,6 +1558,90 @@ PANELS CONFIGURATIONS
     color: #efefef;
     font-size: 20px
 }
+
+
+/* SpotifyArtist Panel */
+#spotifyArtist {
+    background: url(../images/fondBoisBlanc.jpeg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotifyArtist .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotifyArtist .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #514b4b;
+}
+#spotifyArtist .sp-title h3 {
+    font-weight: 900;
+}
+#spotifyArtist .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+
+/* SpotifyLike Panel */
+#spotifyLike {
+    background: url(../images/fondGris.jpeg) no-repeat center top;
+    margin-top: -15px;
+    background-attachment: relative;
+    background-position: center center;
+    min-height: 140px;
+    width: 100%;
+    -webkit-background-size: 100%;
+    -moz-background-size: 100%;
+    -o-background-size: 100%;
+    background-size: 100%;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+#spotifyLike .btn-clear-g {
+    top: 15%;
+    right: 10px;
+    position: absolute;
+    margin-top: 5px;
+}
+#spotifyLike .sp-title {
+    bottom: 75%;
+    left: 25px;
+    position: absolute;
+    color: #514b4b;
+}
+#spotifyLike .sp-title h3 {
+    font-weight: 900;
+}
+#spotifyLike .play{
+    bottom: 18%;
+    right: 25px;
+    position: absolute;
+    color: #efefef;
+    font-size: 20px
+}
+
+
 
 
 /* BLOG PANEL */
