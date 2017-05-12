@@ -1819,7 +1819,7 @@ PANELS CONFIGURATIONS
 
 /* Profile 02*/
 #profile-02 {
-	background: url(../static/images/profile-02.jpg) no-repeat center top;
+	background: url(../images/profile-02.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;
