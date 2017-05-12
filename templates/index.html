@@ -9,7 +9,6 @@
 
     <title>Page d'accueil</title>
 
-
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
     <!--external css-->
@@ -24,7 +23,7 @@
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
-
+    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -59,6 +58,7 @@
             	</ul>
             </div>
         </header>
+
       <!--header end-->
 
       <!-- **********************************************************************************************************************************************************
@@ -74,13 +74,11 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-
-                  <p class="centered"><a href="profile"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
-
+                  <p class="centered"><a href="/profile/"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
-                      <a href="form_component">
+                      <a href="decouverte">
                           <i class="fa fa-tasks"></i>
                           <span>Découvrir</span>
                       </a>
@@ -104,6 +102,8 @@
                           <li><a  href="{{url_for('classement2014')}}">2014</a></li>
                       </ul>
                   </li>
+
+
 
                   <li class="sub-menu">
                       <a href="gallery">
@@ -163,7 +163,7 @@
                                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                                       <div class="content-panel pn">
                                           <div id="blog-bg">
-                                              <div class="blog-title">Lorem Ipsum</div>
+                                              <div class="blog-title"></div>
                                           </div>
                                           <div class="blog-text">
                                               <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
@@ -258,7 +258,7 @@
                                       <div class="content-panel pn">
                                           <div id="spotify5">
                                               <div class="sp-title">
-                                                  <h3>ARCTIC MONKEYS</h3>
+                                                  <h3>ARTIC MONKEYS</h3>
                                               </div>
                                           </div>
                                           <p class="followers">Découvrez leur tout nouvel album très prometteur ! Peut-être passeront-ils bientôt dans les festivals près de chez vous.</p>
@@ -302,25 +302,24 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-    <script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
+    <script src="static/assets/js/jquery.js"></script>
+    <script src="static/assets/js/jquery-1.8.3.min.js"></script>
+    <script src="static/assets/js/bootstrap.min.js"></script>
+    <script class="include" type="text/javascript" src="static/assets/js/jquery.dcjqaccordion.2.7.js"></script>
+    <script src="static/assets/js/jquery.scrollTo.min.js"></script>
+    <script src="static/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
+    <script src="static/assets/js/jquery.sparkline.js"></script>
 
 
     <!--common script for all pages-->
-    <script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
-        
-    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
+    <script src="static/assets/js/common-scripts.js"></script>
+    
+    <script type="text/javascript" src="static/assets/js/gritter/js/jquery.gritter.js"></script>
+    <script type="text/javascript" src="static/assets/js/gritter-conf.js"></script>
 
     <!--script for this page-->
-    <script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
-    
+    <script src="static/assets/js/sparkline-chart.js"></script>    
+	  <script src="static/assets/js/zabuto_calendar.js"></script>
 	
   	<script type="application/javascript">
           $(document).ready(function () {
