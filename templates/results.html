@@ -148,142 +148,46 @@
                               <div class="form-group">
                                 <hr>
                                 <div class="row mt centered">
-                                  <h2>ACTUALITES</h2>
+                                  {% if (requete != nil and requete[0] != "") %}
+                                    <h2>{{requete[0]}}</h2>
+                                  {% else %}
+                                    <h2>Vous n'avez rien saisi dans la barre de recherche...</h2>
+                                  {% endif %}
                                 </div>
                               </div>
 
                               <!-- FIN BARRE DE RECHERCHE -->
 
-                              <!-- 1ST ROW OF PANELS
-                              Les images se changent directement dans le CSS #spotify ou #spotify2 et ainsi de suite
-                              jusqu'à 6. Celà permet d'avoir un bon Responsive
-                              -->
-
-                              <div class="row">
-
-                                  <!-- News Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="blog-bg">
-                                              <div class="blog-title">Lorem Ipsum</div>
-                                          </div>
-                                          <div class="blog-text">
-                                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
-                                          </div>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- Artists Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify">
-                                              <div class="sp-title">
-                                                  <h3>MUSE</h3>
-                                              </div>
-                                          </div>
-                                          <p class="followers">Le groupe britannique de Rock'n Roll qui s'est peu à peu converti à l'électronique, à l'image des Pink Floyd, annonce leur tournée pour leur Album DRONES dans toute la France dès Juin 2017. </p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- New Festivals Panel (Pepites) -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify2">
-                                              <div class="sp-title">
-                                                  <h3>Solidays</h3>
-                                              </div>
-                                          </div>
-                                          <p class="followers">Les Solidays malheureusement dèjà complets... Désolé pour les retardataires.</p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-                              </div><!-- END 1ST ROW OF PANELS -->
-
-
-                              <!--  2ND ROW OF PANELS -->
-                              <div class="row">
-
-                                  <!-- New Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="blog-bg">
-                                              <div class="blog-title">Incredible Title</div>
-                                          </div>
-                                          <div class="blog-text">
-                                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
-                                          </div>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- Artists Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify3">
-                                              <div class="sp-title">
-                                                  <h3>LORDE</h3>
-                                              </div>
-                                          </div>
-                                          <p class="followers">La jeune artiste talentueuse revient sur le devant de la scène. Bientôt en tournée dans toute la France</p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- New Festivals Panel (Pepites) -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify4">
-                                              <div class="sp-title">
-                                                  <h3>OpenAirs à Lyon</h3>
-                                              </div>
-                                          </div>
-                                          <p class="followers">Le quartier de Gerland accueillera très prochainement de nouveaux open airs dès début Juin a annoncée la Mairie de Lyon 7ème. Préparez vos plus lunettes de soleil et vos gosiers ! </p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-                              </div><!-- /END 2ND ROW OF PANELS -->
-
-
-                              <!-- 3RD ROW OF PANELS -->
-                              <div class="row">
-
-                                  <!-- New Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="blog-bg">
-                                              <div class="blog-title">U2 à Lyon !</div>
-                                          </div>
-                                          <div class="blog-text">
-                                              <p>Le groupe mythique Irlandais débarque à Lyon pour la nouvelle tournée. <a href="#">En savoir plus</a></p>
-                                          </div>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- Artists Panel -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify5">
-                                              <div class="sp-title">
-                                                  <h3>ARCTIC MONKEYS</h3>
-                                              </div>
-                                          </div>
-                                          <p class="followers">Découvrez leur tout nouvel album très prometteur ! Peut-être passeront-ils bientôt dans les festivals près de chez vous.</p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-
-                                  <!-- New Festivals Panel (Pepites) -->
-                                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                                      <div class="content-panel pn">
-                                          <div id="spotify6">
-                                              <div class="sp-title">
-                                                  <h3>Les Vieilles Charrues 2017</h3>
-                                              </div>
-
-                                          </div>
-                                          <p class="followers">Vive la Bretagne! Tout simplement. Guichets ouverts dès très bientôt.</p>
-                                      </div>
-                                  </div><!-- /col-md-4-->
-                              </div><!-- /END 3RD ROW OF PANELS -->
-
                           </div>
                       </div>
                       <!-- FIN ACTUS -->
+
+
+              <aside class="col-lg-3 mt">
+                  <h1>RESULTATS ARTISTES</h1>
+                  {% for name in artists %}
+                  {% if name != "" %}
+                  <p>{{ name }}</p>
+                  {% endif %}
+                  {% endfor %}
+
+                  {% if (artists[0] == nil) %}
+                  <p>Votre recherche n'a rien donné :(</p>
+                  {% endif %}
+              </aside>
+
+              <aside class="col-lg-9 mt">
+                <h1>RESULTATS FESTIVALS</h1>
+                {% for name in festivals %}
+                {% if name != "" %}
+                <p>{{ name }}</p>
+                {% endif %}
+                {% endfor %}
+
+                {% if (festivals[0] == nil) %}
+                <p>Votre recherche n'a rien donné :(</p>
+                {% endif %}
+              </aside>
 
           </section>
 
