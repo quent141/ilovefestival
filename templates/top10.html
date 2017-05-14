@@ -76,18 +76,18 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="/profile/"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered"><a href="{{url_for('profil')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
-                       <a href= "{{url_for('decouverte')}}">
+                      <a href= "{{url_for('decouverte')}}">
                           <i class="fa fa-tasks"></i>
                           <span>Découvrir</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/gallery/">
+                      <a href="{{url_for('festivals')}}"">
                           <i class="fa fa-cogs"></i>
                           <span>Festivals</span>
                       </a>
@@ -108,7 +108,7 @@
                    
 
                   <li class="sub-menu">
-                      <a href="/gallery/">
+                      <a href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>

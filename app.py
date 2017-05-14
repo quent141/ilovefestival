@@ -93,6 +93,18 @@ def classement2015():
 def classement2014():
 	return render_template('classement2014.html')
 
+@app.route('/artistes/')
+def artistes():
+    return render_template('artistes.html')    
+
+@app.route('/festivals/')
+def festivals():
+    return render_template('festivals.html')    
+
+@app.route('/profil/')
+def profil():
+    return render_template('profil.html')       
+
 @app.route('/login/')
 def login():
 	return render_template('login.html')

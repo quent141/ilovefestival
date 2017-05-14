@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>classement 2016</title>
+    <title>Artistes</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -91,12 +91,12 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
+                      <a href="javascript:;" >
                           <i class="fa fa-desktop" ></i> <!--href="basic_table"--> 
                           <span>Classements</span>
                       </a>
                       <ul class="sub">
-                          <li class="active"><a  href="{{url_for('classement2016')}}">2016</a></li>
+                          <li><a  href="{{url_for('classement2016')}}">2016</a></li>
                           <li><a  href="{{url_for('classement2015')}}">2015</a></li>
                           <li><a  href="{{url_for('classement2014')}}">2014</a></li>
                       </ul>
@@ -105,7 +105,7 @@
                    
 
                   <li class="sub-menu">
-                      <a href="{{url_for('artistes')}}">
+                      <a class="active" href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
@@ -130,99 +130,108 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Classement 2016</h3>
-          <div class="row mt">
+            <h3><i class="fa fa-angle-right"></i> Artistes </h3>
+              <!-- DEBUT BARRE DE RECHERCHE -->
+              <h1 class="centered">Quel artiste (ou groupe) vous intéresse ?</h1>
+              <div class = "row">
+                  <div class="col-sm-10">
+                      <input type="text" class="form-control round-form" placeholder="Nom de l'artiste">
+                  </div>
+              </div>
+              <!-- FIN BARRE DE RECHERCHE -->
+
+              <!-- DEBUT AFFICHAGE ARTISTE -->
+              <div class="row">
+                  <h3><i class="fa fa-angle-right"></i> Votre artiste / groupe </h3>                
+                    <!-- Artists Image Panel -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+                      <div class="project-wrapper">
+                                  <div class="project">
+                                      <div class="photo-wrapper">
+                                          <div class="photo">
+                                            <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
+                                          </div>
+                                          <div class="overlay"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                    </div><!-- col-lg-4 -->
+                    <!-- Artiste Panel -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                        <div class="content-panel pn">
+                            <div id="spotifyArtist">
+                                <div class="sp-title">
+                                    <h3>Nom de l'artiste</h3>
+                                </div>
+                            </div>
+                            <p class="followers">Genre de l'artiste</p>
+                        </div>
+                    </div><!-- /col-md-4-->
+
+                    <!-- Note Panel (Pepites) -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                        <div class="content-panel pn">
+                            <div id="spotifyLike">
+                                <div class="sp-title">
+                                    <h3> Note </h3>
+                                </div>
+                            </div>
+                            <p class="followers">La note affichée est la note globale.</p>
+                        </div>
+                    </div><!-- /col-md-4-->
+
+              </div><!-- END 1ST ROW OF PANELS -->
+              <!-- FIN AFFICHAGE ARTISTE -->
+
+
+
+              <!-- DEBUT TABLEAU RECAPITULATIF -->
+              <div class="row mt">
             <div class="col-lg-12">
-                      <div class="content-panel">
+                  <div class="content-panel">
+                      <h3>Prochains concerts et festivals</h3>
                           <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>
                               <tr>
-                                  <th>Ranking</th>
-                                  <th>Festival</th>
-                                  <th class="numeric">Global's note</th>
-                                  <th class="numeric">Users' note </th>
-                                  <th class="numeric">Festival Award's note %</th>
+                                  <th>Festival / Concert </th>
+                                  <th>Date </th>
+                                  <th class="numeric">Prix</th>
                               </tr>
                               </thead>
                               <tbody>
                               <tr>
-                                  <td>1</td>
                                   <td>Vieilles Charrues</td>
-                                  <td class="numeric">20</td>
-                                  <td class="numeric">20</td>
-                                  <td class="numeric">20</td>
+                                  <td> 25-05-2017 </td>
+                                  <td class="numeric">50</td>
                               </tr>
                               <tr>
-                                  <td>2</td>
                                   <td>Solidays</td>
-                                  <td class="numeric">19</td>
-                                  <td class="numeric">19</td>
-                                  <td class="numeric">19</td>
+                                  <td> 25-05-2017 </td>
+                                  <td class="numeric">50</td>
                               </tr>
                               <tr>
-                                  <td>3</td>
                                   <td>Helfest</td>
-                                  <td class="numeric">18</td>
-                                  <td class="numeric">18</td>
-                                  <td class="numeric">18</td>
+                                  <td> 25-05-2017 </td>
+                                  <td class="numeric">50</td>
                               </tr>
                               <tr>
-                                  <td>4</td>
                                   <td>Fête du bruit</td>
-                                  <td class="numeric">17</td>
-                                  <td class="numeric">17</td>
-                                  <td class="numeric">17</td>
+                                  <td> 25-05-2017 </td>
+                                  <td class="numeric">50</td>
                               </tr>
-                              <tr>
-                                  <td>5</td>
-                                  <td>Festidreuz</td>
-                                  <td class="numeric">16</td>
-                                  <td class="numeric">16</td>
-                                  <td class="numeric">16</td>
-                              </tr>
-                              <tr>
-                                  <td>6</td>
-                                  <td>La route du rock</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                              </tr>
-                              <tr>
-                                  <td>7</td>
-                                  <td>Les eurockéennes</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                              </tr>
-                              <tr>
-                                  <td>8</td>
-                                  <td>Les 24h de l'INSA</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                              </tr>
-                              <tr>
-                                  <td>9</td>
-                                  <td>Coachella</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                              </tr>
-                              <tr>
-                                  <td>10</td>
-                                  <td>Tomorowland</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                                  <td class="numeric">15</td>
-                              </tr>
+                              
+                              
                               </tbody>
                           </table>
                           </section>
                   </div><!-- /content-panel -->
                </div><!-- /col-lg-4 -->     
-        </div><!-- /row -->
-    </section><! --/wrapper -->
+              </div><!-- /row -->
+
+              <!-- FIN TABLEAU RECAPITULATIF -->
+
+    </section><! <!--/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
