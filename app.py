@@ -189,8 +189,10 @@ def postFestivals():
   #Donne les festivals ou l'artiste "recherche" sera present
   all = resultFestival.fetchone()
   print (all)
-  festivals.append(all[0])
-  print(festivals)
+  if (all != None):
+    festivals.append(all[0])
+    print(festivals)
+
 
 
   return redirect(url_for('festivals'))
