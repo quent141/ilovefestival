@@ -134,6 +134,50 @@
       <section id="main-content">
           <section class="wrapper site-min-height">
           	<h3><i class="fa fa-angle-right"></i> Discovery </h3>
+      <div class="row">
+               <td> <label> Genre: </label>
+                <script type="text/javascript">
+                $(document).ready(function() {
+                  $(".js-example-basic-single").select2();
+                });
+                </script>
+
+                <select class="js-example-basic-single">
+                  <option value="AL">Alabama</option>
+                    
+                  <option value="WY">Wyoming</option>
+                </select>
+
+              </td> 
+
+              <td> <label> Date: </label>
+                 <input type="month" />
+              </td> 
+
+
+              <td> 
+                <label>City:</label>
+                <input type="text" list="countries" />
+
+                <datalist id="countries">
+                  <option value="Afghanistan">
+                  <option value="Albania">
+                  <option value="United Kingdom">
+                  <option value="United States">
+                  <option value="Vanuatu">
+                  <option value="Vatican City">
+                  <option value="Yemen">
+                  <option value="Zambia">
+                  <option value="Zimbabwe">
+                </datalist>
+
+              </td> 
+              <td>
+              <button type="submit" form="nameform" value="Submit">Submit</button>
+
+              </td> 
+
+            </div><!--row-->
               
 <!--beginslider-->
  <div class="row">
