@@ -143,20 +143,38 @@
                 </div>
                 <div class="form-group">
                   <hr>
-                  <div class="row mt centered">
-                    {% if (requete != nil and requete[0] != "") %}
-                      <h2>{{requete[0]}}</h2>
-                    {% else %}
-                      <h2>Vous n'avez rien saisi dans la barre de recherche...</h2>
-                    {% endif %}
-                  </div>
+                  
                 </div>
 
               <!-- FIN BARRE DE RECHERCHE -->
 
               <!-- DEBUT AFFICHAGE FESTIVAL -->
               <div class="row">
-                  <h3><i class="fa fa-angle-right"></i> Votre festival </h3>                
+                  <h3>
+                      <i class="fa fa-angle-right">
+                      {% for name in url %}
+                      {% if name != "" %}
+                      <a href = {{ name }} >
+                        <i class="fa fa-external-link"></i>
+                      </a>
+                      {% endif %}
+                      {% endfor %}
+                      {% if (festivals[0] == nil) %}
+                        <!-- do nothing -->
+                      {% endif %}
+                    
+                      </i> <!-- Votre festival  -->
+                      {% if (requete != nil and requete[0] != "") %}
+                        {{requete[0]}}
+                      {% endif %}
+                      {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+                        Vous n'avez rien saisi dans la barre de recherche...
+                      {% endif %}
+                      {% if (requete == nil) %}
+                        Votre requête n'est pas accessible...
+                      {% endif %}
+
+                  </h3>                
                     <!-- Artists Panel -->
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
                       <div class="project-wrapper">
@@ -176,23 +194,115 @@
                             <div id="spotifyArtist">
                                 <div class="sp-title">
                                     <h3>
-                                      {% for name in festivals %}
-                                      {% if name != "" %}
-                                      <p>
-                                        {{ name }}
-                                      </p>
-                                      {% endif %}
+                                      <!-- Genre -->
+                                      {% for name in genre %}
+                                        {% if name != "" %}
+                                          <p>
+                                            {{ name }}
+                                          </p>
+                                        {% endif %}
                                       {% endfor %}
-
-                                      {% if (festivals[0] == nil) %}
-                                      <p>Votre recherche n'a rien donné :(</p>
+                                      {% if (genre[0] == nil) %}
+                                        <!-- show nothing -->
                                       {% endif %}
                                     </h3>
 
 
                                 </div>
                             </div>
-                            <p class="followers">Genre/taille du festival + date + prix</p>
+                            <!-- DESCRIPTION -->
+                            <div class="followers">
+                              <!-- lieu -->
+                              {% for name in lieu %}
+                                {% if name != "" %}
+                                  <p>
+                                    Lieu : {{ name }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% if (lieu[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              <!-- Dates -->
+                              {% for nameD in dateDeb %}
+                              {% for nameF in dateFin %}
+                                {% if nameD != "" and nameF != "" %}
+                                  <p>
+                                    Du {{ nameD }} au {{ nameF }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% endfor %}
+                              {% if (dateDeb[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              {% if (dateFin[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              <!-- Prix -->
+                              {% for name in prix %}
+                                {% if name != "" %}
+                                  {% if name == 0 %}
+                                  <p>
+                                    Prix par jour : Gratuit
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 1 %}
+                                  <p>
+                                    Prix par jour : jusqu'à 20€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 2 %}
+                                  <p>
+                                    Prix par jour : entre 20 et 40€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 3 %}
+                                  <p>
+                                    Prix par jour : entre 40 et 70€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 4 %}
+                                  <p>
+                                    Prix par jour : entre 70 et 100€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 5 %}
+                                  <p>
+                                    Prix par jour : plus de 100€
+                                  </p>
+                                  {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                              {% if (prix[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}                              
+                              <!-- Taille -->
+                              {% for name in taille %}
+                                {% if name != "" %}
+                                  {% if name == 1 %}
+                                  <p>
+                                    Petit festival
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 2 %}
+                                  <p>
+                                    Festival de taille moyenne
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 3 %}
+                                  <p>
+                                    Grand Festival
+                                  </p>
+                                  {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                              {% if (taille[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+
+                            </div>
+
                         </div>
                     </div><!-- /col-md-4-->
 
@@ -222,33 +332,28 @@
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>
                               <tr>
-                                  <th>Date </th>
                                   <th>Artiste / Groupe </th>
-                                  <th>Genre </th>
                               </tr>
                               </thead>
                               <tbody>
                               <tr>
-                                  <td>25-05-2017</td>
-                                  <td> Muse </td>
-                                  <td> Rock</td>
+                                  <td> 
+                                      {% for name in prog %}
+                                      {% if name != "" %}
+                                      <p>
+                                        {{ name }}
+                                        <a href ="{{url_for('artistes')}}" >
+                                            <i class="fa fa-music"></i>
+                                        </a>
+                                      </p>
+                                      {% endif %}
+                                      {% endfor %}
+
+                                      {% if (prog[0] == nil) %}
+                                      <p>Votre recherche n'a rien donné :(</p>
+                                      {% endif %}
+                                  </td>
                               </tr>
-                              <tr>
-                                  <td>25-05-2017</td>
-                                  <td> Shaka Ponk </td>
-                                  <td> Rock Punk </td>
-                              </tr>
-                              <tr>
-                                  <td>26-05-2017</td>
-                                  <td> Dropkick Murphys </td>
-                                  <td> Rock celtic </td>
-                              </tr>
-                              <tr>
-                                  <td> 26-05-2017 </td>
-                                  <td> MACKLEMORE </td>
-                                  <td> Hip-Hop Rap </td>
-                              </tr>
-                              
                               
                               </tbody>
                           </table>
