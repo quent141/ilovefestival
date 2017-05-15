@@ -99,7 +99,7 @@ def artistes():
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete)    
+    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)    
 
 @app.route('/profil/')
 def profil():
@@ -116,6 +116,14 @@ data = []
 artists = []
 festivals = []
 requete = []
+genre = []
+url = []
+dateDeb = []
+dateFin = []
+taille = []
+prix = []
+lieu = []
+prog = []
 
 @app.route('/post', methods=['POST'])
 def post():
@@ -175,27 +183,106 @@ def postFestivals():
   del artists[:]
   del festivals[:]
   del requete[:]
+  del genre[:]
+  del url[:]
+  del dateDeb[:]
+  del dateFin[:]
+  del taille[:]
+  del prix[:]
+  del lieu[:]
+  del prog[:]
 
   recherche = request.form['post']
   requete.append(recherche)
 
   print("Je suis la recherche : %s", requete[0])
 
-  #RECHERCHE PAR FESTIVAL
+  #RECHERCHE LE FESTIVAL
   resultFestival = connection.execute("SELECT festival.NomFestival FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHES GENRES du festival
+  resultGenre = connection.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHE URL du festival
+  resultURL = connection.execute("SELECT festival.urlsite FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHE DATE du festival
+  resultDateDebut = connection.execute("SELECT festival.DateDebut FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  resultDateFin = connection.execute("SELECT festival.DateFin FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHE TAILLE du festival
+  resultTaille = connection.execute("SELECT festival.Taille FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHE PRIX du festival
+  resultPrix = connection.execute("SELECT festival.Prix FROM festival WHERE (festival.NomFestival like %s)", recherche)
+  #RECHERCHE LIEU du festival
+  resultLieu = connection.execute("SELECT festival.Lieu FROM festival WHERE (festival.NomFestival like %s)", recherche)
 
+  #RECHERCHES PROGRAMMATION du festival
+  resultProg = connection.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE (festival.NomFestival like %s)", recherche)
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
-  #Donne les festivals ou l'artiste "recherche" sera present
+  #Donne le festival "recherche" 
   all = resultFestival.fetchone()
   print (all)
   if (all != None):
     festivals.append(all[0])
     print(festivals)
 
+  #Donne le genre du festival "recherche" 
+  all = resultGenre.fetchone()
+  print (all)
+  if (all != None):
+    genre.append(all[0])
+    print(genre)
 
+  #Donne l'url du festival "recherche" 
+  all = resultURL.fetchone()
+  print (all)
+  if (all != None):
+    url.append(all[0])
+    print(url)
+    
+  #Donne la date du festival "recherche" 
+  all = resultDateDebut.fetchall()
+  print (all)
+  if (all != None):
+    for x in range(len(all)):
+        dateDeb.append(all[x][0])
+        print(dateDeb)
+  all = resultDateFin.fetchall()
+  print (all)
+  if (all != None):
+    for x in range(len(all)):
+        dateFin.append(all[x][0])
+        print(dateFin)      
+  
+  #Donne la taille du festival "recherche" 
+  all = resultTaille.fetchone()
+  print (all)
+  if (all != None):
+    taille.append(all[0])
+    print(taille)
+
+  #Donne le prix du festival "recherche" 
+  all = resultPrix.fetchone()
+  print (all)
+  if (all != None):
+    prix.append(all[0])
+    print(prix)
+  
+  #Donne le lieu du festival "recherche" 
+  all = resultLieu.fetchone()
+  print (all)
+  if (all != None):
+    lieu.append(all[0])
+    print(lieu)
+
+  #Donne les Artistes se produisant au festival "recherche"
+  all = resultProg.fetchall()
+  print (all)
+  for x in range(len(all)):
+        prog.append(all[x][0])
+        print(prog)
 
   return redirect(url_for('festivals'))
+  
+
 
 
 if __name__ == '__main__':
