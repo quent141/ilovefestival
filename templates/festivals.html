@@ -131,13 +131,27 @@
       <section id="main-content">
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Festivals </h3>
-              <!-- DEBUT BARRE DE RECHERCHE -->
-              <h1 class="centered">Quel festival vous intéresse ?</h1>
-              <div class = "row">
-                  <div class="col-sm-10">
-                      <input type="text" class="form-control round-form" placeholder="Nom du festival">
+              
+               <!-- DEBUT BARRE DE RECHERCHE -->
+                <h1 class="centered">Quel festival vous intéresse ?</h1>
+                <div class = "row">
+                    <div class="col-sm-10">
+                        <form action="/postFestivals" method="POST">
+                          <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
+                        </form>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <hr>
+                  <div class="row mt centered">
+                    {% if (requete != nil and requete[0] != "") %}
+                      <h2>{{requete[0]}}</h2>
+                    {% else %}
+                      <h2>Vous n'avez rien saisi dans la barre de recherche...</h2>
+                    {% endif %}
                   </div>
-              </div>
+                </div>
+
               <!-- FIN BARRE DE RECHERCHE -->
 
               <!-- DEBUT AFFICHAGE FESTIVAL -->
@@ -161,7 +175,22 @@
                         <div class="content-panel pn">
                             <div id="spotifyArtist">
                                 <div class="sp-title">
-                                    <h3>Nom du festival</h3>
+                                    <h3>
+                                      {% for name in festivals %}
+                                      {% if name != "" %}
+                                      <p>
+                                        {{ name }}
+                                      </p>
+                                      {% endif %}
+                                      {% endfor %}
+
+                                      {% if (festivals[0] == nil) %}
+                                      <p>Votre recherche n'a rien donné :(</p>
+                                      {% endif %}
+                                    </h3>
+
+                                    <aside class="col-lg-9 mt">
+
                                 </div>
                             </div>
                             <p class="followers">Genre/taille du festival + date + prix</p>
