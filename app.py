@@ -99,7 +99,7 @@ def artistes():
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html')    
+    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete)    
 
 @app.route('/profil/')
 def profil():
@@ -167,6 +167,33 @@ def post():
 
   return redirect(url_for('results'))
 
+
+@app.route('/postFestivals', methods=['POST'])
+def postFestivals():
+
+  del data[:]
+  del artists[:]
+  del festivals[:]
+  del requete[:]
+
+  recherche = request.form['post']
+  requete.append(recherche)
+
+  print("Je suis la recherche : %s", requete[0])
+
+  #RECHERCHE PAR FESTIVAL
+  resultFestival = connection.execute("SELECT festival.NomFestival FROM festival WHERE (festival.NomFestival like %s)", recherche)
+
+
+  #STOCKAGE DES RESULTATS DANS DES LISTES
+  #Donne les festivals ou l'artiste "recherche" sera present
+  all = resultFestival.fetchone()
+  print (all)
+  festivals.append(all[0])
+  print(festivals)
+
+
+  return redirect(url_for('festivals'))
 
 
 if __name__ == '__main__':

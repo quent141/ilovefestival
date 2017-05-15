@@ -7,8 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Page d'accueil</title>
-
+    <title>Resultats</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -24,7 +23,7 @@
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
-
+    
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -54,19 +53,20 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-            	<ul class="nav pull-right top-menu">
+              <ul class="nav pull-right top-menu">
                     <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
-            	</ul>
+              </ul>
             </div>
         </header>
+
       <!--header end-->
 
       <!-- **********************************************************************************************************************************************************
       MAIN SIDEBAR MENU
-        	Infos pour les modifs :
-          		-> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
-          		-> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
-          		-> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
+          Infos pour les modifs :
+              -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
+              -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
+              -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
       *********************************************************************************************************************************************************** -->
       <!--sidebar start-->
       <aside>
@@ -74,20 +74,18 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-
-                  <p class="centered"><a href="profile"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
-
+                  <p class="centered"><a href="{{url_for('profil')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
-                      <a href="form_component">
+                      <a href="{{url_for('decouverte')}}">
                           <i class="fa fa-tasks"></i>
                           <span>Découvrir</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="gallery">
+                      <a href="{{url_for('festivals')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Festivals</span>
                       </a>
@@ -105,8 +103,10 @@
                       </ul>
                   </li>
 
+
+
                   <li class="sub-menu">
-                      <a href="gallery">
+                      <a href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
@@ -167,7 +167,12 @@
                   <h1>RESULTATS ARTISTES</h1>
                   {% for name in artists %}
                   {% if name != "" %}
-                  <p>{{ name }}</p>
+                  <p>
+                    {{ name }}
+                    <a href ="{{url_for('artistes')}}" >
+                        <i class="fa fa-music"></i>
+                    </a>
+                  </p>
                   {% endif %}
                   {% endfor %}
 
@@ -180,7 +185,12 @@
                 <h1>RESULTATS FESTIVALS</h1>
                 {% for name in festivals %}
                 {% if name != "" %}
-                <p>{{ name }}</p>
+                <p>
+                  {{ name }}
+                  <a href ="{{url_for('festivals')}}" >
+                      <i class="fa fa-paper-plane-o"></i>
+                  </a>
+                </p>
                 {% endif %}
                 {% endfor %}
 
