@@ -105,7 +105,7 @@
                    
 
                   <li class="sub-menu">
-                      <a class="active" href="{{url_for('artistes')}}">
+                      <a  class="active" href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
@@ -131,19 +131,41 @@
       <section id="main-content">
           <section class="wrapper">
             <h3><i class="fa fa-angle-right"></i> Artistes </h3>
-              <!-- DEBUT BARRE DE RECHERCHE -->
-              <h1 class="centered">Quel artiste (ou groupe) vous intéresse ?</h1>
-              <div class = "row">
-                  <div class="col-sm-10">
-                      <input type="text" class="form-control round-form" placeholder="Nom de l'artiste">
-                  </div>
-              </div>
+              
+               <!-- DEBUT BARRE DE RECHERCHE -->
+                <h1 class="centered">Quel artiste ou groupe vous intéresse ?</h1>
+                <div class = "row">
+                    <div class="col-sm-10">
+                        <form action="/postArtist" method="POST">
+                          <input type="text" name="post" class="form-control round-form" placeholder="Nom de l'artiste / groupe">
+                        </form>
+                    </div>
+                </div>
+                <div class="form-group">
+                  <hr>
+                  
+                </div>
+
               <!-- FIN BARRE DE RECHERCHE -->
 
-              <!-- DEBUT AFFICHAGE ARTISTE -->
+              <!-- DEBUT AFFICHAGE FESTIVAL -->
               <div class="row">
-                  <h3><i class="fa fa-angle-right"></i> Votre artiste / groupe </h3>                
-                    <!-- Artists Image Panel -->
+                  <h3>
+                      <i class="fa fa-angle-right">
+                      <!--  URL vers youtube artiste -->
+                      </i> <!-- Votre festival  -->
+                      {% if (requete != nil and requete[0] != "") %}
+                        {{requete[0]}}
+                      {% endif %}
+                      {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+                        Vous n'avez rien saisi dans la barre de recherche...
+                      {% endif %}
+                      {% if (requete == nil) %}
+                        Votre requête n'est pas accessible...
+                      {% endif %}
+
+                  </h3>                
+                    <!-- Image Panel -->
                     <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
                       <div class="project-wrapper">
                                   <div class="project">
@@ -156,19 +178,38 @@
                                   </div>
                               </div>
                     </div><!-- col-lg-4 -->
-                    <!-- Artiste Panel -->
+                    <!-- Festivals Panel -->
                     <div class="col-lg-4 col-md-4 col-sm-4 mb">
                         <div class="content-panel pn">
                             <div id="spotifyArtist">
                                 <div class="sp-title">
-                                    <h3>Nom de l'artiste</h3>
+                                    <h3>
+                                      <!-- Genre -->
+                                      {% for name in genre %}
+                                        {% if name != "" %}
+                                          <p>
+                                            {{ name }}
+                                          </p>
+                                        {% endif %}
+                                      {% endfor %}
+                                      {% if (genre[0] == nil) %}
+                                        <!-- show nothing -->
+                                      {% endif %}
+                                    </h3>
+
+
                                 </div>
                             </div>
-                            <p class="followers">Genre de l'artiste</p>
+                            <!-- DESCRIPTION -->
+                            <div class="followers">
+                              Coucou
+
+                            </div>
+
                         </div>
                     </div><!-- /col-md-4-->
 
-                    <!-- Note Panel (Pepites) -->
+                    <!-- Note Panel -->
                     <div class="col-lg-4 col-md-4 col-sm-4 mb">
                         <div class="content-panel pn">
                             <div id="spotifyLike">
@@ -181,7 +222,7 @@
                     </div><!-- /col-md-4-->
 
               </div><!-- END 1ST ROW OF PANELS -->
-              <!-- FIN AFFICHAGE ARTISTE -->
+              <!-- FIN AFFICHAGE FESTIVAL -->
 
 
 
@@ -189,44 +230,39 @@
               <div class="row mt">
             <div class="col-lg-12">
                   <div class="content-panel">
-                      <h3>Prochains concerts et festivals</h3>
+                      <h3>Programmation</h3>
                           <section id="unseen">
                             <table class="table table-bordered table-striped table-condensed">
                               <thead>
                               <tr>
-                                  <th>Festival / Concert </th>
-                                  <th>Date </th>
-                                  <th class="numeric">Prix</th>
+                                  <th>Artiste / Groupe </th>
                               </tr>
                               </thead>
                               <tbody>
                               <tr>
-                                  <td>Vieilles Charrues</td>
-                                  <td> 25-05-2017 </td>
-                                  <td class="numeric">50</td>
+                                  <td> 
+                                      {% for name in concerts %}
+                                      {% if name != "" %}
+                                      <p>
+                                        {{ name }}
+                                        <a href ="{{url_for('artistes')}}" >
+                                            <i class="fa fa-music"></i>
+                                        </a>
+                                      </p>
+                                      {% endif %}
+                                      {% endfor %}
+
+                                      {% if (concerts[0] == nil) %}
+                                      <p>Votre recherche n'a rien donné :(</p>
+                                      {% endif %}
+                                  </td>
                               </tr>
-                              <tr>
-                                  <td>Solidays</td>
-                                  <td> 25-05-2017 </td>
-                                  <td class="numeric">50</td>
-                              </tr>
-                              <tr>
-                                  <td>Helfest</td>
-                                  <td> 25-05-2017 </td>
-                                  <td class="numeric">50</td>
-                              </tr>
-                              <tr>
-                                  <td>Fête du bruit</td>
-                                  <td> 25-05-2017 </td>
-                                  <td class="numeric">50</td>
-                              </tr>
-                              
                               
                               </tbody>
                           </table>
                           </section>
                   </div><!-- /content-panel -->
-               </div><!-- /col-lg-4 -->     
+               </div><!-- /col-lg-12 -->     
               </div><!-- /row -->
 
               <!-- FIN TABLEAU RECAPITULATIF -->
