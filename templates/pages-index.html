@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+
+
+{% block title %} Pages Index {% endblock %}
+
+{% block head %}
+{{ super() }}
+{% endblock %}
+
+{% block content %}
+
+	<div>
+		List of pages
+		<ol>	
+			<!-- {{! iterate over pageList array}} -->
+			{% for page in pagesList %}
+							<!-- {{!   call controler which displays page }}		{{! call controler which delete page }} -->
+			<li>{{ page.name }} <a href="/pages/{{page.name}}') }}"> Edit </a> <a href="/pages_delete/{{page.name}}') }}"> Delete </a> </li>
+			{% endfor %}
+		</ol>
+	</div>
+
+{% endblock %}
