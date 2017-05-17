@@ -2,22 +2,110 @@
 # -*- mode: python -*-
 # -*- coding: utf-8 -*-
 
-from flask import Flask, render_template, json, request, redirect, url_for
-from sqlalchemy import create_engine
+from flask import Flask, render_template, json, request, redirect, url_for, session, flash
+from sqlalchemy import *
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
+from markdown import markdown
+import os, hashlib
+
+
+# ...................................................................................................................................................................... #
+
+app = Flask(__name__)
+app.secret_key = os.urandom(256)        
+
+SALT = 'foo#BAR_{baz}^666'
+
+# ...................................................................................................................................................................... #
+
+engineLogin = create_engine('sqlite:///wiki.db', echo=True)
+engineFest = create_engine('mysql+mysqldb://root:ILF@localhost/ilovefestivals', convert_unicode=True, echo=False)
+metadata = MetaData()
+Base = declarative_base()
+Base.metadata.reflect(engineFest)
+db = engineFest.connect()
+
+accounts = Table('accounts', metadata,
+    Column('login', String, primary_key=true),
+    Column('password_hash', String, nullable=False))    
+
+pages = Table('pages', metadata,
+    Column('name', String, primary_key=true),
+    Column('text', String))
+
+metadata.create_all(engineLogin)
+
 
 # ...................................................................................................................................................................... #
 
 
-app = Flask(__name__)
+# retourne le contenu de la page "name"
+def page_content(name):
+  db = engineLogin.connect()
+  try:
+    row = db.execute(select([pages.c.text]).where(pages.c.name == name)).fetchone()
+    if row is None:
+      return '**(This page is empty or does not exist.)**'
+    return row[0]
+  finally:
+    db.close()
+
+# fourni tous les noms des pages existantes
+# utilisee pour la fonctionnalite "page-index"
+def getPagesName():
+  print("getPagesName")
+  db = engineLogin.connect()
+  row = db.execute(select([pages.c.name])).fetchall()
+  print("getPagesName")
+  print(row)
+  db.close()
+  return row
+
+# si la page "name" n'existe pas, la cree, sinon met a jour son contenu
+def update_page(name, text):
+  db = engineLogin.connect()
+  if db.execute(select([pages.c.name]).where(pages.c.name == name)).fetchone() is None :
+    db.execute(pages.insert().values(name=name, text=text))
+  else :
+    db.execute(pages.update().values(text=text).where(pages.c.name == name))
+  db.close()
+
+# supprime la page "name"
+def delete_page(name):
+  print("model : delete_page : ",name)
+  db = engineLogin.connect()
+  db.execute(pages.delete().where(pages.c.name==name))  
+  db.close()
+  return redirect('/page.html')
 
 
-engine = create_engine('mysql+mysqldb://root:ILF@localhost/ilovefestivals', convert_unicode=True, echo=False)
-Base = declarative_base()
-Base.metadata.reflect(engine)
-db = engine.connect()
+def hash_for(password):
+  salted = '%s @ %s' % (SALT, password)
+  return hashlib.sha256(salted).hexdigest()    
 
+# si le "login" n'existe pas, cree le user sinon, 
+# verifie que le login correspond au mot de passe et retourne vrai ou faux 
+def authenticate_or_create(login, password):
+  print("authenticate_or_create",login,password)
+  db = engineLogin.connect()
+  hpass = hash_for(password)
+  if db.execute(select([accounts.c.login]).where(accounts.c.login == login)).fetchone() is None :
+    print("authenticate_or_create : createUser",login,password)
+    db.execute(accounts.insert().values(login=login, password_hash=hpass))
+    db.close()
+    return True
+  else : 
+    if db.execute(select([accounts.c.password_hash]).where(accounts.c.login == login)).fetchone().password_hash == hpass :
+      print("authenticate_or_create : loggin success",login,password)
+      db.close()
+      return True
+    else :
+      print("authenticate_or_create : loggin failed",login,password)
+      db.close()
+      return False
+
+# ...................................................................................................................................................................... #
 
 class Artistes(Base):
     __table__ = Base.metadata.tables['artistes']
@@ -52,10 +140,7 @@ class Style(Base):
 class User(Base):
     __table__ = Base.metadata.tables['user']
 
-
-
 # ...................................................................................................................................................................... #
-
 
 
 #@app.route('/index/') # BIP a eviter de decorer une fonction avec plusieurs routes (referencement), mais utile si user non identifie encore etc
@@ -64,13 +149,71 @@ class User(Base):
 def main():
     return render_template('index.html', data=data)
 
+# ...............................................#
+@app.route('/<name>')    
+def index(name='Main'):
+  return redirect('pages/'+name)
+
+# utilisee pour la fonctionnalite "page-index"
+@app.route('/page-index')
+def allPages():
+  pagesList = getPagesName() #call du model
+  return render_template("pages-index.html",pagesList=pagesList) #call du template 
+  
+@app.route('/pages/<name>')
+def page(name):
+  raw = page_content(name)
+  content = markdown(raw)
+  return render_template('page.html', name=name, text=content, raw=raw)   
+
+
+@app.route('/page_delete/<name>')
+def delete(name):
+  print("delete pages : ",name)
+  delete_page(name)
+  return redirect('/deleteSucess')
+
+@app.route('/api/renderMarkdown', methods=['POST'])
+def renderMarkdown():
+  content = request.form['text']
+  print("controler : renderMarkdown",content)
+  return jsonify(markdown = content)
+  
+
+@app.route('/save', methods=['POST'])
+def save():
+  page = request.form['page']
+  text = request.form['text']
+  update_page(page,text)
+  return redirect('pages/'+page)
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+  if request.method == 'POST':
+    if authenticate_or_create(request.form['login'],request.form['password']) :
+      session['username'] = request.form['login']
+      return redirect('/pages')
+    else :
+      flash("login fail, wrong password")
+      return render_template('login.html',from_page = 'page1',login=request.form['login'])
+  elif request.method == 'GET':
+    return render_template('login.html',from_page = 'page1')
+
+@app.route('/logout')
+def logout():
+  from_page = request.args.get('from', 'Main')
+  session.clear()
+  return redirect('/pages/' + from_page)    
+
+# ...............................................#  
+
 @app.route('/results')
 def results():
     return render_template('results.html', artists=artists, festivals=festivals, requete=requete)
 
-@app.route('/')
-def my_form():
-    return render_template("my-form.html")
+# @app.route('/')
+# def my_form():
+#     return render_template("my-form.html")
 
 @app.route('/decouverte/') #on peut rajouter un slash a la fois que que les routes http://localhost:5000/decouverte et http://localhost:5000/decouverte/ soient toutes deux acceptees (sinon on peut rencontrer 404)
 def decouverte():
@@ -104,29 +247,27 @@ def classement2014():
 def artistes():
     return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts )    
 
-
 @app.route('/festivals/')
 def festivals():
     return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)    
 
-@app.route('/profil/')
-def profil():
-    return render_template('profil.html')       
+# @app.route('/profil/')
+# def profil():
+#     return render_template('profil.html')       
 
-@app.route('/login/')
-def login():
-	return render_template('login.html')
+# @app.route('/login/')
+# def login():
+# 	return render_template('login.html')
 
 
 # ...................................................................................................................................................................... #
-
-
 
 data = []
 artists = []
 festivals = []
 requete = []
 genre = []
+concerts = []
 url = []
 dateDeb = []
 dateFin = []
@@ -134,7 +275,6 @@ taille = []
 prix = []
 lieu = []
 prog = []
-concerts = []
 
 #GERER LES RECHERCHES SUR 'index.html'
 @app.route('/post', methods=['POST'])
@@ -155,7 +295,7 @@ def post():
   resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND style.NomStyle = %s", recherche)
 
   #RECHERCHE PAR ARTISTE
-  resultArtists = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)", recherche)
+  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)", recherche)
 
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
@@ -174,7 +314,7 @@ def post():
         print(festivals)
 
   #Donne les festivals ou l'artiste "recherche" sera present
-  all = resultArtists.fetchall()
+  all = resultArtistsBis.fetchall()
   print (all)
   indice = 0
   for x in range(len(all)):
@@ -186,6 +326,7 @@ def post():
 
 
   return redirect(url_for('results'))
+
 
 #GERER LES RECHERCHES SUR 'festivals.html'
 @app.route('/postFestivals', methods=['POST'])
@@ -203,7 +344,6 @@ def postFestivals():
   del prix[:]
   del lieu[:]
   del prog[:]
-
 
   recherche = request.form['post']
   requete.append(recherche)
@@ -234,8 +374,9 @@ def postFestivals():
   all = resultFestival.fetchone()
   print (all)
   if (all != None):
-    festivals.append(all[0])
-    print(festivals)
+    for x in range(len(all)):
+      festivals.append(all[x][0])
+      print(festivals)
 
   #Donne le genre du festival "recherche" 
   all = resultGenre.fetchall()
@@ -243,8 +384,10 @@ def postFestivals():
   if (all != None):
     x = []
     for x in range(len(all)):
-      genre.append(all[x][0])
+      genre.append(all[x])
       print(genre)
+
+
 
   #Donne l'url du festival "recherche" 
   all = resultURL.fetchone()
@@ -254,17 +397,15 @@ def postFestivals():
     print(url)
     
   #Donne la date du festival "recherche" 
-  all = resultDateDebut.fetchall()
+  all = resultDateDebut.fetchone()
   print (all)
   if (all != None):
-    for x in range(len(all)):
-        dateDeb.append(all[x][0])
+        dateDeb.append(all[0])
         print(dateDeb)
-  all = resultDateFin.fetchall()
+  all = resultDateFin.fetchone()
   print (all)
   if (all != None):
-    for x in range(len(all)):
-        dateFin.append(all[x][0])
+        dateFin.append(all[0])
         print(dateFin)      
   
   #Donne la taille du festival "recherche" 
@@ -296,8 +437,8 @@ def postFestivals():
         print(prog)
 
   return redirect(url_for('festivals'))
-  
 
+  
 
 #GERER LES RECHERCHES SUR 'artistes.html'
 @app.route('/postArtist', methods=['POST'])
@@ -338,7 +479,7 @@ def postArtist():
   if (all != None):
     x = []
     for x in range(len(all)):
-      genre.append(all[x][0])
+      genre.append(all[x])
       print(genre)
 
 
@@ -358,4 +499,3 @@ def postArtist():
 
 if __name__ == '__main__':
     app.run(debug=True) #BIP mettre false a la fin
-    #app.secret_key = '2d9-E2.)f&e,A$p@fpa+zSU03e09_'

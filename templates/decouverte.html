@@ -8,7 +8,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>DASHGUM - Bootstrap Admin Template</title>
+    <title>Decouvrir</title>
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='assets/css/bootstrap.min.css')}}" rel="stylesheet">
@@ -76,7 +76,15 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="{{url_for('profil')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered">
+
+                    {% if 'username' in session %}
+                    <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% else %}
+                    <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% endif %}
+                    
+                  </p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
