@@ -246,7 +246,11 @@ def artistes():
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)    
+    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog) 
+
+@app.route('/aPropos/')
+def aPropos():
+    return render_template('aPropos.html')  
 
 
 # ...................................................................................................................................................................... #
