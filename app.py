@@ -291,11 +291,11 @@ def post():
   print("Je suis la recherche : %s", requete[0])
 
   #RECHERCHES PAR GENRE (DANS MYSQL)
-  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND style.NomStyle = %s", recherche)
-  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND style.NomStyle = %s", recherche)
+  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND style.NomStyle = '%s' collate utf8_bin", recherche)
+  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND style.NomStyle = '%s' collate utf8_bin", recherche)
 
   #RECHERCHE PAR ARTISTE
-  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)", recherche)
+  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like '%s' collate utf8_bin)", recherche)
 
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
