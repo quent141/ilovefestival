@@ -256,48 +256,65 @@
               </div><!-- END 1ST ROW OF PANELS -->
               <!-- FIN AFFICHAGE FESTIVAL -->
 
-
-
+             
               <!-- DEBUT TABLEAU RECAPITULATIF -->
               <div class="row mt">
-            <div class="col-lg-12">
-                  <div class="content-panel">
-                      <h3>Programmation</h3>
-                          <section id="unseen">
-                            <table class="table table-bordered table-striped table-condensed">
-                              <thead>
-                              <tr>
-                                  <th>Artiste / Groupe </th>
-                              </tr>
-                              </thead>
-                              <tbody>
-                              <tr>
-                                  <td> 
-                                      {% for name in concerts %}
-                                      {% if name != "" %}
-                                      <p>
-                                        {{ name }}
-                                        <a href ="{{url_for('festivals')}}" >
-                                            <i class="fa fa-music"></i>
-                                        </a>
-                                      </p>
-                                      {% endif %}
-                                      {% endfor %}
+                <div class="col-lg-12">
+                      <div class="content-panel">
+                          <h3>Programmation</h3>
+                              <section id="unseen">
+                                <table class="table table-bordered table-striped table-condensed">
+                                  <thead>
+                                  <tr>
+                                      <th>Artiste / Groupe </th>
+                                  </tr>
+                                  </thead>
+                                  <tbody>
+                                  <tr>
+                                      <td> 
+                                          {% for name in concerts %}
+                                          {% if name != "" %}
+                                          <p>
+                                            {{ name }}
+                                            <a href ="{{url_for('festivals')}}" >
+                                                <i class="fa fa-music"></i>
+                                            </a>
+                                          </p>
+                                          {% endif %}
+                                          {% endfor %}
 
-                                      {% if (concerts[0] == nil) %}
-                                      <p>Votre recherche n'a rien donné :(</p>
-                                      {% endif %}
-                                  </td>
-                              </tr>
-                              
-                              </tbody>
-                          </table>
-                          </section>
-                  </div><!-- /content-panel -->
-               </div><!-- /col-lg-12 -->     
-              </div><!-- /row -->
+                                          {% if (concerts[0] == nil) %}
+                                          <p>Votre recherche n'a rien donné :(</p>
+                                          {% endif %}
+                                      </td>
+                                  </tr>
+                                  
+                                  </tbody>
+                              </table>
+                              </section>
+                      </div><!-- /content-panel -->
+                   </div><!-- /col-lg-12 -->     
+                  </div><!-- /row -->
 
               <!-- FIN TABLEAU RECAPITULATIF -->
+              
+              <div class="form-group"></div> <!-- TROU -->
+
+              <!-- DEBUT VIDEO -->
+
+              {% for name in youtube %}
+                {% if name != "" %}
+                  <!-- <iframe width="560" height="315" src="{{name}}" frameborder="0" allowfullscreen></iframe> -->
+                  Lien Youtube : {{name}}
+                {% endif %}
+              {% endfor %}
+              {% if (youtube[0] == nil) %}
+                <!-- show nothing -->
+              {% endif %}
+              <!-- FIN VIDEO -->
+
+
+
 
     </section><! <!--/wrapper -->
       </section><!-- /MAIN CONTENT -->
