@@ -291,11 +291,11 @@ def post():
   print("Je suis la recherche : %s", requete[0])
 
   #RECHERCHES PAR GENRE (DANS MYSQL)
-  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND style.NomStyle = '%s' collate utf8_bin", recherche)
-  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND style.NomStyle = '%s' collate utf8_bin", recherche)
+  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND style.NomStyle like %s", recherche)
+  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND style.NomStyle like %s", recherche)
 
   #RECHERCHE PAR ARTISTE
-  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like '%s' collate utf8_bin)", recherche)
+  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)", recherche)
 
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
@@ -353,7 +353,7 @@ def postFestivals():
   #RECHERCHE LE FESTIVAL
   resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE (festival.NomFestival like %s)", recherche)
   #RECHERCHES GENRES du festival
-  #resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE (festival.NomFestival like %s)", recherche)
+  resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE (festival.NomFestival like %s)", recherche)
   #RECHERCHE URL du festival
   resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE (festival.NomFestival like %s)", recherche)
   #RECHERCHE DATE du festival
@@ -378,14 +378,14 @@ def postFestivals():
       festivals.append(all[x][0])
       print(festivals)
 
-  #Donne le genre du festival "recherche" 
-  #all = resultGenre.fetchall()
-  #print (all)
-  #if (all != None):
-  #  x = []
-  #  for x in range(len(all)):
-  #    genre.append(all[x])
-  #    print(genre)
+  #Donne le genre du festival "recherche"
+  all = resultGenre.fetchall()
+  print (all)
+  if (all != None):
+    x = []
+    for x in range(len(all)):
+      genre.append(all[x][0])
+      print(genre)
 
 
 
@@ -479,7 +479,7 @@ def postArtist():
   if (all != None):
     x = []
     for x in range(len(all)):
-      genre.append(all[x])
+      genre.append(all[x][0])
       print(genre)
 
 
@@ -489,7 +489,7 @@ def postArtist():
   if (all != None):
     x = []
     for x in range(len(all)):
-      concerts.append(all[x])
+      concerts.append(all[x][0])
       print(concerts)
 
   return redirect(url_for('artistes'))
