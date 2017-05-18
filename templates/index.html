@@ -23,6 +23,7 @@
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
+    <script src="{{url_for('static',filename='assets/js/jquery.min.js')}}"></script>
     
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -74,7 +75,16 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="{{url_for('profil')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered">
+
+                  	{% if 'username' in session %}
+					<a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+					{% else %}
+					<a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+					{% endif %}
+                  	
+                  </p>
+                  
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
@@ -314,6 +324,8 @@
 
     <!--common script for all pages-->
     <script src="static/assets/js/common-scripts.js"></script>
+    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="{{url_for('static',filename='assets/js/code.js')}}"></script>
     
     <script type="text/javascript" src="static/assets/js/gritter/js/jquery.gritter.js"></script>
     <script type="text/javascript" src="static/assets/js/gritter-conf.js"></script>
