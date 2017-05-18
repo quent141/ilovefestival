@@ -20,7 +20,6 @@
     <!-- Custom styles for this template -->
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='assets/css/style-responsive.css')}}" rel="stylesheet">
-    <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
 
@@ -138,7 +137,6 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Artistes </h3>
               
                <!-- DEBUT BARRE DE RECHERCHE -->
                 <h1 class="centered">Quel artiste ou groupe vous intéresse ?</h1>
@@ -158,23 +156,23 @@
 
               <!-- DEBUT AFFICHAGE FESTIVAL -->
               <div class="row">
-                  <h3>
-                      <i class="fa fa-angle-right">
-                      <!--  URL vers youtube artiste -->
-                      </i> <!-- Votre festival  -->
-                      {% if (requete != nil and requete[0] != "") %}
-                        {{requete[0]}}
-                      {% endif %}
-                      {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
-                        Vous n'avez rien saisi dans la barre de recherche...
-                      {% endif %}
-                      {% if (requete == nil) %}
-                        Votre requête n'est pas accessible...
-                      {% endif %}
-
-                  </h3>                
+                  <h1>
+                      <div class="row mt centered">
+                          <!--  URL vers youtube artiste -->
+                          <!-- Votre festival  -->
+                          {% if (requete != nil and requete[0] != "") %}
+                          {{requete[0]}}
+                          {% endif %}
+                          {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+                          Vous n'avez rien saisi dans la barre de recherche...
+                          {% endif %}
+                          {% if (requete == nil) %}
+                          Votre requête n'est pas accessible...
+                          {% endif %}
+                      </div>
+                  </h1>
                     <!-- Image Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
                       <div class="project-wrapper">
                                   <div class="project">
                                       <div class="photo-wrapper">

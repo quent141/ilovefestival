@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Festivals</title>
+    <title class = centered>Festivals</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -20,7 +20,6 @@
     <!-- Custom styles for this template -->
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='assets/css/style-responsive.css')}}" rel="stylesheet">
-    <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet" type="text/css"/> <!--BIP -->
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
 
@@ -138,53 +137,55 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper">
-            <h3><i class="fa fa-angle-right"></i> Festivals </h3>
-              
-               <!-- DEBUT BARRE DE RECHERCHE -->
-                <h1 class="centered">Quel festival vous intéresse ?</h1>
-                <div class = "row">
-                    <div class="col-sm-10">
-                        <form action="/postFestivals" method="POST">
+
+              <!-- DEBUT BARRE DE RECHERCHE -->
+              <h1 class="centered">Quel festival vous intéresse ?</h1>
+              <div class = "row">
+                  <div class="col-sm-10">
+                      <form action="/postFestivals" method="POST">
                           <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
-                        </form>
-                    </div>
-                </div>
-                <div class="form-group">
+                      </form>
+                  </div>
+              </div>
+              <div class="form-group">
                   <hr>
-                  
-                </div>
+
+              </div>
 
               <!-- FIN BARRE DE RECHERCHE -->
 
               <!-- DEBUT AFFICHAGE FESTIVAL -->
               <div class="row">
-                  <h3>
-                      <i class="fa fa-angle-right">
-                      {% for name in url %}
-                      {% if name != "" %}
-                      <a href = {{ name }} >
-                        <i class="fa fa-external-link"></i>
-                      </a>
-                      {% endif %}
-                      {% endfor %}
-                      {% if (festivals[0] == nil) %}
-                        <!-- do nothing -->
-                      {% endif %}
-                    
-                      </i> <!-- Votre festival  -->
-                      {% if (requete != nil and requete[0] != "") %}
-                        {{requete[0]}}
-                      {% endif %}
-                      {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
-                        Vous n'avez rien saisi dans la barre de recherche...
-                      {% endif %}
-                      {% if (requete == nil) %}
-                        Votre requête n'est pas accessible...
-                      {% endif %}
+                  <h1>
+                      <div class="row mt centered">
 
-                  </h3>                
+                          {% for name in url %}
+                          {% if name != "" %}
+                          <h1 href = {{ name }}></h1>
+
+                          {% endif %}
+                          {% endfor %}
+                          {% if (festivals[0] == nil) %}
+                          <!-- do nothing -->
+                          {% endif %}
+
+                          <!-- Votre festival  -->
+                          {% if (requete != nil and requete[0] != "") %}
+                          {{requete[0]}}
+                          {% endif %}
+
+                          {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+                          Vous n'avez rien saisi dans la barre de recherche...
+                          {% endif %}
+
+                          {% if (requete == nil) %}
+                          Votre requête n'est pas accessible...
+                          {% endif %}
+
+                  </h1>
+              </div>
                     <!-- Artists Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 desc">
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
                       <div class="project-wrapper">
                                   <div class="project">
                                       <div class="photo-wrapper">
