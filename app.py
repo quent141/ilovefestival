@@ -242,7 +242,7 @@ def classement2014():
 
 @app.route('/artistes/')
 def artistes():
-    return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts, nationalite=nationalite, notoriete=notoriete )    
+    return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts, nationalite=nationalite, notoriete=notoriete, youtube=youtube )    
 
 @app.route('/festivals/')
 def festivals():
@@ -270,6 +270,7 @@ lieu = []
 prog = []
 nationalite = []
 notoriete = []
+youtube = []
 
 #GERER LES RECHERCHES SUR 'index.html'
 @app.route('/post', methods=['POST'])
@@ -450,6 +451,7 @@ def postArtist(nom):
   del concerts[:]
   del nationalite[:]
   del notoriete[:]
+  del youtube[:]
 
   if (nom == 'post') :
     recherche = request.form['post']
@@ -469,7 +471,8 @@ def postArtist(nom):
   resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE (artistes.NomArtiste like %s)", recherche)
   #RECHERCHE NOTORIETE de l'artiste
   resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE (artistes.NomArtiste like %s)", recherche)
-
+  #RECHERCHE Youtube de l'artiste
+  resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE (artistes.NomArtiste like %s)", recherche)
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
   #Donne l'artiste "recherche" 
@@ -514,7 +517,16 @@ def postArtist(nom):
       concerts.append(all[x][0])
       print(concerts)
 
+  #Donne le lien youtube
+  all = resultYoutube.fetchone()
+  print (all)
+  if (all != None):
+    youtube.append(all[0])
+    print(youtube)
+
   return redirect(url_for('artistes'))
+
+
 
 # ...................................................................................................................................................................... #
 
