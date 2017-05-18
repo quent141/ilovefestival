@@ -80,7 +80,15 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="{{url_for('postFestivals')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered">
+
+                    {% if 'username' in session %}
+                    <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% else %}
+                    <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% endif %}
+                    
+                  </p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
@@ -112,7 +120,7 @@
 
 
                   <li class="sub-menu">
-                      <a href="{{url_for('artistes')}}">
+                      <a href="{{url_for('artistes',nom='None')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>

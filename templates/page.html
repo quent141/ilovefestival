@@ -54,7 +54,7 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+              <ul class="nav pull-right top-menu">  
                     <li>
                       {% if 'username' in session %}
                         Logged in as: <em>{{ session.username }}</em> &nbsp;
@@ -84,10 +84,10 @@
                   <p class="centered">
 
                   	{% if 'username' in session %}
-					<a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
-					{% else %}
-					<a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
-					{% endif %}
+          					<a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+          					{% else %}
+          					<a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+          					{% endif %}
                   	
                   </p>
 
@@ -109,7 +109,7 @@
 
                   <li class="sub-menu">
                       <a href="javascript:;" >
-                          <i class="fa fa-desktop" ></i> <!--href="basic_table"--> 
+                          <i class="fa fa-desktop" ></i> 
                           <span>Classements</span>
                       </a>
                       <ul class="sub">
