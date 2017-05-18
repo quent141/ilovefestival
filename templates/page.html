@@ -174,21 +174,21 @@
             </div><!-- END ROW OF PANELS -->
             <!-- FIN IMAGE PROFIL -->
 
-            {% if 'username' in session %}
-				<div class="row sep">
-					<div class="col-xs-12">
-						<hr>
-						<form id="formMarkdown" action="/save" method="POST" role="form">
-							<textarea id="markdown" name="text" class="form-control" rows="10">{{ raw }}</textarea>
-							<p><a href="http://daringfireball.net/projects/markdown/">Markdown reference</a></p>
-							<input type="hidden" name="page" value="{{ name }}">
-							<button type="submit" class="btn btn-default">Save</button>
-						</form>
-					
-					<a class="btn btn-default" href="/pages_delete/{{name}}">Delete Page {{name}}</a>
-					</div>
-				</div>
-			{% endif %}
+            <!-- {% if 'username' in session %}
+      				<div class="row sep">
+      					<div class="col-xs-12">
+      						<hr>
+      						<form id="formMarkdown" action="/save" method="POST" role="form">
+      							<textarea id="markdown" name="text" class="form-control" rows="10">{{ raw }}</textarea>
+      							<p><a href="http://daringfireball.net/projects/markdown/">Markdown reference</a></p>
+      							<input type="hidden" name="page" value="{{ name }}">
+      							<button type="submit" class="btn btn-default">Save</button>
+      						</form>
+      					
+      					<a class="btn btn-default" href="/pages_delete/{{name}}">Delete Page {{name}}</a>
+      					</div>
+      				</div>
+      			{% endif %} -->
 
               <!-- DEBUT PREFERENCES -->
               <div class="row mt">
