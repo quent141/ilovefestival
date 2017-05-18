@@ -149,7 +149,7 @@
                 <h1 class="centered">Quel artiste ou groupe vous intéresse ?</h1>
                 <div class = "row">
                     <div class="col-sm-10">
-                        <form action="/postArtist" method="POST">
+                        <form action="{{url_for('postArtist',nom='post')}}" method="POST">
                           <input type="text" name="post" class="form-control round-form" placeholder="Nom de l'artiste / groupe">
                         </form>
                     </div>
@@ -215,8 +215,27 @@
                             </div>
                             <!-- DESCRIPTION -->
                             <div class="followers">
-                              Coucou
+                              {% for name in nationalite %}
+                                {% if name != "" %}
+                                  <p>
+                                    Nationalite : {{ name }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% if (nationalite[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
 
+                              {% for name in notoriete %}
+                                {% if name != "" %}
+                                  <p>
+                                    Notoriete (sur une echelle de 5) : {{ name }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% if (notoriete[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
                             </div>
 
                         </div>
@@ -258,7 +277,7 @@
                                       {% if name != "" %}
                                       <p>
                                         {{ name }}
-                                        <a href ="{{url_for('artistes')}}" >
+                                        <a href ="{{url_for('festivals')}}" >
                                             <i class="fa fa-music"></i>
                                         </a>
                                       </p>

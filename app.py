@@ -242,7 +242,7 @@ def classement2014():
 
 @app.route('/artistes/')
 def artistes():
-    return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts )    
+    return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts, nationalite=nationalite, notoriete=notoriete )    
 
 @app.route('/festivals/')
 def festivals():
@@ -268,6 +268,8 @@ taille = []
 prix = []
 lieu = []
 prog = []
+nationalite = []
+notoriete = []
 
 #GERER LES RECHERCHES SUR 'index.html'
 @app.route('/post', methods=['POST'])
@@ -338,7 +340,10 @@ def postFestivals():
   del lieu[:]
   del prog[:]
 
-  recherche = request.form['post']
+  if (nom == 'post') :
+    recherche = request.form['post']
+  else :
+    recherche = nom
   requete.append(recherche)
 
   print("Je suis la recherche : %s", requete[0])
@@ -434,8 +439,8 @@ def postFestivals():
   
 
 #GERER LES RECHERCHES SUR 'artistes.html'
-@app.route('/postArtist', methods=['POST'])
-def postArtist():
+@app.route('/postArtist/<nom>', methods=['POST'])
+def postArtist(nom):
 
   del data[:]
   del artists[:]
@@ -443,8 +448,13 @@ def postArtist():
   del requete[:]
   del genre[:]
   del concerts[:]
+  del nationalite[:]
+  del notoriete[:]
 
-  recherche = request.form['post']
+  if (nom == 'post') :
+    recherche = request.form['post']
+  else :
+    recherche = nom
   requete.append(recherche)
 
   print("Je suis la recherche : %s", requete[0])
@@ -455,6 +465,10 @@ def postArtist():
   resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE (artistes.NomArtiste like %s)", recherche)
   #RECHERCHE CONCERTS de l'artiste
   resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)",recherche)
+  #RECHERCHE NOTORIETE de l'artiste
+  resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE (artistes.NomArtiste like %s)", recherche)
+  #RECHERCHE NOTORIETE de l'artiste
+  resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE (artistes.NomArtiste like %s)", recherche)
 
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
@@ -475,6 +489,21 @@ def postArtist():
       genre.append(all[x][0])
       print(genre)
 
+  #Donne la notoriete  
+  all = resultNotoriete.fetchone()
+  print (all)
+  print ("je suis dans (nom artiste)")
+  if (all != None):
+    notoriete.append(all[0])
+    print(notoriete)
+
+  #Donne la nationalite
+  all = resultNationalite.fetchone()
+  print (all)
+  print ("je suis dans (nom artiste)")
+  if (all != None):
+    nationalite.append(all[0])
+    print(nationalite)
 
   #Donne les concerts ou se produit l'artiste 
   all = resultConcerts.fetchall()
