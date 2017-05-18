@@ -19,84 +19,78 @@ SALT = 'foo#BAR_{baz}^666'
 
 # ...................................................................................................................................................................... #
 
-engineLogin = create_engine('sqlite:///wiki.db', echo=True)
 engineFest = create_engine('mysql+mysqldb://root:ILF@localhost/ilovefestivals', convert_unicode=True, echo=False)
 metadata = MetaData()
 Base = declarative_base()
 Base.metadata.reflect(engineFest)
 db = engineFest.connect()
 
-accounts = Table('accounts', metadata,
-    Column('login', String, primary_key=true),
-    Column('password_hash', String, nullable=False))    
-
-pages = Table('pages', metadata,
-    Column('name', String, primary_key=true),
-    Column('text', String))
-
-metadata.create_all(engineLogin)
-
-
 # ...................................................................................................................................................................... #
 
 
-# retourne le contenu de la page "name"
-def page_content(name):
-  db = engineLogin.connect()
-  try:
-    row = db.execute(select([pages.c.text]).where(pages.c.name == name)).fetchone()
-    if row is None:
-      return '**(This page is empty or does not exist.)**'
-    return row[0]
-  finally:
-    db.close()
+# #retourne le contenu de la page "name"
+# def page_content(name):
+#   db = engineLogin.connect()
+#   try:
+#     row = db.execute(select([pages.c.text]).where(pages.c.name == name)).fetchone()
+#     if row is None:
+#       return '**(This page is empty or does not exist.)**'
+#     return row[0]
+#   finally:
+#     db.close()
 
 # fourni tous les noms des pages existantes
 # utilisee pour la fonctionnalite "page-index"
-def getPagesName():
-  print("getPagesName")
-  db = engineLogin.connect()
-  row = db.execute(select([pages.c.name])).fetchall()
-  print("getPagesName")
-  print(row)
-  db.close()
-  return row
+# def getPagesName():
+#   print("getPagesName")
+#   db = engineLogin.connect()
+#   row = db.execute(select([pages.c.name])).fetchall()
+#   print("getPagesName")
+#   print(row)
+#   db.close()
+#   return row
 
-# si la page "name" n'existe pas, la cree, sinon met a jour son contenu
-def update_page(name, text):
-  db = engineLogin.connect()
-  if db.execute(select([pages.c.name]).where(pages.c.name == name)).fetchone() is None :
-    db.execute(pages.insert().values(name=name, text=text))
-  else :
-    db.execute(pages.update().values(text=text).where(pages.c.name == name))
-  db.close()
+# # si la page "name" n'existe pas, la cree, sinon met a jour son contenu
+# def update_page(name, text):
+#   db = engineLogin.connect()
+#   if db.execute(select([pages.c.name]).where(pages.c.name == name)).fetchone() is None :
+#     db.execute(pages.insert().values(name=name, text=text))
+#   else :
+#     db.execute(pages.update().values(text=text).where(pages.c.name == name))
+#   db.close()
 
-# supprime la page "name"
-def delete_page(name):
-  print("model : delete_page : ",name)
-  db = engineLogin.connect()
-  db.execute(pages.delete().where(pages.c.name==name))  
-  db.close()
-  return redirect('/page.html')
+# # supprime la page "name"
+# def delete_page(name):
+#   print("model : delete_page : ",name)
+#   db = engineLogin.connect()
+#   db.execute(pages.delete().where(pages.c.name==name))  
+#   db.close()
+#   return redirect('/page.html')
 
 
 def hash_for(password):
   salted = '%s @ %s' % (SALT, password)
   return hashlib.sha256(salted).hexdigest()    
 
-# si le "login" n'existe pas, cree le user sinon, 
-# verifie que le login correspond au mot de passe et retourne vrai ou faux 
+
 def authenticate_or_create(login, password):
   print("authenticate_or_create",login,password)
-  db = engineLogin.connect()
+  db = engineFest.connect()
   hpass = hash_for(password)
-  if db.execute(select([accounts.c.login]).where(accounts.c.login == login)).fetchone() is None :
+  resultUser = db.execute("SELECT user.login FROM user WHERE user.login = '" + login + "'")
+  all = resultUser.fetchone()
+  print(all)
+  if (all == None) :
     print("authenticate_or_create : createUser",login,password)
-    db.execute(accounts.insert().values(login=login, password_hash=hpass))
+    resultCreate = db.execute("INSERT INTO user (login,password_hash) VALUES ('"+ login +"','" + hpass + "') ")
     db.close()
     return True
-  else : 
-    if db.execute(select([accounts.c.password_hash]).where(accounts.c.login == login)).fetchone().password_hash == hpass :
+  else :
+    resultLogin = db.execute("SELECT user.password_hash FROM user WHERE user.login = '" + login + "'")
+    all = resultLogin.fetchone()
+    print(all[0])
+    print("hpass : "+hpass)
+    if(all[0]==hpass) :
       print("authenticate_or_create : loggin success",login,password)
       db.close()
       return True
@@ -104,6 +98,7 @@ def authenticate_or_create(login, password):
       print("authenticate_or_create : loggin failed",login,password)
       db.close()
       return False
+
 
 # ...................................................................................................................................................................... #
 
@@ -155,37 +150,39 @@ def index(name='Main'):
   return redirect('pages/'+name)
 
 # utilisee pour la fonctionnalite "page-index"
-@app.route('/page-index')
-def allPages():
-  pagesList = getPagesName() #call du model
-  return render_template("pages-index.html",pagesList=pagesList) #call du template 
+# @app.route('/page-index')
+# def allPages():
+#   pagesList = getPagesName() #call du model
+#   return render_template("pages-index.html",pagesList=pagesList) #call du template 
   
 @app.route('/pages/<name>')
 def page(name):
-  raw = page_content(name)
-  content = markdown(raw)
-  return render_template('page.html', name=name, text=content, raw=raw)   
+  # raw = page_content(name)
+  # content = markdown(raw)
+  return render_template('page.html', name=name)   
 
 
-@app.route('/page_delete/<name>')
-def delete(name):
-  print("delete pages : ",name)
-  delete_page(name)
-  return redirect('/deleteSucess')
+# @app.route('/page_delete/<name>')
+# def delete(name):
+#   print("delete pages : ",name)
+#   delete_page(name)
+#   return redirect('/deleteSucess')
 
-@app.route('/api/renderMarkdown', methods=['POST'])
-def renderMarkdown():
-  content = request.form['text']
-  print("controler : renderMarkdown",content)
-  return jsonify(markdown = content)
+# @app.route('/api/renderMarkdown', methods=['POST'])
+# def renderMarkdown():
+#   content = request.form['text']
+#   print("controler : renderMarkdown",content)
+#   return jsonify(markdown = content)
   
 
-@app.route('/save', methods=['POST'])
-def save():
-  page = request.form['page']
-  text = request.form['text']
-  update_page(page,text)
-  return redirect('pages/'+page)
+# @app.route('/save', methods=['POST'])
+# def save():
+#   page = request.form['page']
+#   text = request.form['text']
+#   update_page(page,text)
+#   return redirect('pages/'+page)
+
+
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -250,14 +247,6 @@ def artistes():
 @app.route('/festivals/')
 def festivals():
     return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)    
-
-# @app.route('/profil/')
-# def profil():
-#     return render_template('profil.html')       
-
-# @app.route('/login/')
-# def login():
-# 	return render_template('login.html')
 
 
 # ...................................................................................................................................................................... #
