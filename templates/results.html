@@ -52,8 +52,15 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-              <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
+              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+                    <li>
+                      {% if 'username' in session %}
+                        Logged in as: <em>{{ session.username }}</em> &nbsp;
+                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                      {% else %}
+                      <a class="logout" href="/login?from={{ name }}" >Login</a>
+                      {% endif %}
+                    </li>
               </ul>
             </div>
         </header>
@@ -73,7 +80,15 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="{{url_for('postFestivals')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
+                  <p class="centered">
+
+                    {% if 'username' in session %}
+                    <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% else %}
+                    <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% endif %}
+                    
+                  </p>
                   <h5 class="centered">I Love Festivals</h5>
 
                   <li class="mt">
@@ -105,7 +120,7 @@
 
 
                   <li class="sub-menu">
-                      <a href="{{url_for('artistes')}}">
+                      <a href="{{url_for('artistes',nom='None')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
@@ -148,7 +163,7 @@
                                 <hr>
                                 <div class="row mt centered">
                                   {% if (requete != nil and requete[0] != "") %}
-                                    <h2>Votre recherche: {{requete[0]}}</h2>
+                                    <h2>{{requete[0]}}</h2>
                                   {% else %}
                                     <h2>Vous n'avez rien saisi dans la barre de recherche...</h2>
                                   {% endif %}

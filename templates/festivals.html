@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
+  <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
@@ -25,439 +25,443 @@
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-</head>
+  </head>
 
-<body>
+  <body>
 
-<section id="container" >
-    <!-- **********************************************************************************************************************************************************
-    TOP BAR CONTENT & NOTIFICATIONS
-    *********************************************************************************************************************************************************** -->
-    <!--header start-->
-    <header class="header black-bg">
-        <div class="sidebar-toggle-box">
-            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-        </div>
-        <!--logo start-->
-        <a href="{{ url_for('main') }}" class="logo"><b>I Love Festivals</b></a>
-        <!--logo end-->
-        <div class="nav notify-row" id="top_menu">
-            <!--  notification start -->
-            <ul class="nav top-menu">
+  <section id="container" >
+      <!-- **********************************************************************************************************************************************************
+      TOP BAR CONTENT & NOTIFICATIONS
+      *********************************************************************************************************************************************************** -->
+      <!--header start-->
+      <header class="header black-bg">
+              <div class="sidebar-toggle-box">
+                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+              </div>
+            <!--logo start-->
+            <a href="{{ url_for('main') }}" class="logo"><b>I Love Festivals</b></a>
+            <!--logo end-->
+            <div class="nav notify-row" id="top_menu">
+                <!--  notification start -->
+                <ul class="nav top-menu">
+                    
+                </ul>
+                <!--  notification end -->
+            </div>
+            <div class="top-menu">
+              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+                    <li>
+                      {% if 'username' in session %}
+                        Logged in as: <em>{{ session.username }}</em> &nbsp;
+                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                      {% else %}
+                      <a class="logout" href="/login?from={{ name }}" >Login</a>
+                      {% endif %}
+                    </li>
+              </ul>
+            </div>
+        </header>
+      <!--header end-->
 
-            </ul>
-            <!--  notification end -->
-        </div>
-        <div class="top-menu">
-            <ul class="nav pull-right top-menu">
-                <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
-            </ul>
-        </div>
-    </header>
-    <!--header end-->
+      <!-- **********************************************************************************************************************************************************
+      MAIN SIDEBAR MENU
+          Infos pour les modifs :
+              -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
+              -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
+              -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
+      *********************************************************************************************************************************************************** -->
+      <!--sidebar start-->
+      <aside>
+          <div id="sidebar"  class="nav-collapse ">
+              <!-- sidebar menu start-->
+              <ul class="sidebar-menu" id="nav-accordion">
 
-    <!-- **********************************************************************************************************************************************************
-    MAIN SIDEBAR MENU
-        Infos pour les modifs :
-            -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
-            -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
-            -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
-    *********************************************************************************************************************************************************** -->
-    <!--sidebar start-->
-    <aside>
-        <div id="sidebar"  class="nav-collapse ">
-            <!-- sidebar menu start-->
-            <ul class="sidebar-menu" id="nav-accordion">
-
-                <p class="centered">
+                  <p class="centered">
 
                     {% if 'username' in session %}
                     <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
                     {% else %}
                     <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
                     {% endif %}
+                    
+                  </p>
+                  <h5 class="centered">I Love Festivals</h5>
 
-                </p>
-                <h5 class="centered">I Love Festivals</h5>
+                  <li class="mt">
+                      <a href= "{{url_for('decouverte')}}">
+                          <i class="fa fa-tasks"></i>
+                          <span>Découvrir</span>
+                      </a>
+                  </li>
 
-                <li class="mt">
-                    <a href= "{{url_for('decouverte')}}">
-                        <i class="fa fa-tasks"></i>
-                        <span>Découvrir</span>
-                    </a>
-                </li>
+                  <li class="sub-menu">
+                      <a class="active" href="{{url_for('festivals')}}">
+                          <i class="fa fa-cogs"></i>
+                          <span>Festivals</span>
+                      </a>
+                  </li>
 
-                <li class="sub-menu">
-                    <a class="active" href="{{url_for('festivals')}}">
-                        <i class="fa fa-cogs"></i>
-                        <span>Festivals</span>
-                    </a>
-                </li>
+                  <li class="sub-menu">
+                      <a href="javascript:;" >
+                          <i class="fa fa-desktop" ></i> <!--href="basic_table"--> 
+                          <span>Classements</span>
+                      </a>
+                      <ul class="sub">
+                          <li><a  href="{{url_for('classement2016')}}">2016</a></li>
+                          <li><a  href="{{url_for('classement2015')}}">2015</a></li>
+                          <li><a  href="{{url_for('classement2014')}}">2014</a></li>
+                      </ul>
+                  </li>
 
-                <li class="sub-menu">
-                    <a href="javascript:;" >
-                        <i class="fa fa-desktop" ></i> <!--href="basic_table"-->
-                        <span>Classements</span>
-                    </a>
-                    <ul class="sub">
-                        <li><a  href="{{url_for('classement2016')}}">2016</a></li>
-                        <li><a  href="{{url_for('classement2015')}}">2015</a></li>
-                        <li><a  href="{{url_for('classement2014')}}">2014</a></li>
-                    </ul>
-                </li>
+                   
 
+                  <li class="sub-menu">
+                      <a  href="{{url_for('artistes')}}">
+                          <i class="fa fa-cogs"></i>
+                          <span>Artistes</span>
+                      </a>
+                  </li>
 
+                  <li class="sub-menu">
+                      <a href="/chartjs/">
+                          <i class=" fa fa-bar-chart-o"></i>
+                          <span>A Propos</span>
+                      </a>
+                  </li>
 
-                <li class="sub-menu">
-                    <a  href="{{url_for('artistes')}}">
-                        <i class="fa fa-cogs"></i>
-                        <span>Artistes</span>
-                    </a>
-                </li>
+              </ul>
+              <!-- sidebar menu end-->
+          </div>
+      </aside>
+      <!--sidebar end-->
 
-                <li class="sub-menu">
-                    <a href="/chartjs/">
-                        <i class=" fa fa-bar-chart-o"></i>
-                        <span>A Propos</span>
-                    </a>
-                </li>
+      <!-- **********************************************************************************************************************************************************
+      MAIN CONTENT
+      *********************************************************************************************************************************************************** -->
+      <!--main content start-->
+      <section id="main-content">
+          <section class="wrapper">
 
-            </ul>
-            <!-- sidebar menu end-->
-        </div>
-    </aside>
-    <!--sidebar end-->
+              <!-- DEBUT BARRE DE RECHERCHE -->
+              <h1 class="centered">Quel festival vous intéresse ?</h1>
+              <div class = "row">
+                  <div class="col-sm-10">
+                      <form action="{{url_for('postFestivals',nom='post')}}" method="POST">
+                          <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
+                      </form>
+                  </div>
+              </div>
+              <div class="form-group">
+                  <hr>
 
-    <!-- **********************************************************************************************************************************************************
-    MAIN CONTENT
-    *********************************************************************************************************************************************************** -->
-    <!--main content start-->
-    <section id="main-content">
-        <section class="wrapper">
+              </div>
 
-            <!-- DEBUT BARRE DE RECHERCHE -->
-            <h1 class="centered">Quel festival vous intéresse ?</h1>
-            <div class = "row">
-                <div class="col-sm-10">
-                    <form action="/postFestivals" method="POST">
-                        <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
-                    </form>
-                </div>
-            </div>
-            <div class="form-group">
-                <hr>
+              <!-- FIN BARRE DE RECHERCHE -->
 
-            </div>
+              <!-- DEBUT AFFICHAGE FESTIVAL -->
+              <div class="row">
+                  <h1>
+                      <div class="row mt centered">
 
-            <!-- FIN BARRE DE RECHERCHE -->
+                          {% for name in url %}
+                          {% if name != "" %}
+                          <h1 href = {{ name }}></h1>
 
-            <!-- DEBUT AFFICHAGE FESTIVAL -->
+                          {% endif %}
+                          {% endfor %}
+                          {% if (festivals[0] == nil) %}
+                          <!-- do nothing -->
+                          {% endif %}
 
+                          <!-- Votre festival  -->
+                          {% if (requete != nil and requete[0] != "") %}
+                          {{requete[0]}}
+                          {% endif %}
 
+                          {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+                          Vous n'avez rien saisi dans la barre de recherche...
+                          {% endif %}
 
-            <div class="row mt centered">
-                <h2>Votre recherche: {{requete[0]}}</h2>
-            </div>
+                          {% if (requete == nil) %}
+                          Votre requête n'est pas accessible...
+                          {% endif %}
 
-
-            {% for name in url %}
-            {% if name != "" %}
-            <h1 href = {{ name }}></h1>
-
-            {% endif %}
-            {% endfor %}
-
-
-            <!-- Votre festival  -->
-            {% if (requete != nil and requete[0] != "" and festivals[0] != nil) %} <!-- festivals[0] permet de savoir si le nom cherché existe dans la DB : si oui on affiche tout, sinon on n'affiche rien -->
-            <div class="row">
-                <!-- Artists Panel -->
-                <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                    <div class="project-wrapper">
-                        <div class="project">
-                            <div class="photo-wrapper">
-                                <div class="photo">
-                                    <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
-                                </div>
-                                <div class="overlay"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><!-- col-lg-4 -->
-                <!-- Festivals Panel -->
-                <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                    <div class="content-panel pn">
-                        <div id="spotifyArtist">
-
-                            <div class="centered">
-                                <p>Genres musicaux associés: </p>
-                                <p></p>
-                                <!-- Genre -->
-                                {% for name in genre %}
-                                {% if name != "" %}
-                                    <p>{{ name }}</p>
-                                {% endif %}
-                                {% endfor %}
-                            </div>
-
-                        </div>
-                        <!-- DESCRIPTION -->
-                        <div class="followers">
-                            <!-- lieu -->
-                            {% for name in lieu %}
-                            {% if name != "" %}
-                            <p>
-                                Lieu : {{ name }}
-                            </p>
-                            {% endif %}
-                            {% endfor %}
-                            {% if (lieu[0] == nil) %}
-                            <!-- show nothing -->
-                            {% endif %}
-                            <!-- Dates -->
-                            {% for nameD in dateDeb %}
-                            {% for nameF in dateFin %}
-                            {% if nameD != "" and nameF != "" %}
-                            <p>
-                                Du {{ nameD }} au {{ nameF }}
-                            </p>
-                            {% endif %}
-                            {% endfor %}
-                            {% endfor %}
-                            {% if (dateDeb[0] == nil) %}
-                            <!-- show nothing -->
-                            {% endif %}
-                            {% if (dateFin[0] == nil) %}
-                            <!-- show nothing -->
-                            {% endif %}
-                            <!-- Prix -->
-                            {% for name in prix %}
-                            {% if name != "" %}
-                            {% if name == 0 %}
-                            <p>
-                                Prix par jour : Gratuit
-                            </p>
-                            {% endif %}
-                            {% if name == 1 %}
-                            <p>
-                                Prix par jour : jusqu'à 20€
-                            </p>
-                            {% endif %}
-                            {% if name == 2 %}
-                            <p>
-                                Prix par jour : entre 20 et 40€
-                            </p>
-                            {% endif %}
-                            {% if name == 3 %}
-                            <p>
-                                Prix par jour : entre 40 et 70€
-                            </p>
-                            {% endif %}
-                            {% if name == 4 %}
-                            <p>
-                                Prix par jour : entre 70 et 100€
-                            </p>
-                            {% endif %}
-                            {% if name == 5 %}
-                            <p>
-                                Prix par jour : plus de 100€
-                            </p>
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            {% if (prix[0] == nil) %}
-                            <!-- show nothing -->
-                            {% endif %}
-                            <!-- Taille -->
-                            {% for name in taille %}
-                            {% if name != "" %}
-                            {% if name == 1 %}
-                            <p>
-                                Petit festival
-                            </p>
-                            {% endif %}
-                            {% if name == 2 %}
-                            <p>
-                                Festival de taille moyenne
-                            </p>
-                            {% endif %}
-                            {% if name == 3 %}
-                            <p>
-                                Grand Festival
-                            </p>
-                            {% endif %}
-                            {% endif %}
-                            {% endfor %}
-                            {% if (taille[0] == nil) %}
-                            <!-- show nothing -->
-                            {% endif %}
-
-                        </div>
-
-                    </div>
-                </div><!-- /col-md-4-->
-
-                <!-- Note Panel -->
-                <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                    <div class="content-panel pn">
-                        <div id="spotifyLike">
-                            <div class="sp-title">
-                                <h3> Note </h3>
-                            </div>
-                        </div>
-                        <p class="followers">La note affichée est la note globale.</p>
-                    </div>
-                </div><!-- /col-md-4-->
-
-            </div><!-- END 1ST ROW OF PANELS -->
-            <!-- FIN AFFICHAGE FESTIVAL -->
-
-
-
-            <!-- DEBUT TABLEAU RECAPITULATIF -->
-            <div class="row mt">
-                <div class="col-lg-12">
-                    <div class="content-panel">
-                        <h3>Programmation</h3>
-                        <section id="unseen">
-                            <table class="table table-bordered table-striped table-condensed">
-                                <thead>
-                                <tr>
-                                    <th>Artiste / Groupe </th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                <tr>
-                                    <td>
-                                        {% for name in prog %}
+                  </h1>
+              </div>
+                    <!-- Artists Panel -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                      <div class="project-wrapper">
+                                  <div class="project">
+                                      <div class="photo-wrapper">
+                                          <div class="photo">
+                                            <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
+                                          </div>
+                                          <div class="overlay"></div>
+                                      </div>
+                                  </div>
+                              </div>
+                    </div><!-- col-lg-4 -->
+                    <!-- Festivals Panel -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                        <div class="content-panel pn">
+                            <div id="spotifyArtist">
+                                <div class="sp-title">
+                                    <h3>
+                                      <!-- Genre -->
+                                      {% for name in genre %}
                                         {% if name != "" %}
-                                        <p>
+                                          <p>
                                             {{ name }}
-                                            <a href ="{{url_for('artistes')}}" >
-                                                <i class="fa fa-music"></i>
-                                            </a>
-                                        </p>
+                                          </p>
                                         {% endif %}
-                                        {% endfor %}
-
-                                        {% if (prog[0] == nil) %}
-                                        <p>Votre recherche n'a rien donné :(</p>
-                                        {% endif %}
-                                    </td>
-                                </tr>
-
-                                </tbody>
-                            </table>
-                        </section>
-                    </div><!-- /content-panel -->
-                </div><!-- /col-lg-4 -->
-            </div><!-- /row -->
-
-            <!-- FIN TABLEAU RECAPITULATIF -->
+                                      {% endfor %}
+                                      {% if (genre[0] == nil) %}
+                                        <!-- show nothing -->
+                                      {% endif %}
+                                    </h3>
 
 
-            {% endif %}
+                                </div>
+                            </div>
+                            <!-- DESCRIPTION -->
+                            <div class="followers">
+                              <!-- lieu -->
+                              {% for name in lieu %}
+                                {% if name != "" %}
+                                  <p>
+                                    Lieu : {{ name }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% if (lieu[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              <!-- Dates -->
+                              {% for nameD in dateDeb %}
+                              {% for nameF in dateFin %}
+                                {% if nameD != "" and nameF != "" %}
+                                  <p>
+                                    Du {{ nameD }} au {{ nameF }}
+                                  </p>
+                                {% endif %}
+                              {% endfor %}
+                              {% endfor %}
+                              {% if (dateDeb[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              {% if (dateFin[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+                              <!-- Prix -->
+                              {% for name in prix %}
+                                {% if name != "" %}
+                                  {% if name == 0 %}
+                                  <p>
+                                    Prix par jour : Gratuit
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 1 %}
+                                  <p>
+                                    Prix par jour : jusqu'à 20€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 2 %}
+                                  <p>
+                                    Prix par jour : entre 20 et 40€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 3 %}
+                                  <p>
+                                    Prix par jour : entre 40 et 70€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 4 %}
+                                  <p>
+                                    Prix par jour : entre 70 et 100€
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 5 %}
+                                  <p>
+                                    Prix par jour : plus de 100€
+                                  </p>
+                                  {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                              {% if (prix[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}                              
+                              <!-- Taille -->
+                              {% for name in taille %}
+                                {% if name != "" %}
+                                  {% if name == 1 %}
+                                  <p>
+                                    Petit festival
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 2 %}
+                                  <p>
+                                    Festival de taille moyenne
+                                  </p>
+                                  {% endif %}
+                                  {% if name == 3 %}
+                                  <p>
+                                    Grand Festival
+                                  </p>
+                                  {% endif %}
+                                {% endif %}
+                              {% endfor %}
+                              {% if (taille[0] == nil) %}
+                                <!-- show nothing -->
+                              {% endif %}
+
+                            </div>
+
+                        </div>
+                    </div><!-- /col-md-4-->
+
+                    <!-- Note Panel -->
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                        <div class="content-panel pn">
+                            <div id="spotifyLike">
+                                <div class="sp-title">
+                                    <h3> Note </h3>
+                                </div>
+                            </div>
+                            <p class="followers">La note affichée est la note globale.</p>
+                        </div>
+                    </div><!-- /col-md-4-->
+
+              </div><!-- END 1ST ROW OF PANELS -->
+              <!-- FIN AFFICHAGE FESTIVAL -->
 
 
-            {% if (requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
-            <div class="row mt centered">
-                <h4>Vous n'avez rien saisi dans la barre de recherche...</h4>
-            </div>
-            {% endif %}
 
-            {% if (requete == nil) %}
-            <div class="row mt centered">
-                <h4>Votre requête n'est pas accessible...</h4>
-            </div>
-            {% endif %}
+              <!-- DEBUT TABLEAU RECAPITULATIF -->
+              <div class="row mt">
+            <div class="col-lg-12">
+                  <div class="content-panel">
+                      <h3>Programmation</h3>
+                          <section id="unseen">
+                            <table class="table table-bordered table-striped table-condensed">
+                              <thead>
+                              <tr>
+                                  <th>Artiste / Groupe </th>
+                              </tr>
+                              </thead>
+                              <tbody>
+                              <tr>
+                                  <td> 
+                                      {% for name in prog %}
+                                      {% if name != "" %}
+                                      <p>
+                                        {{ name }}
+                                        <a href ="{{url_for('artistes')}}" >
+                                            <i class="fa fa-music"></i>
+                                        </a>
+                                      </p>
+                                      {% endif %}
+                                      {% endfor %}
+
+                                      {% if (prog[0] == nil) %}
+                                      <p>Votre recherche n'a rien donné :(</p>
+                                      {% endif %}
+                                  </td>
+                              </tr>
+                              
+                              </tbody>
+                          </table>
+                          </section>
+                  </div><!-- /content-panel -->
+               </div><!-- /col-lg-4 -->     
+              </div><!-- /row -->
+
+              <!-- FIN TABLEAU RECAPITULATIF -->
+
+    </section><! <!--/wrapper -->
+      </section><!-- /MAIN CONTENT -->
+
+      <!--main content end-->
+      <!--footer start-->
+      <footer class="site-footer">
+          <div class="text-center">
+              2017 - ILoveFestivals
+              <a href="{{url_for('main')}}" class="go-top">
+                  <i class="fa fa-angle-up"></i>
+              </a>
+          </div>
+      </footer>
+      <!--footer end-->
+  </section>
+
+    <!-- js placed at the end of the document so the pages load faster -->
+    <script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
+    <script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
 
-
-        </section><! <!--/wrapper -->
-    </section><!-- /MAIN CONTENT -->
-
-    <!--main content end-->
-    <!--footer start-->
-    <footer class="site-footer">
-        <div class="text-center">
-            2017 - ILoveFestivals
-            <a href="{{url_for('main')}}" class="go-top">
-                <i class="fa fa-angle-up"></i>
-            </a>
-        </div>
-    </footer>
-    <!--footer end-->
-</section>
-
-<!-- js placed at the end of the document so the pages load faster -->
-<script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-<script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
+    <!--common script for all pages-->
+    <script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
+        
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
 
 
-<!--common script for all pages-->
-<script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
+    <!--script for this page-->
+    <script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
+    
+  <script>
+      //custom select box
 
-<script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
-<script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
+      $(function(){
+          $('select.styled').customSelect();
+      });
 
-
-<!--script for this page-->
-<script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
-<script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
-
-<script>
-    //custom select box
-
-    $(function(){
-        $('select.styled').customSelect();
-    });
-
-</script>
+  </script>
 
 
-
-<script type="application/javascript">
-    $(document).ready(function () {
-        $("#date-popover").popover({html: true, trigger: "manual"});
-        $("#date-popover").hide();
-        $("#date-popover").click(function (e) {
-            $(this).hide();
+  
+  <script type="application/javascript">
+        $(document).ready(function () {
+            $("#date-popover").popover({html: true, trigger: "manual"});
+            $("#date-popover").hide();
+            $("#date-popover").click(function (e) {
+                $(this).hide();
+            });
+        
+            $("#my-calendar").zabuto_calendar({
+                action: function () {
+                    return myDateFunction(this.id, false);
+                },
+                action_nav: function () {
+                    return myNavFunction(this.id);
+                },
+                ajax: {
+                    url: "show_data.php?action=1",
+                    modal: true
+                },
+                legend: [
+                    {type: "text", label: "Special event", badge: "00"},
+                    {type: "block", label: "Regular event", }
+                ]
+            });
         });
+        
+        
+        function myNavFunction(id) {
+            $("#date-popover").hide();
+            var nav = $("#" + id).data("navigation");
+            var to = $("#" + id).data("to");
+            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+        }
+    </script>
 
-        $("#my-calendar").zabuto_calendar({
-            action: function () {
-                return myDateFunction(this.id, false);
-            },
-            action_nav: function () {
-                return myNavFunction(this.id);
-            },
-            ajax: {
-                url: "show_data.php?action=1",
-                modal: true
-            },
-            legend: [
-                {type: "text", label: "Special event", badge: "00"},
-                {type: "block", label: "Regular event", }
-            ]
-        });
-    });
-
-
-    function myNavFunction(id) {
-        $("#date-popover").hide();
-        var nav = $("#" + id).data("navigation");
-        var to = $("#" + id).data("to");
-        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-    }
-</script>
-
-</body>
+  </body>
 </html>

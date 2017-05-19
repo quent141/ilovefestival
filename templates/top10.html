@@ -57,8 +57,15 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-              <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
+              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+                    <li>
+                      {% if 'username' in session %}
+                        Logged in as: <em>{{ session.username }}</em> &nbsp;
+                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                      {% else %}
+                      <a class="logout" href="/login?from={{ name }}" >Login</a>
+                      {% endif %}
+                    </li>
               </ul>
             </div>
         </header>
@@ -123,7 +130,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/chartjs/">
+                      <a href="{{url_for('aPropos')}}">
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>A Propos</span>
                       </a>
