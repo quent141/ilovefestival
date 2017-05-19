@@ -341,10 +341,7 @@ def postFestivals():
   del lieu[:]
   del prog[:]
 
-  if (nom == 'post') :
-    recherche = request.form['post']
-  else :
-    recherche = nom
+  recherche = request.form['post']
   requete.append(recherche)
 
   print("Je suis la recherche : %s", requete[0])

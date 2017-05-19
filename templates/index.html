@@ -53,15 +53,12 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-            	<ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
-                    <li>
-                      {% if 'username' in session %}
-                        Logged in as: <em>{{ session.username }}</em> &nbsp;
-                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
-                      {% else %}
-                      <a class="logout" href="/login?from={{ name }}" >Login</a>
-                      {% endif %}
-                    </li>
+            	<ul class="nav pull-right top-menu">  
+                {% if 'username' in session %}
+                  <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                {% else %}
+                <a class="logout" href="/login?from={{ name }}" >Login</a>
+                {% endif %}
             	</ul>
             </div>
         </header>
@@ -84,14 +81,20 @@
                   <p class="centered">
 
                   	{% if 'username' in session %}
-					<a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
-					{% else %}
-					<a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
-					{% endif %}
+          					<a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+          					{% else %}
+          					<a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+          					{% endif %}
                   	
                   </p>
                   
-                  <h5 class="centered">I Love Festivals</h5>
+                  <h5 class="centered">
+                      {% if 'username' in session %}
+                         <em>{{ session.username }}</em> &nbsp;
+                      {% else %}
+                        I Love Festivals
+                      {% endif %}
+                  </h5>
 
                   <li class="mt">
                       <a href="{{url_for('decouverte')}}">
