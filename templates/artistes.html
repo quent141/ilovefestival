@@ -216,13 +216,21 @@
 
                               <!-- Genre -->
                               {% for name in genre %}
-                              {% if name != "" %}
+                              {% if name != "" and genre|length == 1 %}
                               <p class="alert alert-success">
                                   <b>
                                       {{ name }}
                                   </b>
                               </p>
+                              {%elif (name!="" and genre|length > 1) %}
+                              <p>
+                                  <b>
+                                      {{ name }}
+                                  </b>
+                              </p>
+
                               {% endif %}
+
                               {% endfor %}
                               {% if (genre[0] == nil) %}
                               <!-- show nothing -->
