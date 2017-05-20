@@ -178,7 +178,7 @@
                       <!-- Votre festival  -->
                       {% if (requete != nil and requete[0] != "" and genre != []) %}
                       <div class="row mt centered">
-                          <h1>{{requete[0]}}</h1>
+                          <h1>{{requete[0].upper()}}</h1>
                           <!-- URL -->
                           {% for name in url %}
                           {% if name != "" %}
