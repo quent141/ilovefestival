@@ -168,10 +168,10 @@
                               <div class="form-group">
                                 <hr>
                                 <div class="row mt centered">
-                                  {% if (requete != nil and requete[0] != "") %}
+                                  {% if (requete != nil and requete[0]|length >= 2) %}
                                     <h2>{{requete[0]}}</h2>
                                   {% else %}
-                                    <h2>Vous n'avez rien saisi dans la barre de recherche...</h2>
+                                    <h2>Veuillez saisir une requete plus précise...</h2>
                                   {% endif %}
                                 </div>
                               </div>
@@ -185,8 +185,10 @@
 
               <aside class="col-lg-3 mt">
                   <h1>RESULTATS ARTISTES</h1>
+
+
                   {% for name in artists %}
-                  {% if name != "" %}
+                  {% if name != "" and name != " " and requete[0]|length >=2%}
 
                   <form action="/postArtist" method="POST">
                       <input type="button" name="post" class="form-control round-form" value="{{name}}">
@@ -195,7 +197,7 @@
                   {% endif %}
                   {% endfor %}
 
-                  {% if (artists[0] == nil) %}
+                  {% if (artists[0] == nil)%}
                   <p>Votre recherche n'a rien donné :(</p>
                   {% endif %}
               </aside>
@@ -203,7 +205,7 @@
               <aside class="col-lg-9 mt">
                 <h1>RESULTATS FESTIVALS</h1>
                 {% for name in festivals %}
-                {% if name != "" %}
+                {% if name != "" and name != " " and requete[0]|length >=2  %}
                 <p>
                   {{ name }}
                   <a href ="{{url_for('festivals')}}" >
