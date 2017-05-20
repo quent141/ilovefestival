@@ -167,123 +167,121 @@
 
               <!-- FIN BARRE DE RECHERCHE -->
 
-              <!-- DEBUT AFFICHAGE FESTIVAL -->
+              <!-- DEBUT AFFICHAGE ARTISTES -->
+              <div class="row mt centered">
+                  <h2>Votre recherche: {{requete[0]}}</h2>
+              </div>
+
               <div class="row">
-                  <h1>
-                      <div class="row mt centered">
-                          <!--  URL vers youtube artiste -->
-                          <!-- Votre festival  -->
-                          {% if (requete != nil and requete[0] != "") %}
-                          {{requete[0]}}
-                          {% endif %}
 
-                          <!-- DEBUT VIDEO -->
 
-                          {% for name in youtube %}
-                          {% if name != "" %}
-                          <a href = {{ name }}><p>redirection Youtube</p></a>
-                          {% endif %}
-                          {% endfor %}
-                          {% if (youtube[0] == nil) %}
-                          <!-- show nothing -->
-                          {% endif %}
-                          <!-- FIN VIDEO -->
+                  <!--  URL vers youtube artiste -->
+                  <!-- Votre festival  -->
+                  {% if (requete != nil and requete[0] != "" and genre != []) %}
 
-                          {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
-                          Vous n'avez rien saisi dans la barre de recherche...
-                          {% endif %}
-                          {% if (requete == nil) %}
-                          Votre requête n'est pas accessible...
-                          {% endif %}
-                      </div>
-                  </h1>
-                    <!-- Image Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                        <div class="project-wrapper">
-                                  <div class="project">
-                                      <div class="photo-wrapper">
-                                          <div class="photo">
-                                            <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
-                                          </div>
-                                          <div class="overlay"></div>
-                                      </div>
+                  <div class="row mt centered">
+                      <h1>{{requete[0]}}</h1>
+
+                      <!-- DEBUT VIDEO -->
+                      {% for name in youtube %}
+                      {% if name != "" %}
+                      <a href = {{ name }}><p>redirection Youtube</p></a>
+                      {% endif %}
+                      {% endfor %}
+                      {% if (youtube[0] == nil) %}
+                      <!-- show nothing -->
+                      {% endif %}
+                      <!-- FIN VIDEO -->
+                  </div>
+
+
+                  <!-- Image Panel -->
+                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                      <div class="project-wrapper">
+                          <div class="project">
+                              <div class="photo-wrapper">
+                                  <div class="photo">
+                                      <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
                                   </div>
+                                  <div class="overlay"></div>
                               </div>
-                    </div><!-- col-lg-4 -->
-                    <!-- Festivals Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                        <div class="content-panel pn">
-                            <div id="spotifyArtist" class="mt centered">
+                          </div>
+                      </div>
+                  </div><!-- col-lg-4 -->
+                  <!-- Festivals Panel -->
+                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                      <div class="content-panel pn">
+                          <div id="spotifyArtist" class="mt centered">
 
 
-                                      <!-- Genre -->
-                                      {% for name in genre %}
-                                        {% if name != "" %}
-                                          <p class="alert alert-success">
-                                              <b>
-                                            {{ name }}
-                                              </b>
-                                          </p>
-                                        {% endif %}
-                                      {% endfor %}
-                                      {% if (genre[0] == nil) %}
-                                        <!-- show nothing -->
-                                      {% endif %}
+                              <!-- Genre -->
+                              {% for name in genre %}
+                              {% if name != "" %}
+                              <p class="alert alert-success">
+                                  <b>
+                                      {{ name }}
+                                  </b>
+                              </p>
+                              {% endif %}
+                              {% endfor %}
+                              {% if (genre[0] == nil) %}
+                              <!-- show nothing -->
+                              {% endif %}
 
 
 
-                            </div>
-                            <!-- DESCRIPTION -->
-                            <div class="followers">
+                          </div>
+                          <!-- DESCRIPTION -->
+                          <div class="followers">
                               {% for name in nationalite %}
-                                {% if name != "" %}
-                                  <p>
-                                    Nationalite : {{ name }}
-                                  </p>
-                                {% endif %}
+                              {% if name != "" %}
+                              <p>
+                                  Nationalite : {{ name }}
+                              </p>
+                              {% endif %}
                               {% endfor %}
                               {% if (nationalite[0] == nil) %}
-                                <!-- show nothing -->
+                              <!-- show nothing -->
                               {% endif %}
 
                               {% for name in notoriete %}
-                                {% if name != "" %}
-                                  <p>
-                                    Notoriete (sur une echelle de 5) : {{ name }}
-                                  </p>
-                                {% endif %}
+                              {% if name != "" %}
+                              <p>
+                                  Notoriete (sur une echelle de 5) : {{ name }}
+                              </p>
+                              {% endif %}
                               {% endfor %}
                               {% if (notoriete[0] == nil) %}
-                                <!-- show nothing -->
+                              <!-- show nothing -->
                               {% endif %}
-                            </div>
+                          </div>
 
-                        </div>
-                    </div><!-- /col-md-4-->
+                      </div>
+                  </div><!-- /col-md-4-->
 
-                    <!-- Note Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                        <div class="content-panel pn">
-                            <div id="spotifyLike">
-                                <div class="sp-title">
-                                    <h3> Note </h3>
-                                </div>
-                            </div>
-                            <p class="followers">La note affichée est la note globale.</p>
-                        </div>
-                    </div><!-- /col-md-4-->
+                  <!-- Note Panel -->
+                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                      <div class="content-panel pn">
+                          <div id="spotifyLike">
+                              <div class="sp-title">
+                                  <h3> Note </h3>
+                              </div>
+                          </div>
+                          <p class="followers">La note affichée est la note globale.</p>
+                      </div>
+                  </div><!-- /col-md-4-->
 
               </div><!-- END 1ST ROW OF PANELS -->
               <!-- FIN AFFICHAGE FESTIVAL -->
 
-             
+
               <!-- DEBUT TABLEAU RECAPITULATIF -->
               <div class="row mt">
-                <div class="col-lg-12">
+                  <div class="col-lg-12">
                       <div class="content-panel">
                           <h3>Programmation</h3>
-                              <section id="unseen">
-                                <table class="table table-bordered table-striped table-condensed">
+                          <section id="unseen">
+                              <table class="table table-bordered table-striped table-condensed">
                                   <thead>
                                   <tr>
                                       <th>Artiste / Groupe </th>
@@ -291,14 +289,14 @@
                                   </thead>
                                   <tbody>
                                   <tr>
-                                      <td> 
+                                      <td>
                                           {% for name in concerts %}
                                           {% if name != "" %}
                                           <p>
-                                            {{ name }}
-                                            <a href ="{{url_for('festivals')}}" >
-                                                <i class="fa fa-music"></i>
-                                            </a>
+                                              {{ name }}
+                                              <a href ="{{url_for('festivals')}}" >
+                                                  <i class="fa fa-music"></i>
+                                              </a>
                                           </p>
                                           {% endif %}
                                           {% endfor %}
@@ -308,28 +306,37 @@
                                           {% endif %}
                                       </td>
                                   </tr>
-                                  
+
                                   </tbody>
                               </table>
-                              </section>
+                          </section>
                       </div><!-- /content-panel -->
-                   </div><!-- /col-lg-12 -->     
-                  </div><!-- /row -->
+                  </div><!-- /col-lg-12 -->
+              </div><!-- /row -->
 
               <!-- FIN TABLEAU RECAPITULATIF -->
-              
-              <div class="form-group"></div> <!-- TROU -->
-              
+
+              {% elif (requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
+              <div class="row mt centered">
+                  <p>Vous n'avez rien saisi dans la barre de recherche...</p>
+              </div>
 
 
-    </section><! <!--/wrapper -->
+              {% else %}
+              <div class="row mt centered">
+                  <p>Oups! Votre recherche n'a rien donné</p>
+              </div>
+              {%endif%}
+
+
+          </section><! <!--/wrapper -->
       </section><!-- /MAIN CONTENT -->
 
       <!--main content end-->
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              2017 - ILoveFestivals
+              ILoveFestivals - Crée en 2017 par : Nolwenn Madec, Maria Alicia Bermudez Jaime, Marwann Mehenni, Emmanuel Gublin et Quentin Nieloud
               <a href="{{url_for('artistes')}}" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
