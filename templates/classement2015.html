@@ -1,13 +1,13 @@
 <!DOCTYPE html>
 <html lang="fr">
-  <head>
+<head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>Classement 2014</title>
+    <title>Classement 2015</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -21,64 +21,65 @@
     <link href="{{url_for('static',filename='assets/css/style.css')}}" rel="stylesheet">
     <link href="{{url_for('static',filename='assets/css/style-responsive.css')}}" rel="stylesheet">
 
+
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
 
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-  </head>
+</head>
 
-  <body>
+<body>
 
-  <section id="container" >
-      <!-- **********************************************************************************************************************************************************
-      TOP BAR CONTENT & NOTIFICATIONS
-      *********************************************************************************************************************************************************** -->
-      <!--header start-->
-      <header class="header black-bg">
-              <div class="sidebar-toggle-box">
-                  <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
-              </div>
-            <!--logo start-->
-            <a href="{{ url_for('main') }}" class="logo"><b>I Love Festivals</b></a>
-            <!--logo end-->
-            <div class="nav notify-row" id="top_menu">
-                <!--  notification start -->
-                <ul class="nav top-menu">
+<section id="container" >
+    <!-- **********************************************************************************************************************************************************
+    TOP BAR CONTENT & NOTIFICATIONS
+    *********************************************************************************************************************************************************** -->
+    <!--header start-->
+    <header class="header black-bg">
+        <div class="sidebar-toggle-box">
+            <div class="fa fa-bars tooltips" data-placement="right" data-original-title="Toggle Navigation"></div>
+        </div>
+        <!--logo start-->
+        <a href="{{ url_for('main') }}" class="logo"><b>I Love Festivals</b></a>
+        <!--logo end-->
+        <div class="nav notify-row" id="top_menu">
+            <!--  notification start -->
+            <ul class="nav top-menu">
 
-                </ul>
-                <!--  notification end -->
-            </div>
-            <div class="top-menu">
-              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
-                    <li>
-                {% if 'username' in session %}
-                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
-                {% else %}
-                <a class="logout" href="/login?from={{ name }}" >Login</a>
-                {% endif %}
-                    </li>
-              </ul>
-            </div>
-        </header>
-      <!--header end-->
+            </ul>
+            <!--  notification end -->
+        </div>
+        <div class="top-menu">
+            <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+                <li>
+                    {% if 'username' in session %}
+                    <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                    {% else %}
+                    <a class="logout" href="/login?from={{ name }}" >Login</a>
+                    {% endif %}
+                </li>
+            </ul>
+        </div>
+    </header>
+    <!--header end-->
 
-      <!-- **********************************************************************************************************************************************************
-      MAIN SIDEBAR MENU
-          Infos pour les modifs :
-              -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
-              -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
-              -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
-      *********************************************************************************************************************************************************** -->
-      <!--sidebar start-->
-      <aside>
-          <div id="sidebar"  class="nav-collapse ">
-              <!-- sidebar menu start-->
-              <ul class="sidebar-menu" id="nav-accordion">
+    <!-- **********************************************************************************************************************************************************
+    MAIN SIDEBAR MENU
+        Infos pour les modifs :
+            -> chaque .html a une classe A RESPECTER (fa fa-cogs/ fa fa-tasks etc.) Voir le README pour références
+            -> Bien mettre (ou enlever) class="active" au bon endroit pour un bel affichage dynamique
+            -> attention aux classes "mt" et "sub-menu" qui modifient seulement la taille des boutons (mt>sub-menu)
+    *********************************************************************************************************************************************************** -->
+    <!--sidebar start-->
+    <aside>
+        <div id="sidebar"  class="nav-collapse ">
+            <!-- sidebar menu start-->
+            <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered">
+                <p class="centered">
 
                     {% if 'username' in session %}
                     <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
@@ -86,159 +87,244 @@
                     <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
                     {% endif %}
 
-                  </p>
+                </p>
 
-                  <h5 class="centered">
-                      {% if 'username' in session %}
-                         <em>{{ session.username }}</em> &nbsp;
-                      {% else %}
-                        I Love Festivals
-                      {% endif %}
-                  </h5>
+                <h5 class="centered">
+                    {% if 'username' in session %}
+                    <em>{{ session.username }}</em> &nbsp;
+                    {% else %}
+                    I Love Festivals
+                    {% endif %}
+                </h5>
 
-                  <li class="mt">
-                      <a href= "{{url_for('decouverte')}}">
-                          <i class="fa fa-tasks"></i>
-                          <span>Découvrir</span>
-                      </a>
-                  </li>
+                <li class="mt">
+                    <a href= "{{url_for('decouverte')}}">
+                        <i class="fa fa-tasks"></i>
+                        <span>Découvrir</span>
+                    </a>
+                </li>
 
-                  <li class="sub-menu">
-                      <a href="{{url_for('festivals')}}">
-                          <i class="fa fa-cogs"></i>
-                          <span>Festivals</span>
-                      </a>
-                  </li>
+                <li class="sub-menu">
+                    <a href="{{url_for('festivals')}}">
+                        <i class="fa fa-cogs"></i>
+                        <span>Festivals</span>
+                    </a>
+                </li>
 
-                  <li class="sub-menu">
-                      <a class="active" href="javascript:;" >
-                          <i class="fa fa-desktop" ></i> <!--href="basic_table"-->
-                          <span>Classements</span>
-                      </a>
-                      <ul class="sub">
-                          <li><a  href="{{url_for('classement2016')}}">2016</a></li>
-                          <li class="active"><a  href="{{url_for('classement2015')}}">2015</a></li>
-                          <li><a  href="{{url_for('classement2014')}}">2014</a></li>
-                      </ul>
-                  </li>
+                <li class="sub-menu">
+                    <a class="active" href="javascript:;" >
+                        <i class="fa fa-desktop" ></i> <!--href="basic_table"-->
+                        <span>Classements</span>
+                    </a>
+                    <ul class="sub">
+                        <li><a  href="{{url_for('classement2016')}}">2016</a></li>
+                        <li class="active"><a  href="{{url_for('classement2015')}}">2015</a></li>
+                        <li><a  href="{{url_for('classement2014')}}">2014</a></li>
+                    </ul>
+                </li>
 
 
 
-                  <li class="sub-menu">
-                      <a href="{{url_for('artistes')}}">
-                          <i class="fa fa-cogs"></i>
-                          <span>Artistes</span>
-                      </a>
-                  </li>
+                <li class="sub-menu">
+                    <a href="{{url_for('artistes')}}">
+                        <i class="fa fa-cogs"></i>
+                        <span>Artistes</span>
+                    </a>
+                </li>
 
-                  <li class="sub-menu">
-                      <a href="{{url_for('aPropos')}}">
-                          <i class=" fa fa-bar-chart-o"></i>
-                          <span>A Propos</span>
-                      </a>
-                  </li>
+                <li class="sub-menu">
+                    <a href="{{url_for('aPropos')}}">
+                        <i class=" fa fa-bar-chart-o"></i>
+                        <span>A Propos</span>
+                    </a>
+                </li>
 
-              </ul>
-              <!-- sidebar menu end-->
-          </div>
-      </aside>
-      <!--sidebar end-->
+            </ul>
+            <!-- sidebar menu end-->
+        </div>
+    </aside>
+    <!--sidebar end-->
 
-      <!-- **********************************************************************************************************************************************************
-      MAIN CONTENT
-      *********************************************************************************************************************************************************** -->
-      <!--main content start-->
-      <section id="main-content">
-          <section class="wrapper site-min-height">
-            <h3><i class="fa fa-angle-right"></i>Cette page est en cours de Maintenance... </h3>
+    <!-- **********************************************************************************************************************************************************
+    MAIN CONTENT
+    *********************************************************************************************************************************************************** -->
+    <!--main content start-->
+    <section id="main-content">
+        <section class="wrapper">
+            <h3><i class="fa fa-angle-right"></i> Classement 2015</h3>
             <div class="row mt">
-              <div class="col-lg-12">
-              <p>Des travaux sont en cours ici</p>
-              </div>
-            </div>
+                <div class="col-lg-12">
+                    <div class="content-panel">
+                        <section id="unseen">
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                <tr>
+                                    <th>Classement</th>
+                                    <th>Festival</th>
+                                    <th class="numeric">Note ILoveFestivals</th>
+                                    <th class="numeric">Notes Utilisateurs</th>
 
-    </section><! --/wrapper -->
-      </section><!-- /MAIN CONTENT -->
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr>
+                                    <td class="alert alert-success"><b>1</b></td>
+                                    <td class="alert alert-success"><b>Vieilles Charrues</b></td>
+                                    <td class="numeric alert alert-warning"><b>20</b></td>
+                                    <td class="numeric alert alert-warning"><b>19</b></td>
 
-      <!--main content end-->
-      <!--footer start-->
-      <footer class="site-footer">
-          <div class="text-center">
-              ILoveFestivals - Créé en 2017 par : Nolwenn Madec, Maria Alicia Bermudez Jaime, Marwann Mehenni, Emmanuel Gublin et Quentin Nieloud
-              <a href="{{url_for('classement2014')}}" class="go-top">
-                  <i class="fa fa-angle-up"></i>
-              </a>
-          </div>
-      </footer>
-      <!--footer end-->
-  </section>
+                                </tr>
+                                <tr>
+                                    <td class="alert alert-success"><b>2</b></td>
+                                    <td class="alert alert-success"><b>Solidays</b></td>
+                                    <td class="numeric alert alert-warning"><b>18</b></td>
+                                    <td class="numeric alert alert-warning"><b>19</b></td>
 
-    <!-- js placed at the end of the document so the pages load faster -->
-    <script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
-    <script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
+                                </tr>
+                                <tr>
+                                    <td class="alert alert-success"><b>3</b></td>
+                                    <td class="alert alert-success"><b>Hellfest</b></td>
+                                    <td class="numeric alert alert-warning"><b>18</b></td>
+                                    <td class="numeric alert alert-warning"><b>18</b></td>
+
+                                </tr>
+                                <tr>
+                                    <td>4</td>
+                                    <td>Fête du bruit</td>
+                                    <td class="numeric">17</td>
+                                    <td class="numeric">18</td>
+
+                                </tr>
+                                <tr>
+                                    <td>5</td>
+                                    <td>Festidreuz</td>
+                                    <td class="numeric">17</td>
+                                    <td class="numeric">17</td>
+
+                                </tr>
+                                <tr>
+                                    <td>6</td>
+                                    <td>La route du rock</td>
+                                    <td class="numeric">17</td>
+                                    <td class="numeric">16</td>
+
+                                </tr>
+                                <tr>
+                                    <td>7</td>
+                                    <td>Les eurockéennes</td>
+                                    <td class="numeric">16</td>
+                                    <td class="numeric">16</td>
+
+                                </tr>
+                                <tr>
+                                    <td>8</td>
+                                    <td>Les 24h de l'INSA</td>
+                                    <td class="numeric">16</td>
+                                    <td class="numeric">15</td>
+
+                                </tr>
+                                <tr>
+                                    <td>9</td>
+                                    <td>Coachella</td>
+                                    <td class="numeric">14</td>
+                                    <td class="numeric">15</td>
+
+                                </tr>
+                                <tr>
+                                    <td>10</td>
+                                    <td>Tomorrowland</td>
+                                    <td class="numeric">13</td>
+                                    <td class="numeric">15</td>
+
+                                </tr>
+                                </tbody>
+                            </table>
+                        </section>
+                    </div><!-- /content-panel -->
+                </div><!-- /col-lg-4 -->
+            </div><!-- /row -->
+        </section><! --/wrapper -->
+    </section><!-- /MAIN CONTENT -->
+
+    <!--main content end-->
+    <!--footer start-->
+    <footer class="site-footer">
+        <div class="text-center">
+            ILoveFestivals - Créé en 2017 par : Nolwenn Madec, Maria Alicia Bermudez Jaime, Marwann Mehenni, Emmanuel Gublin et Quentin Nieloud
+            <a href="{{url_for('classement2015')}}" class="go-top">
+                <i class="fa fa-angle-up"></i>
+            </a>
+        </div>
+    </footer>
+    <!--footer end-->
+</section>
+
+<!-- js placed at the end of the document so the pages load faster -->
+<script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
+<script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
 
-    <!--common script for all pages-->
-    <script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
+<!--common script for all pages-->
+<script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
 
-    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
-
-
-    <!--script for this page-->
-    <script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
-    <script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
-
-  <script>
-      //custom select box
-
-      $(function(){
-          $('select.styled').customSelect();
-      });
-
-  </script>
+<script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
+<script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
 
 
+<!--script for this page-->
+<script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
+<script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
 
-  <script type="application/javascript">
-        $(document).ready(function () {
-            $("#date-popover").popover({html: true, trigger: "manual"});
-            $("#date-popover").hide();
-            $("#date-popover").click(function (e) {
-                $(this).hide();
-            });
+<script>
+    //custom select box
 
-            $("#my-calendar").zabuto_calendar({
-                action: function () {
-                    return myDateFunction(this.id, false);
-                },
-                action_nav: function () {
-                    return myNavFunction(this.id);
-                },
-                ajax: {
-                    url: "show_data.php?action=1",
-                    modal: true
-                },
-                legend: [
-                    {type: "text", label: "Special event", badge: "00"},
-                    {type: "block", label: "Regular event", }
-                ]
-            });
+    $(function(){
+        $('select.styled').customSelect();
+    });
+
+</script>
+
+
+
+<script type="application/javascript">
+    $(document).ready(function () {
+        $("#date-popover").popover({html: true, trigger: "manual"});
+        $("#date-popover").hide();
+        $("#date-popover").click(function (e) {
+            $(this).hide();
         });
 
+        $("#my-calendar").zabuto_calendar({
+            action: function () {
+                return myDateFunction(this.id, false);
+            },
+            action_nav: function () {
+                return myNavFunction(this.id);
+            },
+            ajax: {
+                url: "show_data.php?action=1",
+                modal: true
+            },
+            legend: [
+                {type: "text", label: "Special event", badge: "00"},
+                {type: "block", label: "Regular event", }
+            ]
+        });
+    });
 
-        function myNavFunction(id) {
-            $("#date-popover").hide();
-            var nav = $("#" + id).data("navigation");
-            var to = $("#" + id).data("to");
-            console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
-        }
-    </script>
 
-  </body>
+    function myNavFunction(id) {
+        $("#date-popover").hide();
+        var nav = $("#" + id).data("navigation");
+        var to = $("#" + id).data("to");
+        console.log('nav ' + nav + ' to: ' + to.month + '/' + to.year);
+    }
+</script>
+
+</body>
 </html>
