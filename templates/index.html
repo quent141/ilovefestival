@@ -22,8 +22,7 @@
     <link href="{{url_for('static',filename='assets/css/style-responsive.css')}}" rel="stylesheet">
 
     <script src="{{url_for('static',filename='assets/js/chart-master/Chart.js')}}"></script> <!--DU PLUS-->
-    <script src="{{url_for('static',filename='assets/js/jquery-1.8.3.min.js')}}"></script>
-    
+
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
@@ -158,7 +157,7 @@
                           <div class="col-lg-12">
 
                               <!-- DEBUT BARRE DE RECHERCHE -->
-                              <h1 class="centered">Vous recherchez quelque chose ?</h1>
+                              <h1 class="centered"><b>Vous recherchez quelque chose ?</b></h1>
                               <div class = "row">
                                   <div class="col-sm-10">
                                       <form action="/post" method="POST">
@@ -186,10 +185,10 @@
                                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                                       <div class="content-panel pn">
                                           <div id="blog-bg">
-                                              <div class="blog-title"></div>
+                                              <div class="blog-title">Samedi 20 Mai 2017</div>
                                           </div>
                                           <div class="blog-text">
-                                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
+                                              <p>Vos partiels approchent ? On a la solution pour vous les faire oublier : Muse ! (Mais pour les Solidays une mauvaise nouvelle...)</p>
                                           </div>
                                       </div>
                                   </div><!-- /col-md-4-->
@@ -227,10 +226,10 @@
                                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                                       <div class="content-panel pn">
                                           <div id="blog-bg">
-                                              <div class="blog-title">Incredible Title</div>
+                                              <div class="blog-title">Lundi 15 Mai 2017</div>
                                           </div>
                                           <div class="blog-text">
-                                              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. <a href="#">Read More</a></p>
+                                              <p>Quand il fait trop chaud et trop beau dehors et au lieu de rester enfermé chez soi pour réviser ses partiels... Recette de jour : OpenAirs et Lorde !</p>
                                           </div>
                                       </div>
                                   </div><!-- /col-md-4-->
@@ -268,10 +267,10 @@
                                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                                       <div class="content-panel pn">
                                           <div id="blog-bg">
-                                              <div class="blog-title">U2 à Lyon !</div>
+                                              <div class="blog-title">Mercredi 10 Mai 2017</div>
                                           </div>
                                           <div class="blog-text">
-                                              <p>Le groupe mythique Irlandais débarque à Lyon pour la nouvelle tournée. <a href="#">En savoir plus</a></p>
+                                              <p>Aujourd'hui c'est l'heure des News Bretonnes et Ango-saxonnes! ça se ressemble effectivement</p>
                                           </div>
                                       </div>
                                   </div><!-- /col-md-4-->
@@ -324,22 +323,21 @@
   </section>
 
     <!-- js placed at the end of the document so the pages load faster -->
-    <script src="static/assets/js/jquery.js"></script>
-    <script src="static/assets/js/jquery-1.8.3.min.js"></script>
-    <script src="static/assets/js/bootstrap.min.js"></script>
-    <script class="include" type="text/javascript" src="static/assets/js/jquery.dcjqaccordion.2.7.js"></script>
-    <script src="static/assets/js/jquery.scrollTo.min.js"></script>
-    <script src="static/assets/js/jquery.nicescroll.js" type="text/javascript"></script>
-    <script src="static/assets/js/jquery.sparkline.js"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/bootstrap.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery-ui-1.9.2.custom.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.ui.touch-punch.min.js')}}"></script>
+    <script class="include" type="text/javascript" src="{{url_for('static',filename='assets/js/jquery.dcjqaccordion.2.7.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.scrollTo.min.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/jquery.nicescroll.js')}}" type="text/javascript"></script>
 
 
     <!--common script for all pages-->
-    <script src="static/assets/js/common-scripts.js"></script>
-    <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
-	<script src="{{url_for('static',filename='assets/js/code.js')}}"></script>
-    
-    <script type="text/javascript" src="static/assets/js/gritter/js/jquery.gritter.js"></script>
-    <script type="text/javascript" src="static/assets/js/gritter-conf.js"></script>
+    <script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
+
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
+
 
     <!--script for this page-->
     <script src="static/assets/js/sparkline-chart.js"></script>    

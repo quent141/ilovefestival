@@ -152,7 +152,7 @@
           <section class="wrapper">
 
               <!-- DEBUT BARRE DE RECHERCHE -->
-              <h1 class="centered">Quel festival vous intéresse ?</h1>
+              <h1 class="centered"><b>Quel festival vous intéresse ?</b></h1>
               <div class = "row">
                   <div class="col-sm-10">
                       <form action="{{url_for('postFestivals',nom='post')}}" method="POST">
@@ -172,12 +172,6 @@
                   <h1>
                       <div class="row mt centered">
 
-                          {% for name in url %}
-                          {% if name != "" %}
-                          <h1 href = {{ name }}></h1>
-
-                          {% endif %}
-                          {% endfor %}
                           {% if (festivals[0] == nil) %}
                           <!-- do nothing -->
                           {% endif %}
@@ -186,6 +180,13 @@
                           {% if (requete != nil and requete[0] != "") %}
                           {{requete[0]}}
                           {% endif %}
+
+                          {% for name in url %}
+                          {% if name != "" %}
+                          <a href = {{ name }}><p>site web du festival</p></a>
+
+                          {% endif %}
+                          {% endfor %}
 
                           {% if (requete == nil and requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
                           Vous n'avez rien saisi dans la barre de recherche...
@@ -216,29 +217,40 @@
                             <div id="spotifyArtist" class="mt centered">
 
 
-                                      <!-- Genre -->
-                                      {% for name in genre %}
-                                        {% if name != "" %}
-                                          <p>
-                                            {{ name }}
-                                          </p>
-                                        {% endif %}
-                                      {% endfor %}
-                                      {% if (genre[0] == nil) %}
-                                        <!-- show nothing -->
-                                      {% endif %}
+                                <!-- Genre -->
+                                {% for name in genre %}
+                                {% if (name != "" and genre|length == 1) %}
+                                <p class="alert alert-success">
+                                    <b>
+                                        {{ name }}
+                                    </b>
+                                </p>
 
+                                {%elif (name!="" and genre|length > 1) %}
+                                <p>
+                                    <b>
+                                        {{ name }}
+                                    </b>
+                                </p>
+
+                                {% endif %}
+
+                                {% endfor %}
+                                {% if (genre[0] == nil) %}
+                                <!-- show nothing -->
+                                {% endif %}
 
 
                             </div>
                             <!-- DESCRIPTION -->
                             <div class="followers">
+                                <ul>
                               <!-- lieu -->
                               {% for name in lieu %}
                                 {% if name != "" %}
-                                  <p>
+                                  <li>
                                     Lieu : {{ name }}
-                                  </p>
+                                  </li>
                                 {% endif %}
                               {% endfor %}
                               {% if (lieu[0] == nil) %}
@@ -248,9 +260,9 @@
                               {% for nameD in dateDeb %}
                               {% for nameF in dateFin %}
                                 {% if nameD != "" and nameF != "" %}
-                                  <p>
+                                  <li>
                                     Du {{ nameD }} au {{ nameF }}
-                                  </p>
+                                  </li>
                                 {% endif %}
                               {% endfor %}
                               {% endfor %}
@@ -264,34 +276,34 @@
                               {% for name in prix %}
                                 {% if name != "" %}
                                   {% if name == 0 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : Gratuit
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 1 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : jusqu'à 20€
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 2 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : entre 20 et 40€
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 3 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : entre 40 et 70€
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 4 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : entre 70 et 100€
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 5 %}
-                                  <p>
+                                  <li>
                                     Prix par jour : plus de 100€
-                                  </p>
+                                  </li>
                                   {% endif %}
                                 {% endif %}
                               {% endfor %}
@@ -302,25 +314,26 @@
                               {% for name in taille %}
                                 {% if name != "" %}
                                   {% if name == 1 %}
-                                  <p>
+                                  <li>
                                     Petit festival
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 2 %}
-                                  <p>
+                                  <li>
                                     Festival de taille moyenne
-                                  </p>
+                                  </li>
                                   {% endif %}
                                   {% if name == 3 %}
-                                  <p>
+                                  <li>
                                     Grand Festival
-                                  </p>
+                                  </li>
                                   {% endif %}
                                 {% endif %}
                               {% endfor %}
                               {% if (taille[0] == nil) %}
                                 <!-- show nothing -->
                               {% endif %}
+                                </ul>
 
                             </div>
 
@@ -393,7 +406,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2017 - ILoveFestivals
-              <a href="{{url_for('main')}}" class="go-top">
+              <a href="{{url_for('festivals')}}" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>

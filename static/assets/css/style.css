@@ -1646,7 +1646,7 @@ PANELS CONFIGURATIONS
 
 /* BLOG PANEL */
 #blog-bg {
-	background: url(../static/images/blog-bg.jpg) no-repeat center top;
+	background: url(../images/portfolio/port04.jpg) no-repeat center top;
 	margin-top: -15px;
 	background-attachment: relative;
 	background-position: center center;

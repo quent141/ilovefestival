@@ -127,7 +127,7 @@
                    
 
                   <li class="sub-menu">
-                      <a class="active" href="{{url_for('artistes')}}">
+                      <a href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
@@ -384,7 +384,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2017 - ILoveFestivals
-              <a href="{{url_for('main')}}" class="go-top">
+              <a href="{{url_for('page',name='{{ session.username }}')}}"class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
