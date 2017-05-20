@@ -204,7 +204,7 @@
                   <!-- Festivals Panel -->
                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                       <div class="content-panel pn">
-                          <div id="spotifyArtist" class="mt centered">
+                          <div id="spotifyLike" class="mt centered">
 
 
                               <!-- Genre -->
@@ -331,16 +331,14 @@
                   </div><!-- /col-md-4-->
 
                   <!-- Note Panel -->
-                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
-                      <div class="content-panel pn">
-                          <div id="spotifyLike">
-                              <div class="sp-title">
-                                  <h3> Note </h3>
-                              </div>
-                          </div>
-                          <p class="followers">La note affichée est la note globale.</p>
-                      </div>
-                  </div><!-- /col-md-4-->
+                    <div>
+                        <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
+                            Note:
+                            <input type="number" name="quantity" min="1" max="5">
+                            <input type="submit" href="artistes">
+                        </form>
+
+                    </div><!-- /col-md-4-->
 
               </div><!-- END 1ST ROW OF PANELS -->
               <!-- FIN AFFICHAGE FESTIVAL -->
@@ -409,7 +407,7 @@
       <!--footer start-->
       <footer class="site-footer">
           <div class="text-center">
-              ILoveFestivals - Crée en 2017 par : Nolwenn Madec, Maria Alicia Bermudez Jaime, Marwann Mehenni, Emmanuel Gublin et Quentin Nieloud
+              ILoveFestivals - Créé en 2017 par : Nolwenn Madec, Maria Alicia Bermudez Jaime, Marwann Mehenni, Emmanuel Gublin et Quentin Nieloud
               <a href="{{url_for('festivals')}}" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
