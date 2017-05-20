@@ -53,12 +53,14 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-            	<ul class="nav pull-right top-menu">  
+            	<ul class="nav pull-right top-menu">
+                    <li>
                 {% if 'username' in session %}
-                  <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
                 {% else %}
                 <a class="logout" href="/login?from={{ name }}" >Login</a>
                 {% endif %}
+                    </li>
             	</ul>
             </div>
         </header>

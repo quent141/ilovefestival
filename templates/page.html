@@ -56,12 +56,11 @@
             <div class="top-menu">
               <ul class="nav pull-right top-menu">  
                     <li>
-                      {% if 'username' in session %}
-                        Logged in as: <em>{{ session.username }}</em> &nbsp;
+                {% if 'username' in session %}
                         <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
-                      {% else %}
-                      <a class="logout" href="/login?from={{ name }}" >Login</a>
-                      {% endif %}
+                {% else %}
+                <a class="logout" href="/login?from={{ name }}" >Login</a>
+                {% endif %}
                     </li>
               </ul>
             </div>
@@ -91,7 +90,13 @@
                   	
                   </p>
 
-                  <h5 class="centered">I Love Festivals</h5>
+                  <h5 class="centered">
+                      {% if 'username' in session %}
+                         <em>{{ session.username }}</em> &nbsp;
+                      {% else %}
+                        I Love Festivals
+                      {% endif %}
+                  </h5>
 
                   <li class="mt">
                       <a href= "{{url_for('decouverte')}}">
@@ -129,7 +134,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/chartjs/">
+                      <a href="{{url_for('aPropos')}}">
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>A Propos</span>
                       </a>
