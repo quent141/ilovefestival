@@ -7,7 +7,7 @@
     <meta name="author" content="Dashboard">
     <meta name="keyword" content="Dashboard, Bootstrap, Admin, Template, Theme, Responsive, Fluid, Retina">
 
-    <title>DASHGUM - Bootstrap Admin Template</title>
+    <title>Classement 2014</title>
 
     <!-- Bootstrap core CSS -->
     <link href="{{url_for('static',filename='assets/css/bootstrap.css')}}" rel="stylesheet">
@@ -52,8 +52,14 @@
                 <!--  notification end -->
             </div>
             <div class="top-menu">
-              <ul class="nav pull-right top-menu">
-                    <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li>
+              <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
+                    <li>
+                {% if 'username' in session %}
+                        <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
+                {% else %}
+                <a class="logout" href="/login?from={{ name }}" >Login</a>
+                {% endif %}
+                    </li>
               </ul>
             </div>
         </header>
@@ -72,8 +78,23 @@
               <!-- sidebar menu start-->
               <ul class="sidebar-menu" id="nav-accordion">
 
-                  <p class="centered"><a href="/profile/"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a></p>
-                  <h5 class="centered">I Love Festivals</h5>
+                  <p class="centered">
+
+                    {% if 'username' in session %}
+                    <a href="{{url_for('page',name='{{ session.username }}')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% else %}
+                    <a href="{{url_for('main')}}"><img src="{{url_for('static',filename='assets/images/ui-sam.jpg')}}" class="img-circle" width="60"></a>
+                    {% endif %}
+
+                  </p>
+
+                  <h5 class="centered">
+                      {% if 'username' in session %}
+                         <em>{{ session.username }}</em> &nbsp;
+                      {% else %}
+                        I Love Festivals
+                      {% endif %}
+                  </h5>
 
                   <li class="mt">
                       <a href= "{{url_for('decouverte')}}">
@@ -83,7 +104,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/gallery/">
+                      <a href="{{url_for('festivals')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Festivals</span>
                       </a>
@@ -101,16 +122,18 @@
                       </ul>
                   </li>
 
+
+
                   <li class="sub-menu">
-                      <a href="/gallery/">
+                      <a href="{{url_for('artistes')}}">
                           <i class="fa fa-cogs"></i>
                           <span>Artistes</span>
                       </a>
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/chartjs/">
-                          <a href="{{url_for('aPropos')}}">
+                      <a href="{{url_for('aPropos')}}">
+                          <i class=" fa fa-bar-chart-o"></i>
                           <span>A Propos</span>
                       </a>
                   </li>
@@ -127,10 +150,10 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Blank Page</h3>
+          	<h3><i class="fa fa-angle-right"></i>Cette page est en cours de Maintenance... </h3>
           	<div class="row mt">
           		<div class="col-lg-12">
-          		<p>Place your content here.</p>
+          		<p>Des travaux sont en cours ici</p>
           		</div>
           	</div>
 
@@ -142,7 +165,7 @@
       <footer class="site-footer">
           <div class="text-center">
               2017 - ILoveFestivals
-              <a href="{{url_for('main')}}" class="go-top">
+              <a href="{{url_for('classement2014')}}" class="go-top">
                   <i class="fa fa-angle-up"></i>
               </a>
           </div>
@@ -163,8 +186,14 @@
     <!--common script for all pages-->
     <script src="{{url_for('static',filename='assets/js/common-scripts.js')}}"></script>
 
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
+    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
+
+
     <!--script for this page-->
-    
+    <script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
+    <script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
+
   <script>
       //custom select box
 
@@ -174,12 +203,7 @@
 
   </script>
 
-<script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter/js/jquery.gritter.js')}}"></script>
-    <script type="text/javascript" src="{{url_for('static',filename='assets/js/gritter-conf.js')}}"></script>
 
-    <!--script for this page-->
-    <script src="{{url_for('static',filename='assets/js/sparkline-chart.js')}}"></script>
-  <script src="{{url_for('static',filename='assets/js/zabuto_calendar.js')}}"></script>
 
   <script type="application/javascript">
         $(document).ready(function () {
