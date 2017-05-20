@@ -54,12 +54,11 @@
             <div class="top-menu">
               <ul class="nav pull-right top-menu">  <!--  <li><a class="logout" href="{{ url_for('login') }}">Déconnexion</a></li> -->
                     <li>
-                      {% if 'username' in session %}
-                        Logged in as: <em>{{ session.username }}</em> &nbsp;
+                {% if 'username' in session %}
                         <a class="logout" href="{{ url_for('logout') }}" >Logout</a>
-                      {% else %}
-                      <a class="logout" href="/login?from={{ name }}" >Login</a>
-                      {% endif %}
+                {% else %}
+                <a class="logout" href="/login?from={{ name }}" >Login</a>
+                {% endif %}
                     </li>
               </ul>
             </div>
@@ -88,7 +87,14 @@
                     {% endif %}
                     
                   </p>
-                  <h5 class="centered">I Love Festivals</h5>
+
+                  <h5 class="centered">
+                      {% if 'username' in session %}
+                         <em>{{ session.username }}</em> &nbsp;
+                      {% else %}
+                        I Love Festivals
+                      {% endif %}
+                  </h5>
 
                   <li class="mt">
                       <a href= "{{url_for('decouverte')}}">
@@ -126,7 +132,7 @@
                   </li>
 
                   <li class="sub-menu">
-                      <a href="/chartjs/">
+                      <a href="{{url_for('aPropos')}}">
                           <i class=" fa fa-bar-chart-o"></i>
                           <span>A Propos</span>
                       </a>
@@ -207,9 +213,9 @@
                     <!-- Festivals Panel -->
                     <div class="col-lg-4 col-md-4 col-sm-4 mb">
                         <div class="content-panel pn">
-                            <div id="spotifyArtist">
-                                <div class="sp-title">
-                                    <h3>
+                            <div id="spotifyArtist" class="mt centered">
+
+
                                       <!-- Genre -->
                                       {% for name in genre %}
                                         {% if name != "" %}
@@ -221,10 +227,9 @@
                                       {% if (genre[0] == nil) %}
                                         <!-- show nothing -->
                                       {% endif %}
-                                    </h3>
 
 
-                                </div>
+
                             </div>
                             <!-- DESCRIPTION -->
                             <div class="followers">

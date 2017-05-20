@@ -281,6 +281,7 @@ def post():
   del festivals[:]
   del requete[:]
 
+
   recherche = request.form['post']
   requete.append(recherche)
 
@@ -293,6 +294,9 @@ def post():
   #RECHERCHE PAR ARTISTE
   resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE (artistes.NomArtiste like %s)", recherche)
 
+  #RECHERCHE LE FESTIVAL
+  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE (festival.NomFestival like %s)", recherche)
+
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
 
@@ -302,6 +306,7 @@ def post():
   for x in range(len(all)):
         artists.append(all[x][0])
         print(artists)
+
   #Donne les Festivals du genre "recherche"
   all = resultFestivals.fetchall()
   print (all)
@@ -320,6 +325,13 @@ def post():
   if (indice != 0):
         artists.append(recherche)
 
+  #Donne le festival "recherche"
+  all = resultFestival.fetchone()
+  print (all)
+  if (all != None):
+    for x in range(len(all)):
+      festivals.append(all[x])
+      print(festivals)
 
   return redirect(url_for('results'))
 
@@ -361,7 +373,6 @@ def postFestivals():
   resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE (festival.NomFestival like %s)", recherche)
   #RECHERCHE LIEU du festival
   resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE (festival.NomFestival like %s)", recherche)
-
   #RECHERCHES PROGRAMMATION du festival
   resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE (festival.NomFestival like %s)", recherche)
 
@@ -371,7 +382,7 @@ def postFestivals():
   print (all)
   if (all != None):
     for x in range(len(all)):
-      festivals.append(all[x][0])
+      festivals.append(all[x])
       print(festivals)
 
   #Donne le genre du festival "recherche"
@@ -382,8 +393,6 @@ def postFestivals():
     for x in range(len(all)):
       genre.append(all[x][0])
       print(genre)
-
-
 
   #Donne l'url du festival "recherche" 
   all = resultURL.fetchone()
@@ -434,7 +443,6 @@ def postFestivals():
 
   return redirect(url_for('festivals'))
 
-  
 
 #GERER LES RECHERCHES SUR 'artistes.html'
 @app.route('/postArtist/<nom>', methods=['POST'])
