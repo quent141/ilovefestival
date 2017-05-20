@@ -177,10 +177,10 @@
 
                   <!--  URL vers youtube artiste -->
                   <!-- Votre festival  -->
-                  {% if (requete != nil and requete[0] != "" and genre != []) %}
+                  {% if (requete != nil and requete[0] != "" and genre != [] and requete[0]|length >= 2) %}
 
                   <div class="row mt centered">
-                      <h1>{{requete[0].upper()}}</h1>
+                      <h1>{{artists[0]}}</h1>
 
                       <!-- DEBUT VIDEO -->
                       {% for name in youtube %}
@@ -323,11 +323,6 @@
               </div><!-- /row -->
 
               <!-- FIN TABLEAU RECAPITULATIF -->
-
-              {% elif (requete[0] == "") %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
-              <div class="row mt centered">
-                  <p>Vous n'avez rien saisi dans la barre de recherche...</p>
-              </div>
 
 
               {% else %}

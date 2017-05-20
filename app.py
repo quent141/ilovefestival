@@ -206,7 +206,7 @@ def logout():
 
 @app.route('/results')
 def results():
-    return render_template('results.html', artists=artists, festivals=festivals, requete=requete)
+    return render_template('results.html', artists=artists, festivals=festivals, requete=requete, prog=prog)
 
 # @app.route('/')
 # def my_form():
@@ -281,7 +281,6 @@ def post():
   del festivals[:]
   del requete[:]
 
-
   recherche = request.form['post']
   requete.append(recherche)
 
@@ -290,14 +289,17 @@ def post():
   print("Je suis la recherche : %s", cherche)
 
   #RECHERCHES PAR GENRE (DANS MYSQL)
-  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND upper(style.NomStyle) like %s", cherche)
-  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND upper(style.NomStyle) like %s", cherche)
+  resultArtists = db.execute("SELECT artistes.NomArtiste FROM artistes, artistestyles, style WHERE artistes.idartiste = artistestyles.idartiste AND artistestyles.idstyle = style.idstyle AND upper(style.NomStyle) like '%%%%%s%%%%' " % (cherche,))
+  resultFestivals = db.execute("SELECT festival.NomFestival FROM festival, festivalstyles, style WHERE festival.idFestival = festivalstyles.idFestival AND festivalstyles.idstyle = style.idstyle AND upper(style.NomStyle) like '%%%%%s%%%%' " % (cherche,))
 
   #RECHERCHE PAR ARTISTE
-  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultArtistsBis = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
 
   #RECHERCHE LE FESTIVAL
-  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%' " % (cherche,))
+
+  #RECHERCHE L'ARTISTE DIRECTEMENT
+  resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%'" % (cherche,))
 
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
@@ -316,24 +318,28 @@ def post():
         festivals.append(all[x][0])
         print(festivals)
 
+  #Donne l'artiste "recherche"
+  all = resultArtist.fetchall()
+  print (all)
+  print ("je suis dans (nom artiste)")
+  for x in range(len(all)):
+    artists.append(all[x][0])
+    print(artists)
+
   #Donne les festivals ou l'artiste "recherche" sera present
   all = resultArtistsBis.fetchall()
   print (all)
-  indice = 0
   for x in range(len(all)):
         festivals.append(all[x][0])
-        indice+=1
         print(festivals)
-  if (indice != 0):
-        artists.append(recherche)
+
 
   #Donne le festival "recherche"
-  all = resultFestival.fetchone()
+  all = resultFestival.fetchall()
   print (all)
-  if (all != None):
-    for x in range(len(all)):
-      festivals.append(all[x])
-      print(festivals)
+  for x in range(len(all)):
+    festivals.append(all[x][0])
+    print(festivals)
 
   return redirect(url_for('results'))
 
@@ -362,22 +368,22 @@ def postFestivals():
   print("Je suis la recherche : %s", cherche)
 
   #RECHERCHE LE FESTIVAL
-  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
   #RECHERCHES GENRES du festival
-  resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like %s", cherche)
+  resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
   #RECHERCHE URL du festival
-  resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
   #RECHERCHE DATE du festival
-  resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
-  resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+  resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
   #RECHERCHE TAILLE du festival
-  resultTaille = db.execute("SELECT festival.Taille FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultTaille = db.execute("SELECT festival.Taille FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
   #RECHERCHE PRIX du festival
-  resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
   #RECHERCHE LIEU du festival
-  resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE upper(festival.NomFestival) like %s", cherche)
+  resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
   #RECHERCHES PROGRAMMATION du festival
-  resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like %s", cherche)
+  resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
   #Donne le festival "recherche" 
@@ -471,17 +477,17 @@ def postArtist(nom):
   print("Je suis la recherche : %s", cherche)
 
   #RECHERCHE L'ARTISTE
-  resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
   #RECHERCHE GENRE de l'artiste
-  resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
   #RECHERCHE CONCERTS de l'artiste
-  resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like %s",cherche)
+  resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
   #RECHERCHE NOTORIETE de l'artiste
-  resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
   #RECHERCHE NOTORIETE de l'artiste
-  resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
   #RECHERCHE Youtube de l'artiste
-  resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE upper(artistes.NomArtiste) like %s", cherche)
+  resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
   #Donne l'artiste "recherche" 
