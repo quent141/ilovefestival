@@ -304,6 +304,9 @@ def post():
   #RECHERCHES PROGRAMMATION du festival
   resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like %s", cherche)
 
+  #RECHERCHE LIEU du festival
+  resultLieu = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.Lieu) like '%%%%%s%%%%' " % (cherche,))
+
 
   #STOCKAGE DES RESULTATS DANS DES LISTES
 
@@ -352,6 +355,13 @@ def post():
       artists.append(all[x][0])
       print(artists)
 
+  #Donne le festival du Lieu "recherche"
+  all = resultLieu.fetchall()
+  print (all)
+  if (all != None):
+    for x in range(len(all)):
+      festivals.append(all[x][0])
+      print(festivals)
 
   return redirect(url_for('results'))
 
