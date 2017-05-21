@@ -183,7 +183,7 @@
                       <!-- FIN ACTUS -->
 
 
-              <aside class="col-lg-3 mt">
+              <aside class="col-lg-3 mt centered">
                   <h1>RESULTATS ARTISTES</h1>
 
 
@@ -193,7 +193,7 @@
                   <form action="/postArtist/{{name}}" method="POST">
                       <button class="btn btn-round btn-warning" type="text" name='requeteText'>{{name}}</button>
                   </form>
-
+                  <br>
                   {% endif %}
                   {% endfor %}
 
@@ -202,15 +202,14 @@
                   {% endif %}
               </aside>
 
-              <aside class="col-lg-9 mt">
+              <aside class="col-lg-3 mt centered">
                 <h1>RESULTATS FESTIVALS</h1>
                 {% for name in festivals %}
                 {% if name != "" and name != " " and requete[0]|length >=2  %}
-                <p>
                   <form action="/postFestivals/{{name}}" method="POST">
                       <button class="btn btn-round btn-success" type="text" name='requeteText'>{{name}}</button>
                   </form>
-                </p>
+                  <br>
                 {% endif %}
                 {% endfor %}
 
