@@ -190,8 +190,8 @@
                   {% for name in artists %}
                   {% if name != "" and name != " " and requete[0]|length >=2%}
 
-                  <form action="/postArtist" method="POST">
-                      <input type="button" name="post" class="form-control round-form" value="{{name}}">
+                  <form action="/postArtist/{{name}}" method="POST">
+                      <button class="btn btn-round btn-warning" type="text" name='requeteText'>{{name}}</button>
                   </form>
 
                   {% endif %}
@@ -207,10 +207,9 @@
                 {% for name in festivals %}
                 {% if name != "" and name != " " and requete[0]|length >=2  %}
                 <p>
-                  {{ name }}
-                  <a href ="{{url_for('festivals')}}" >
-                      <i class="fa fa-paper-plane-o"></i>
-                  </a>
+                  <form action="/postFestivals/{{name}}" method="POST">
+                      <button class="btn btn-round btn-success" type="text" name='requeteText'>{{name}}</button>
+                  </form>
                 </p>
                 {% endif %}
                 {% endfor %}

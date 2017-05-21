@@ -246,7 +246,7 @@ def artistes():
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete , genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)
+    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete, genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)
 
 @app.route('/aPropos/')
 def aPropos():
@@ -357,8 +357,8 @@ def post():
 
 
 #GERER LES RECHERCHES SUR 'festivals.html'
-@app.route('/postFestivals', methods=['POST'])
-def postFestivals():
+@app.route('/postFestivals/<requeteText>', methods=['GET','POST'])
+def postFestivals(requeteText=None):
 
   del data[:]
   del artists[:]
@@ -373,101 +373,201 @@ def postFestivals():
   del lieu[:]
   del prog[:]
 
-  recherche = request.form['post']
-  requete.append(recherche)
+  print("---")
+  print(requeteText)
+  print("----")
 
-  cherche = requete[0].upper()
-  print("Je suis la recherche : %s", cherche)
+  if(requeteText == 'post'):
 
-  #RECHERCHE LE FESTIVAL
-  resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
-  #RECHERCHES GENRES du festival
-  resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
-  #RECHERCHE URL du festival
-  resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  #RECHERCHE DATE du festival
-  resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  #RECHERCHE TAILLE du festival
-  resultTaille = db.execute("SELECT festival.Taille FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  #RECHERCHE PRIX du festival
-  resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  #RECHERCHE LIEU du festival
-  resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
-  #RECHERCHES PROGRAMMATION du festival
-  resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    recherche = request.form['post']
+    requete.append(recherche)
 
-  #STOCKAGE DES RESULTATS DANS DES LISTES
-  #Donne le festival "recherche" 
-  all = resultFestival.fetchone()
-  print (all)
-  if (all != None):
-    for x in range(len(all)):
-      festivals.append(all[x])
-      print(festivals)
+    cherche = requete[0].upper()
+    print("Je suis la recherche : %s", cherche)
 
-  #Donne le genre du festival "recherche"
-  all = resultGenre.fetchall()
-  print (all)
-  if (all != None):
-    x = []
-    for x in range(len(all)):
-      genre.append(all[x][0])
-      print(genre)
+    #RECHERCHE LE FESTIVAL
+    resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
+    #RECHERCHES GENRES du festival
+    resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
+    #RECHERCHE URL du festival
+    resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    #RECHERCHE DATE du festival
+    resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    #RECHERCHE TAILLE du festival
+    resultTaille = db.execute("SELECT festival.Taille FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    #RECHERCHE PRIX du festival
+    resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    #RECHERCHE LIEU du festival
+    resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+    #RECHERCHES PROGRAMMATION du festival
+    resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
 
-  #Donne l'url du festival "recherche" 
-  all = resultURL.fetchone()
-  print (all)
-  if (all != None):
-    url.append(all[0])
-    print(url)
+    #STOCKAGE DES RESULTATS DANS DES LISTES
+    #Donne le festival "recherche"
+    all = resultFestival.fetchone()
+    print (all)
+    if (all != None):
+        for x in range(len(all)):
+            festivals.append(all[x])
+        print(festivals)
+
+    #Donne le genre du festival "recherche"
+    all = resultGenre.fetchall()
+    print (all)
+    if (all != None):
+        x = []
+        for x in range(len(all)):
+            genre.append(all[x][0])
+        print(genre)
+
+    #Donne l'url du festival "recherche"
+    all = resultURL.fetchone()
+    print (all)
+    if (all != None):
+        url.append(all[0])
+        print(url)
     
-  #Donne la date du festival "recherche" 
-  all = resultDateDebut.fetchone()
-  print (all)
-  if (all != None):
+    #Donne la date du festival "recherche"
+    all = resultDateDebut.fetchone()
+    print (all)
+    if (all != None):
         dateDeb.append(all[0])
         print(dateDeb)
-  all = resultDateFin.fetchone()
-  print (all)
-  if (all != None):
+    all = resultDateFin.fetchone()
+    print (all)
+    if (all != None):
         dateFin.append(all[0])
         print(dateFin)      
   
-  #Donne la taille du festival "recherche" 
-  all = resultTaille.fetchone()
-  print (all)
-  if (all != None):
-    taille.append(all[0])
-    print(taille)
+    #Donne la taille du festival "recherche"
+    all = resultTaille.fetchone()
+    print (all)
+    if (all != None):
+        taille.append(all[0])
+        print(taille)
 
-  #Donne le prix du festival "recherche" 
-  all = resultPrix.fetchone()
-  print (all)
-  if (all != None):
-    prix.append(all[0])
-    print(prix)
+    #Donne le prix du festival "recherche"
+    all = resultPrix.fetchone()
+    print (all)
+    if (all != None):
+        prix.append(all[0])
+        print(prix)
   
-  #Donne le lieu du festival "recherche" 
-  all = resultLieu.fetchone()
-  print (all)
-  if (all != None):
-    lieu.append(all[0])
-    print(lieu)
+    #Donne le lieu du festival "recherche"
+    all = resultLieu.fetchone()
+    print (all)
+    if (all != None):
+        lieu.append(all[0])
+        print(lieu)
 
-  #Donne les Artistes se produisant au festival "recherche"
-  all = resultProg.fetchall()
-  print (all)
-  for x in range(len(all)):
+    #Donne les Artistes se produisant au festival "recherche"
+    all = resultProg.fetchall()
+    print (all)
+    for x in range(len(all)):
         prog.append(all[x][0])
-        print(prog)
+    print(prog)
+
+  else :
+
+      recherche = request.form['requeteText']
+      print(requeteText)
+      requete.append(requeteText)
+
+      cherche = requete[0].upper()
+      print("Je suis la recherche : %s", cherche)
+
+      #RECHERCHE LE FESTIVAL
+      resultFestival = db.execute("SELECT festival.NomFestival FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
+      #RECHERCHES GENRES du festival
+      resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
+      #RECHERCHE URL du festival
+      resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      #RECHERCHE DATE du festival
+      resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      #RECHERCHE TAILLE du festival
+      resultTaille = db.execute("SELECT festival.Taille FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      #RECHERCHE PRIX du festival
+      resultPrix = db.execute("SELECT festival.Prix FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      #RECHERCHE LIEU du festival
+      resultLieu = db.execute("SELECT festival.Lieu FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+      #RECHERCHES PROGRAMMATION du festival
+      resultProg = db.execute("SELECT artistes.NomArtiste FROM artistes LEFT JOIN programmation ON programmation.idArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival  WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+
+      #STOCKAGE DES RESULTATS DANS DES LISTES
+      #Donne le festival "recherche"
+      all = resultFestival.fetchone()
+      print (all)
+      if (all != None):
+          for x in range(len(all)):
+              festivals.append(all[x])
+          print(festivals)
+
+      #Donne le genre du festival "recherche"
+      all = resultGenre.fetchall()
+      print (all)
+      if (all != None):
+          x = []
+          for x in range(len(all)):
+            genre.append(all[x][0])
+          print(genre)
+
+      #Donne l'url du festival "recherche"
+      all = resultURL.fetchone()
+      print (all)
+      if (all != None):
+          url.append(all[0])
+          print(url)
+
+      #Donne la date du festival "recherche"
+      all = resultDateDebut.fetchone()
+      print (all)
+      if (all != None):
+          dateDeb.append(all[0])
+          print(dateDeb)
+      all = resultDateFin.fetchone()
+      print (all)
+      if (all != None):
+          dateFin.append(all[0])
+          print(dateFin)
+
+      #Donne la taille du festival "recherche"
+      all = resultTaille.fetchone()
+      print (all)
+      if (all != None):
+          taille.append(all[0])
+          print(taille)
+
+      #Donne le prix du festival "recherche"
+      all = resultPrix.fetchone()
+      print (all)
+      if (all != None):
+          prix.append(all[0])
+          print(prix)
+
+      #Donne le lieu du festival "recherche"
+      all = resultLieu.fetchone()
+      print (all)
+      if (all != None):
+          lieu.append(all[0])
+          print(lieu)
+
+      #Donne les Artistes se produisant au festival "recherche"
+      all = resultProg.fetchall()
+      print (all)
+      for x in range(len(all)):
+          prog.append(all[x][0])
+      print(prog)
+
+
 
   return redirect(url_for('festivals'))
 
 
 #GERER LES RECHERCHES SUR 'artistes.html'
-@app.route('/postArtist/<nom>', methods=['POST'])
-def postArtist(nom):
+@app.route('/postArtist/<requeteText>', methods=['POST'])
+def postArtist(requeteText=None):
 
   del data[:]
   del artists[:]
@@ -478,78 +578,160 @@ def postArtist(nom):
   del nationalite[:]
   del notoriete[:]
   del youtube[:]
+  del url[:]
+  del dateDeb[:]
+  del dateFin[:]
+  del taille[:]
+  del prix[:]
+  del lieu[:]
+  del prog[:]
 
-  if (nom == 'post') :
+  print("---")
+  print(requeteText)
+  print("----")
+
+  if(requeteText == 'post'):
+
     recherche = request.form['post']
-  else :
-    recherche = nom
-  requete.append(recherche)
+    requete.append(recherche)
 
-  cherche = requete[0].upper()
-  print("Je suis la recherche : %s", cherche)
+    cherche = requete[0].upper()
+    print("Je suis la recherche : %s", cherche)
 
-  #RECHERCHE L'ARTISTE
-  resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
-  #RECHERCHE GENRE de l'artiste
-  resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
-  #RECHERCHE CONCERTS de l'artiste
-  resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
-  #RECHERCHE NOTORIETE de l'artiste
-  resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
-  #RECHERCHE NOTORIETE de l'artiste
-  resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
-  #RECHERCHE Youtube de l'artiste
-  resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+    #RECHERCHE L'ARTISTE
+    resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
+    #RECHERCHE GENRE de l'artiste
+    resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
+    #RECHERCHE CONCERTS de l'artiste
+    resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+    #RECHERCHE NOTORIETE de l'artiste
+    resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+    #RECHERCHE NOTORIETE de l'artiste
+    resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+    #RECHERCHE Youtube de l'artiste
+    resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
 
-  #STOCKAGE DES RESULTATS DANS DES LISTES
-  #Donne l'artiste "recherche" 
-  all = resultArtist.fetchone()
-  print (all)
-  print ("je suis dans (nom artiste)")
-  if (all != None):
-    artists.append(all[0])
-    print(artists)
+    #STOCKAGE DES RESULTATS DANS DES LISTES
+    #Donne l'artiste "recherche"
+    all = resultArtist.fetchone()
+    print (all)
+    print ("je suis dans (nom artiste)")
+    if (all != None):
+        artists.append(all[0])
+        print(artists)
 
-  #Donne le genre de l'artiste "recherche" 
-  all = resultGenre.fetchall()
-  print (all)
-  if (all != None):
-    x = []
-    for x in range(len(all)):
-      genre.append(all[x][0])
-      print(genre)
+    #Donne le genre de l'artiste "recherche"
+    all = resultGenre.fetchall()
+    print (all)
+    if (all != None):
+        x = []
+        for x in range(len(all)):
+            genre.append(all[x][0])
+        print(genre)
 
-  #Donne la notoriete  
-  all = resultNotoriete.fetchone()
-  print (all)
-  print ("je suis dans (nom artiste)")
-  if (all != None):
-    notoriete.append(all[0])
-    print(notoriete)
+    #Donne la notoriete
+    all = resultNotoriete.fetchone()
+    print (all)
+    print ("je suis dans (nom artiste)")
+    if (all != None):
+        notoriete.append(all[0])
+        print(notoriete)
 
-  #Donne la nationalite
-  all = resultNationalite.fetchone()
-  print (all)
-  print ("je suis dans (nom artiste)")
-  if (all != None):
-    nationalite.append(all[0])
-    print(nationalite)
+    #Donne la nationalite
+    all = resultNationalite.fetchone()
+    print (all)
+    print ("je suis dans (nom artiste)")
+    if (all != None):
+        nationalite.append(all[0])
+        print(nationalite)
 
-  #Donne les concerts ou se produit l'artiste 
-  all = resultConcerts.fetchall()
-  print (all)
-  if (all != None):
-    x = []
-    for x in range(len(all)):
-      concerts.append(all[x][0])
-      print(concerts)
+    #Donne les concerts ou se produit l'artiste
+    all = resultConcerts.fetchall()
+    print (all)
+    if (all != None):
+        x = []
+        for x in range(len(all)):
+            concerts.append(all[x][0])
+        print(concerts)
 
-  #Donne le lien youtube
-  all = resultYoutube.fetchone()
-  print (all)
-  if (all != None):
-    youtube.append(all[0])
-    print(youtube)
+    #Donne le lien youtube
+    all = resultYoutube.fetchone()
+    print (all)
+    if (all != None):
+        youtube.append(all[0])
+        print(youtube)
+
+  else:
+
+      recherche = request.form['requeteText']
+      requete.append(requeteText)
+
+      cherche = requete[0].upper()
+      print("Je suis la recherche : %s", cherche)
+
+      #RECHERCHE L'ARTISTE
+      resultArtist = db.execute("SELECT artistes.NomArtiste FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 1" % (cherche,))
+      #RECHERCHE GENRE de l'artiste
+      resultGenre = db.execute("SELECT style.NomStyle FROM style LEFT JOIN artistestyles ON artistestyles.idStyle = style.idStyle LEFT JOIN artistes ON artistestyles.idArtiste = artistes.idArtiste WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
+      #RECHERCHE CONCERTS de l'artiste
+      resultConcerts = db.execute("SELECT festival.NomFestival FROM artistes LEFT JOIN programmation ON programmation.IdArtiste = artistes.idArtiste LEFT JOIN festival ON programmation.idFestival = festival.idFestival WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+      #RECHERCHE NOTORIETE de l'artiste
+      resultNotoriete = db.execute("SELECT artistes.Notoriete FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+      #RECHERCHE NOTORIETE de l'artiste
+      resultNationalite = db.execute("SELECT artistes.Pays FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+      #RECHERCHE Youtube de l'artiste
+      resultYoutube = db.execute("SELECT artistes.lienvideo FROM artistes WHERE upper(artistes.NomArtiste) like '%%%%%s%%%%' " % (cherche,))
+
+      #STOCKAGE DES RESULTATS DANS DES LISTES
+      #Donne l'artiste "recherche"
+      all = resultArtist.fetchone()
+      print (all)
+      print ("je suis dans (nom artiste)")
+      if (all != None):
+          artists.append(all[0])
+          print(artists)
+
+      #Donne le genre de l'artiste "recherche"
+      all = resultGenre.fetchall()
+      print (all)
+      if (all != None):
+          x = []
+          for x in range(len(all)):
+              genre.append(all[x][0])
+          print(genre)
+
+      #Donne la notoriete
+      all = resultNotoriete.fetchone()
+      print (all)
+      print ("je suis dans (nom artiste)")
+      if (all != None):
+          notoriete.append(all[0])
+          print(notoriete)
+
+      #Donne la nationalite
+      all = resultNationalite.fetchone()
+      print (all)
+      print ("je suis dans (nom artiste)")
+      if (all != None):
+          nationalite.append(all[0])
+          print(nationalite)
+
+      #Donne les concerts ou se produit l'artiste
+      all = resultConcerts.fetchall()
+      print (all)
+      if (all != None):
+          x = []
+          for x in range(len(all)):
+            concerts.append(all[x][0])
+          print(concerts)
+
+      #Donne le lien youtube
+      all = resultYoutube.fetchone()
+      print (all)
+      if (all != None):
+          youtube.append(all[0])
+          print(youtube)
+
 
   return redirect(url_for('artistes'))
 
