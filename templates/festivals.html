@@ -155,7 +155,7 @@
               <h1 class="centered"><b>Quel festival vous intéresse ?</b></h1>
               <div class = "row">
                   <div class="col-sm-10">
-                      <form action="{{url_for('postFestivals',nom='post')}}" method="POST">
+                      <form action="{{url_for('postFestivals',requeteText='post')}}" method="POST">
                           <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
                       </form>
                   </div>
@@ -178,7 +178,7 @@
                       <!-- Votre festival  -->
                       {% if (requete != nil and requete[0] != "" and genre != [] and requete[0]|length >= 2) %}
                       <div class="row mt centered">
-                          <h1>{{festivals[0]}}</h1>
+                          <h1><b>{{festivals[0]}}</b></h1>
                           <!-- URL -->
                           {% for name in url %}
                           {% if name != "" %}
@@ -362,12 +362,16 @@
                                       <td>
                                           {% for name in prog %}
                                           {% if name != "" %}
-                                          <p>
-                                              {{ name }}
-                                              <a href ="{{url_for('artistes')}}" >
-                                                  <i class="fa fa-music"></i>
-                                              </a>
-                                          </p>
+
+
+                                          <form action="/postArtist/{{name}}" method="POST">
+
+                                              <i class="fa fa-music"></i>
+                                              <button class="btn btn-warning btn-xs" name='requeteText'>{{name}}</button>
+
+                                          </form>
+                                          <br>
+
                                           {% endif %}
                                           {% endfor %}
 
