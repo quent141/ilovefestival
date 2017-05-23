@@ -151,64 +151,63 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-              <h2>À PROPOS: Documentation technique de la page ILoveFestivals </h2>
-              <p><strong>Introduction</strong></p>
-              <p>
-                  Notre site web permettra de répertorier des festivals. Ceci permet de faciliter la recherche de festivals existants en France et à l’International pour des festivaliers intéresés par des artistes ou des genres musicaux en particulier.</p>
-              <p>“Mais où joue *insérer nom d’artiste* cet été ?” C’est une question que beaucoup de festivaliers ont dû se poser à l’heure de choisir leur(s) festivals de l’été.
-                  Objectif: Créér un site web de recherche de festivals selon le genre, les artistes, la popularité etc.
-                  Aujourd’hui, il n’existe pas de comparateurs/répertoires de festivals répondant de manière simple à la question précédente ! Les futurs festivaliers se retrouvent obligés d’éplucher les sites des festivals ou des artistes pour trouver des dates leur convenant. Notre projet faciliterait donc la recherche en mettant à disposition un outil intuitif et facile d’utilisation, avec entre autres un système de recherche par artiste ou par genre, ainsi qu’une partie réservée aux avis et aux commentaires sur les festivals et les artistes. Cela serait un point fort pour notre site puisque les festivals et les artistes seraient notés par nos utilisateurs. Cette action permettrait de Créér un centre de partage entre les festivals, les artistes et les festivaliers afin de permettre aux festivals et aux artistes de s’améliorer pour la prochaine fois s’ils ont été mal notés, et cela permettrait aux festivaliers d’avoir un avis “concret” sur un festival ou un artiste.</p>
-              <p><strong> Choix des technologies </strong></p>
+                  <h2>À PROPOS: Documentation technique de la page ILoveFestivals </h2>
+                  <p><strong>Introduction</strong></p>
+                  <p>
+                  Notre site web permettra de répertorier des festivals. Ceci permet de faciliter la recherche de festivals existants en France et à l’International pour des festivaliers intéressés par des artistes ou des genres musicaux en particulier.</p>
+                  <p>“Mais où joue *insérer nom d’artiste* cet été ?” C’est une question que beaucoup de festivaliers ont dû se poser à l’heure de choisir leur(s) festivals de l’été.
+                  Objectif: Créer un site web de recherche de festivals selon le genre, les artistes, la popularité etc.
+                  Aujourd’hui, il n’existe pas de comparateurs/répertoires de festivals répondant de manière simple à la question précédente ! Les futurs festivaliers se retrouvent obligés d’éplucher les sites des festivals ou des artistes pour trouver des dates leur convenant. Notre projet faciliterait donc la recherche en mettant à disposition un outil intuitif et facile d’utilisation, avec entre autres un système de recherche par artiste ou par genre, ainsi qu’une partie réservée aux avis et aux commentaires sur les festivals et les artistes. Cela serait un point fort pour notre site puisque les festivals et les artistes seraient notés par nos utilisateurs. Cette action permettrait de créer un centre de partage entre les festivals, les artistes et les festivaliers afin de permettre aux festivals et aux artistes de s’améliorer pour la prochaine fois s’ils ont été mal notés, et cela permettrait aux festivaliers d’avoir un avis “concret” sur un festival ou un artiste.</p>
+                  <p><strong> Choix des technologies </strong></p>
 
-              <a><img src="{{url_for('static',filename='assets/images/techno.png')}}"  width="500"></a>
-              <p><strong>La base de données </strong></p>
-              <p>Pour la gestion  de  l’ensemble des données nous avons élaborer une base de données. La base finale est la suivante:
-              </p>
-              <a><img src="{{url_for('static',filename='assets/images/base.png')}}"  width="900"></a>
-              <p><em>Note: Notoriete correspond à la notoriété mondiale de l'artiste </em> </p>
-              <p><strong>Maquette du site </strong></p>
-              <p>Chaque page du site possède un menu latéral permettant d’accéder aux autres pages et revenir à l’accueil.Toutes les pages ont aussi une option de connexion/déconnexion pour l’utilisateur.</p>
-              <p>Notre site se divise en 11 pages :</p>
-              <ul style="list-style-type:disc">
-                  <li><strong>La page d’accueil :</strong>Elle affiche les actualités relatives aux festivals, artistes, evenements. Les actualités sont affichées en lignes sur la plupart des ecrans et en groupe de 3 cadres. Le premier cadre correspond à un résumé de l'actualité pour une certaine semaine, le second à une actualité liée à un artiste, et enfin le troisième à une actualité sur des festivals ou des evenements. </li>
-                  <br>
-                  <li><strong>La page de login :</strong>Elle permet de s’enregistrer dans le site web ou de connecter si une compte a déjà été créé. Le mot de passe et le login sont enregistrés dans la base de données automatiquement. Pour l'instant certaines fonctionnalités ne fonctionnent pas. Pour vous inscrire : faites comme si vous aviez déjà un login et un mot de passe, il n'y a pas besoin de passer par le lien d'inscription qui ne fonctionne pas encore. Vous serez directement enregistré sur notre site web. Nous avons aussi mis en place "Mot de place oublié" qui permet de renvoyer par mail le mot de passe de l'utilisateur, seulement cette option ne fonctionne pas encore puisque l'inscription avec email est en cours de construction. Nous pensons aussi intégrer une identification par Facebook ou Twitter prochainement mais les boutons ne sont pas encore fonctionnels. </li>
-                  <br>
-                  <li><strong>Pages de classements (3)  :</strong>Permet l’affichage des classements des trois deux dernières années sous forme de tableau. Le classement de 2014 est en cours de construction. Les classements sont faits grace à la moyenne des notes de tous les utilisateurs ainsi que de celle des administrateurs de ILoveFestivals. Les coefficients sont les même lors du calcul de la moyenne. Les 3 premiers de chaque année sont affichés en couleur et en gras afin de mieux les différencier.</li>
-                  <br>
-                  <li><strong>Page artistes :</strong>Permet d’afficher et rechercher les différents artistes avec leur photo (en cours de construction), leur note(idem) et les prochains festivals auxquels ils participeront. Il y a aussi un lien qui redirige l'utilisateur vers la page youtube de l'artiste.</li>
-                  <br>
-                  <li><strong>Page festivals :</strong>Permet d’afficher et rechercher les différents festivals dans la base de données avec une photo(en cours de construction), leur note(en cours de construction), les prix (Allant de 0 à 4 : echelle de prix du plus au moins cher) et le lien vers la page officielle du festival.</li>
-                  <br>
-                  <li><strong>Page découvrir  :</strong>La page découverte affiche dans un “slider” les principaux festivals du moment . Chaque “slide” a un lien vers la page officielle du festival. Le titre ” top10”  a un lien vers une page contenant l’ensemble de festivals du moment.
-                      Ensuite il y a deux blocs (hot et recommandations). Chaque bloc a un lien vers la page correspondante.</li>
-                  <br>
-                  <li><strong>Page Hot: </strong>  Page qui affiche l’ensemble des festivals les plus connus.  Cette page contient un barre de filtrage pour retrouver les festivals avec les liens vers leur page correspondante.</li>
-                  <br>
-                  <li><strong>Page Recommendation :</strong> Page qui affiche l’ensemble des festivals recommandés pour l’utilisateur selon les intérêts qu’il a enregistré.(En cours de construction) </li>
-                  <br>
-                  <li><strong>Page profil utilisateur : </strong> Page personnelle avec une option de logout, l’option de saisir une description personnelle et  ajouter des gouts personnels (artistes, genres, …). (En cours de construction)</li>
-                  <br>
-                  <li><strong>Page à propos : </strong> Page avec la documentation technique sur le site, la description des pages et quelques subtilités sur le site. EIle possède aussi une description de la base de données pour mieux comprendre l’architecture interne du site. </li>
+                  <a><img src="{{url_for('static',filename='assets/images/techno.png')}}"  width="500"></a>
+
+                  <p><strong>La base de données </strong></p>
+                  <p>Pour la gestion  de  l’ensemble des données nous avons élaboré une base de données. La base finale est la suivante:
+                  </p>
+                    <a><img src="{{url_for('static',filename='assets/images/base.png')}}"  width="900"></a>
+                  <p><em>Note: Notoriete correspond à la notoriété mondiale de l'artiste </em> </p>
+                  <p>Conception de la base de données</p>
+                  <p> La base de données SQL a été conçue à l’aide du soft phpmyAdmin, qui permet à la fois d’avoir une interface graphique intuitive et de modifier facilement et rapidement la base. Au vu des nombreuses relations entre les tables que notre base induisait, nous avons fait le choix d’avoir recours à plusieurs tables de passage. Elles facilitent la structure des requêtes puisque que de simples jointures permettent de faire des requêtes sur plusieurs tables simultanément. </p>
+                  <p>Améliorations possibles :</p> 
+                   <ul style="list-style-type:square">
+                    <li>- La base de données n’est pour l’instant remplie qu’avec un échantillon suffisant d’artistes et de festivals pour faire une démonstration. Bien sûr, le site gagne en intérêt quand la base est bien remplie.</li>
+                    <li>- Justement, on pourrait mettre au point un bot de remplissage pour la base, puisque la remplir à la main prendrait beaucoup de temps vu la quantité d’infos à traiter.</li>
+                    <li>- Intégration d’un module de géolocalisation type Google Maps pour ajouter une dimension proximité du festival.</li>
+                    <li>- Version multilingue.</li>
+                  </ul>  
+                  <p><strong>Maquette du site / Front-End </strong></p>
+                  <p>Chaque page du site possède un menu latéral permettant d’accéder aux autres pages et revenir à l’accueil.Toutes les pages ont aussi une option de connexion/déconnexion pour l’utilisateur.</p>
 
 
-              </ul>
-              <p><em>Note: Lorsque l’utilisateur est connecté les logo  du menu latéral possède un lien vers la page de profil . Dans le cas contraire le lien est vers la page d’accueil du site.</em> </p>
+                  <p>Notre site se divise en 10 pages :</p>
+                  <ul style="list-style-type:disc">
+                     <li><strong>- La page d’accueil :</strong>Elle affiche quelques nouvelles sur les différents festivals du moment</li>
+                     <li><strong>- La page de login :</strong>Elle permet de s’enregistrer dans le site web ou de connecter si un compte a déjà été créé. Le mot de passe et le login sont enregistrés dans la base de données.</li>
+                     <li><strong>- Pages de classements (3)  :</strong>Permet l’affichage des classements des trois dernières années sous forme de tableau.</li>
+                     <li><strong>- Page artistes :</strong>Permet d’afficher et rechercher les différents artistes avec leur photo, leur note et les prochains festivals auxquels il participera.</li>
+                     <li><strong>- Page festivals :</strong>Permet d’afficher et rechercher les différents festivals de la base de données avec une photo, leur note, les prix (Allant de 0 à 4 du moins au plus cher) et le lien vers la page officielle du festival.</li>
+                     <li><strong>- Page découverte  :</strong>La page découverte affiche dans un “slider” les principaux festivals du moment . Chaque “slide” a un lien vers la page officielle du festival. Le titre ” top10”  a un lien vers une page contenant l’ensemble de festivals du moment. Ensuite il y a deux blocs (hot et recommandations). Chaque bloc a un lien vers la page correspondante.</li>
+                     
+                     <li><strong>- Page Hot: </strong>  Page qui affiche l’ensemble des festivals les plus connus.  Cette page contient une barre de filtrage pour retrouver les festivals avec les liens vers leur page correspondante.</li>
+                     <li><strong>Page recommendation :</strong> Page qui affiche l’ensemble des festivals recommandés pour l’utilisateur selon les intérêts qu’il a enregistrés. </li>
+                     <li><strong>- Page profil utilisateur : </strong> Page personnelle avec une option de logout, l’option de saisir une description personnelle et  ajouter des gouts personnels (artistes, genres, …).</li>
+                     <li><strong>- Page à propos : </strong> Page avec la documentation technique sur le site, la description des pages et quelques subtilités sur le site. EIle possède aussi une description de la base de données pour mieux comprendre l’architecture interne du site. </li>
+      
 
-              <p><strong>Astuces</strong></p>
-              <p>Lorsque que l'utilisateur est tout en bas d'une page Web, celui-ci voit alors une barre bleue azur horizontale avec du texte. A la droite de cette barre se trouve un bouton qui permet de remonter tout en haut de la page afin de ne pas avoir à scroller manuellement (attention cette action va en fait recharger la page web)</p>
+                </ul>  
+                <p><em>Note: Lorsque l’utilisateur est connecté le logo  du menu latéral possède un lien vers la page de profil . Dans le cas contraire le lien est vers la page d’accueil du site.</em> </p>
 
-              <p><strong>Choix technologique</strong></p>
+                <p><strong>Choix technologique</strong></p>
 
-              <p>D’une part, nous avons utilisé python/Flask comme technologie pour relier la base des données avec le Front-End parce que nous avons été introduit à ces outils pendant les cours de WEB.</p>
+                <p>D’une part, nous avons utilisé python/Flask comme technologie pour relier la base des données avec le Front-End parce que nous avons été introduit à ces outils pendant les cours de WEB.</p>
 
-              <p><i>Flask</i></p>
-              <p>Certes, flask ne possède pas des outils de bootstrapping mais vu que nous ne cherchons pas avoir une application MVC de grande taille, ceci ne pose pas de problème. Nous sommes conscients que ce "micro-framework" nous permet de développer notre application seulement, mais qu'il vaudra mieux passer par un serveur HTTP frontal comme Apache HTTPD, Lighttpd ou Nginx<p>
+                <p><i>Flask</i></p>
+                 <p>Certes, flask ne possède pas des outils de bootstrapping mais vu que nous ne cherchons pas à avoir une application MVC de grande taille, ceci ne pose pas de problème.<p>
 
-              <p><i>Python</i></p>
+                <p><i>Python</i></p>
 
-              <p>L’avantage de Python est qu’il met à disposition de bonnes librairies standards et des bons frameworks. Ceci nous permet de developper plus rapidement et de plus, le code est plus facile à écrire et à lire. Nous avons aussi utilisé python parce que c’est un langage que nous n’utilisons pas souvent et qui est pourtant très intéressant dans le monde du travail.</p>
-
+                <p>L’avantage de python c’est qu’il met à disposition de bonnes librairies standard et de bons frameworks. Ceci permet de developper plus rapidement et le code est plus facile à lire et à écrire. Nous avons aussi utilisé python parce que c’est un langage que nous n’utilisons pas souvent et qui est pourtant intéressant.</p>
 
 
 
