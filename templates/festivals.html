@@ -210,7 +210,7 @@
                               <!-- Genre -->
                               {% for name in genre %}
                               {% if (name != "" and genre|length == 1) %}
-                              <p class="alert alert-success">
+                              <p>
                                   <b>
                                       {{ name }}
                                   </b>
@@ -393,7 +393,7 @@
 
               {% else %}  <!-- BIP ces deux cas suivant ne s'affichent pas  -->
               <div class="row mt centered">
-                  <p>Oups! Votre recherche n'a rien donné</p>
+                  <p class="alert alert-warning">Oups! Votre recherche n'a rien donné</p>
               </div>
 
               {%endif%}

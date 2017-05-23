@@ -171,7 +171,7 @@
                                   {% if (requete != nil and requete[0]|length >= 2) %}
                                     <h2>{{requete[0]}}</h2>
                                   {% else %}
-                                    <h2>Veuillez saisir une requete plus précise...</h2>
+                                    <h2 class="alert alert-warning">Veuillez saisir une requete plus précise...</h2>
                                   {% endif %}
                                 </div>
                               </div>
@@ -189,6 +189,7 @@
 
                   {% for name in artists %}
                   {% if name != "" and name != " " and requete[0]|length >=2%}
+
 
                   <form action="/postArtist/{{name}}" method="POST">
                       <button class="btn btn-round btn-warning" type="text" name='requeteText'>{{name}}</button>
