@@ -310,7 +310,7 @@
                                           {% endfor %}
 
                                           {% if (concerts[0] == nil) %}
-                                          <p>Votre recherche n'a rien donné :(</p>
+                                          <p>Votre recherche n'a rien donné :( </p>
                                           {% endif %}
                                       </td>
                                   </tr>
@@ -327,7 +327,7 @@
 
               {% else %}
               <div class="row mt centered">
-                  <p>Oups! Votre recherche n'a rien donné</p>
+                  <p class="alert alert-warning">Oups! Votre recherche n'a rien donné</p>
               </div>
               {%endif%}
 

@@ -154,19 +154,20 @@
       <!--main content start-->
       <section id="main-content">
           <section class="wrapper site-min-height">
-          	<h3><i class="fa fa-angle-right"></i> Discovery </h3>
-      <div class="row">
+              <h1 class="centered"><b>Découvrir</b></h1>
+
+      <!--<div class="row centered ">
                <td> <label> Genre: </label>
                 <script type="text/javascript">
                 $(document).ready(function() {
                   $(".js-example-basic-single").select2();
                 });
                 </script>
-
                 <select class="js-example-basic-single">
-                  <option value="AL">Alabama</option>
-                    
-                  <option value="WY">Wyoming</option>
+                    <option value="AL">Rock</option>
+                    <option value="WY">Electro</option>
+                    <option value="WY">Transe</option>
+                    <option value="WY">Pop</option>
                 </select>
 
               </td> 
@@ -199,70 +200,61 @@
               </td> 
 
             </div><!--row-->
-              
-<!--beginslider-->
- <div class="row">
-  <div id="container">
-    <center>
-            <div class="thumbnail_slider flexslider">
-                      <a href="{{url_for('topten')}}">Top10</a>
-                       <div class="w3-content w3-display-container">
 
-                              <div class="w3-display-container mySlides">
-                                <img src="{{url_for('static',filename='assets/images/euro.jpg')}}" style="width:100%">
-                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-                                 <td> 
-                                  <a href="https://www.festicket.com/fr/packages/les-eurockeennes-2017/?referrer=google-ppc&FestivalFR%20%7C%20FR%20%7C%20Google%20PPC%20%7C%20Les%20Eurockeennes%202017%20%7C%20Belfort%20%7C%20France%20%7C%20INTERNAL&gclid=CjwKCAjw_6XIBRAiEiwANnDbTPpOKfRj3o31uD8d807WVzyS_Ze6uChwhyvIUKuQpGfRuhWKX7EF_xoCbUoQAvD_BwE&buy=tickets">   Les Eurockéennes </a>
-                                  </td>
-                              
-                                </div>
+              <!--beginslider-->
+              <div class="row">
+                  <div id="container">
+                      <center>
+                          <div class="thumbnail_slider flexslider">
+
+                              <div class="row centered">
+                                  <button class="btn btn-success btn-round"><a href="{{url_for('topten')}}">Top 10</a></button>
                               </div>
+                              <div class="w3-content w3-display-container">
 
-                              <div class="w3-display-container mySlides">
-                                <img src="{{url_for('static',filename='assets/images/euro.jpg')}}"style="width:100%">
-                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-                                   <td>
-                                    <a href="https://www.festicket.com/fr/packages/les-eurockeennes-2017/?referrer=google-ppc&FestivalFR%20%7C%20FR%20%7C%20Google%20PPC%20%7C%20Les%20Eurockeennes%202017%20%7C%20Belfort%20%7C%20France%20%7C%20INTERNAL&gclid=CjwKCAjw_6XIBRAiEiwANnDbTPpOKfRj3o31uD8d807WVzyS_Ze6uChwhyvIUKuQpGfRuhWKX7EF_xoCbUoQAvD_BwE&buy=tickets">   Les Eurockéennes </a>
-                                  </td>
-                                </div>
-                              </div>
+                                  <div class="w3-display-container mySlides">
+                                      <img src="{{url_for('static',filename='assets/images/euro.jpg')}}" style="width:100%">
+                                      <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                          <td>
+                                              <div class="row centered">
+                                              <h3><a href="https://www.festicket.com/fr/packages/les-eurockeennes-2017/?referrer=google-ppc&FestivalFR%20%7C%20FR%20%7C%20Google%20PPC%20%7C%20Les%20Eurockeennes%202017%20%7C%20Belfort%20%7C%20France%20%7C%20INTERNAL&gclid=CjwKCAjw_6XIBRAiEiwANnDbTPpOKfRj3o31uD8d807WVzyS_Ze6uChwhyvIUKuQpGfRuhWKX7EF_xoCbUoQAvD_BwE&buy=tickets">   Les Eurockéennes </a></h3>
+                                              </div>
+                                          </td>
 
-                              <div class="w3-display-container mySlides">
-                                <img src="{{url_for('static',filename='assets/images/hell.jpg')}}" style="width:100%">
-                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-                                  <td>
-                                    <a href="http://www.hellfest.fr/">   Hellfest Open Air</a>
-                                  </td>
-                                </div>
-                              </div>
+                                      </div>
+                                  </div>
 
-                              <div class="w3-display-container mySlides">
-                                <img src="{{url_for('static',filename='assets/images/rock.jpg')}}" style="width:100%">
-                                <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-                                  <td>
-                                    <a href="https://www.rockenseine.com/billetterie/">   Rock En Seine </a>
-                                  </td>
-                                </div>
-                              </div>
 
-                              <div class="w3-display-container mySlides">
-                                <img src="{{url_for('static',filename='assets/images/rock.jpg')}}" style="width:100%">
-                               <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
-                                  <td>
-                                    <a href="https://www.rockenseine.com/billetterie/">   Rock En Seine </a>
-                                  </td>
-                                </div>
-                              </div>
 
-                              <button class="w3-button w3-display-left w3-black" onclick="plusDivs(-1)">&#10094;</button>
-                              <button class="w3-button w3-display-right w3-black" onclick="plusDivs(1)">&#10095;</button>
+                                  <div class="w3-display-container mySlides">
+                                      <img src="{{url_for('static',filename='assets/images/hell.jpg')}}" style="width:100%">
+                                      <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                          <td>
+                                              <h3><a href="http://www.hellfest.fr/">   Hellfest Open Air</a></h3>
+                                          </td>
+                                      </div>
+                                  </div>
+
+                                  <div class="w3-display-container mySlides">
+                                      <img src="{{url_for('static',filename='assets/images/rock.jpg')}}" style="width:100%">
+                                      <div class="w3-display-bottomleft w3-large w3-container w3-padding-16 w3-black">
+                                          <td>
+                                              <h3><a href="https://www.rockenseine.com/billetterie/">   Rock En Seine </a></h3>
+                                          </td>
+                                      </div>
+                                  </div>
+
+
+
+                                  <button class="w3-button w3-display-left w3-black btn btn-success btn-round" onclick="plusDivs(-1)">&#10094;</button>
+                                  <button class="w3-button w3-display-right w3-black btn btn-success btn-round" onclick="plusDivs(1)">&#10095;</button>
 
                               </div>
-                           </div>
-                         </center>
-                      </div>
+                          </div>
+                      </center>
                   </div>
-<!--end slider-->
+              </div>
+              <!--end slider-->
 
 
 

@@ -206,7 +206,7 @@ def logout():
 
 @app.route('/results')
 def results():
-    return render_template('results.html', artists=artists, festivals=festivals, requete=requete, prog=prog)
+    return render_template('results.html', artists=sorted(set(artists)), festivals=sorted(set(festivals)), requete=requete, prog=sorted(set(prog)))
 
 # @app.route('/')
 # def my_form():
@@ -242,11 +242,11 @@ def classement2014():
 
 @app.route('/artistes/')
 def artistes():
-    return render_template('artistes.html', artists=artists, festivals=festivals, requete=requete, genre=genre, concerts=concerts, nationalite=nationalite, notoriete=notoriete, youtube=youtube )
+    return render_template('artistes.html', artists=sorted(set(artists)), festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), concerts=concerts, nationalite=nationalite, notoriete=notoriete, youtube=youtube )
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=festivals, requete=requete, genre=genre, url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)
+    return render_template('festivals.html', artists=artists, festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)
 
 @app.route('/aPropos/')
 def aPropos():
@@ -284,7 +284,15 @@ def post():
   recherche = request.form['post']
   requete.append(recherche)
 
-  cherche = requete[0].upper()
+
+  str1 = list(requete[0])
+  for i in range(len(str1)):
+    if str1[i] == "'":
+        str1[i] = "\\'"
+  cherche = ''.join(str1)
+
+  cherche = cherche.upper()
+
 
   print("Je suis la recherche : %s", cherche)
 
@@ -315,7 +323,6 @@ def post():
   print (all)
   for x in range(len(all)):
         artists.append(all[x][0])
-        print(artists)
 
   #Donne les Festivals du genre "recherche"
   all = resultFestivals.fetchall()
@@ -392,7 +399,13 @@ def postFestivals(requeteText=None):
     recherche = request.form['post']
     requete.append(recherche)
 
-    cherche = requete[0].upper()
+    str1 = list(requete[0])
+    for i in range(len(str1)):
+      if str1[i] == "'":
+        str1[i] = "\\'"
+    cherche = ''.join(str1)
+
+    cherche = cherche.upper()
     print("Je suis la recherche : %s", cherche)
 
     #RECHERCHE LE FESTIVAL
@@ -484,7 +497,13 @@ def postFestivals(requeteText=None):
       print(requeteText)
       requete.append(requeteText)
 
-      cherche = requete[0].upper()
+      str1 = list(requete[0])
+      for i in range(len(str1)):
+        if str1[i] == "'":
+            str1[i] = "\\'"
+      cherche = ''.join(str1)
+
+      cherche = cherche.upper()
       print("Je suis la recherche : %s", cherche)
 
       #RECHERCHE LE FESTIVAL
@@ -605,7 +624,13 @@ def postArtist(requeteText=None):
     recherche = request.form['post']
     requete.append(recherche)
 
-    cherche = requete[0].upper()
+    str1 = list(requete[0])
+    for i in range(len(str1)):
+      if str1[i] == "'":
+          str1[i] = "\\'"
+    cherche = ''.join(str1)
+
+    cherche = cherche.upper()
     print("Je suis la recherche : %s", cherche)
 
     #RECHERCHE L'ARTISTE
@@ -673,10 +698,18 @@ def postArtist(requeteText=None):
 
   else:
 
+
+
       recherche = request.form['requeteText']
       requete.append(requeteText)
 
-      cherche = requete[0].upper()
+      str1 = list(requete[0])
+      for i in range(len(str1)):
+        if str1[i] == "'":
+          str1[i] = "\\'"
+      cherche = ''.join(str1)
+
+      cherche = cherche.upper()
       print("Je suis la recherche : %s", cherche)
 
       #RECHERCHE L'ARTISTE
