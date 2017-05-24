@@ -246,7 +246,7 @@ def artistes():
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog)
+    return render_template('festivals.html', artists=artists, festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog, image=image)
 
 @app.route('/aPropos/')
 def aPropos():
@@ -271,6 +271,8 @@ prog = []
 nationalite = []
 notoriete = []
 youtube = []
+
+image=[]
 
 #GERER LES RECHERCHES SUR 'index.html'
 @app.route('/post', methods=['POST'])
@@ -389,6 +391,7 @@ def postFestivals(requeteText=None):
   del prix[:]
   del lieu[:]
   del prog[:]
+  del image[:]
 
   print("---")
   print(requeteText)
@@ -414,6 +417,10 @@ def postFestivals(requeteText=None):
     resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
     #RECHERCHE URL du festival
     resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+
+    #RECHERCHE image du festival
+    resultImage = db.execute("SELECT festival.image FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+
     #RECHERCHE DATE du festival
     resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
     resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
@@ -450,6 +457,16 @@ def postFestivals(requeteText=None):
     if (all != None):
         url.append(all[0])
         print(url)
+
+
+    #Donne l'IMAGE du festival "recherche"
+    all = resultImage.fetchone()
+    print ("IMAGE : ", all)
+    if (all != None):
+        image.append(all[0])
+        print(image)
+
+
     
     #Donne la date du festival "recherche"
     all = resultDateDebut.fetchone()

@@ -268,11 +268,20 @@
                   </div><!-- /col-md-4-->
 
                   <!-- Note Panel -->
-                    <div>
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
                         <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
-                            Note:
-                            <input type="number" name="quantity" min="1" max="5">
-                            <input type="submit" href="artistes">
+                            <h5><b>Note:</b></h5>
+                            <select class="form-control" name="quantity">
+                                <option>1</option>
+                                <option>2</option>
+                                <option>3</option>
+                                <option>4</option>
+                                <option>5</option>
+                            </select>
+
+
+                            <button type="submit" href="artistes" class="btn btn-info">Envoyer</button>
+
                         </form>
 
                     </div><!-- /col-md-4-->
