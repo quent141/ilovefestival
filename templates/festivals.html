@@ -188,13 +188,18 @@
                       </div>
 
 
-                  <!-- Artists Panel -->
+                  <!-- Image Panel -->
                   <div class="col-lg-4 col-md-4 col-sm-4 mb">
                       <div class="project-wrapper">
                           <div class="project">
                               <div class="photo-wrapper">
                                   <div class="photo">
-                                      <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
+                                      {% for name in image %}
+                                      {% if name != "" %}
+                                      <a class="fancybox" href={{url_for('static',filename=name)}}><img class="img-responsive" src={{url_for('static',filename=name)}} alt=""></a>
+                                      {% endif %}
+                                      {% endfor %}
+
                                   </div>
                                   <div class="overlay"></div>
                               </div>
@@ -331,14 +336,23 @@
                   </div><!-- /col-md-4-->
 
                   <!-- Note Panel -->
-                    <div>
-                        <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
-                            Note:
-                            <input type="number" name="quantity" min="1" max="5">
-                            <input type="submit" href="artistes">
-                        </form>
+                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                      <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
+                          <h5><b>Note:</b></h5>
+                          <select class="form-control" name="quantity">
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                              <option>4</option>
+                              <option>5</option>
+                          </select>
 
-                    </div><!-- /col-md-4-->
+
+                          <button type="submit" href="artistes" class="btn btn-info">Envoyer</button>
+
+                      </form>
+                  </div><!-- /col-md-4-->
+
 
               </div><!-- END 1ST ROW OF PANELS -->
               <!-- FIN AFFICHAGE FESTIVAL -->
