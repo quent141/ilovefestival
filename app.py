@@ -529,6 +529,12 @@ def postFestivals(requeteText=None):
       resultGenre = db.execute("SELECT style.NomStyle FROM festival LEFT JOIN festivalstyles ON festivalstyles.idFestival = festival.idFestival LEFT JOIN style ON festivalstyles.idStyle = style.idStyle  WHERE upper(festival.NomFestival) like '%%%%%s%%%%' LIMIT 5" % (cherche,))
       #RECHERCHE URL du festival
       resultURL = db.execute("SELECT festival.urlsite FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+
+
+      #RECHERCHE image du festival
+      resultImage = db.execute("SELECT festival.image FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
+
+
       #RECHERCHE DATE du festival
       resultDateDebut = db.execute("SELECT festival.DateDebut FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
       resultDateFin = db.execute("SELECT festival.DateFin FROM festival WHERE upper(festival.NomFestival) like '%%%%%s%%%%'" % (cherche,))
@@ -549,6 +555,13 @@ def postFestivals(requeteText=None):
           for x in range(len(all)):
               festivals.append(all[x])
           print(festivals)
+
+      #Donne l'IMAGE du festival "recherche"
+      all = resultImage.fetchone()
+      print ("IMAGE : ", all)
+      if (all != None):
+          image.append(all[0])
+          print(image)
 
       #Donne le genre du festival "recherche"
       all = resultGenre.fetchall()
