@@ -8,6 +8,10 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, backref
 from markdown import markdown
 import os, hashlib
+import MySQLdb
+
+MySQLdb.escape_string("'")
+"\\'"
 
 
 # ...................................................................................................................................................................... #
@@ -206,7 +210,7 @@ def logout():
 
 @app.route('/results')
 def results():
-    return render_template('results.html', artists=sorted(set(artists)), festivals=sorted(set(festivals)), requete=requete, prog=sorted(set(prog)))
+    return render_template('results.html', artistsResults=sorted(set(artistsResults)), festivalsResults=sorted(set(festivalsResults)), requete=requete, prog=sorted(set(prog)))
 
 # @app.route('/')
 # def my_form():
@@ -242,11 +246,11 @@ def classement2014():
 
 @app.route('/artistes/')
 def artistes():
-    return render_template('artistes.html', artists=sorted(set(artists)), festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), concerts=concerts, nationalite=nationalite, notoriete=notoriete, youtube=youtube )
+    return render_template('artistes.html', artists=sorted(set(artists)), festivals=sorted(set(festivals)), requeteArtists=requeteArtists, genreArtists=sorted(set(genreArtists)), concerts=concerts, nationalite=nationalite, notoriete=notoriete, youtube=youtube )
 
 @app.route('/festivals/')
 def festivals():
-    return render_template('festivals.html', artists=artists, festivals=sorted(set(festivals)), requete=requete, genre=sorted(set(genre)), url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog, image=image)
+    return render_template('festivals.html', artists=artists, festivals=sorted(set(festivals)), requeteFestivals=requeteFestivals, genreFestivals=sorted(set(genreFestivals)), url=url, dateDeb=dateDeb, dateFin=dateFin, taille=taille, prix=prix, lieu=lieu, prog=prog, imageFestivals=imageFestivals)
 
 @app.route('/aPropos/')
 def aPropos():
@@ -255,11 +259,17 @@ def aPropos():
 
 # ...................................................................................................................................................................... #
 
+requete = []
+requeteFestivals = []
+requeteArtists = []
+
 data = []
 artists = []
+artistsResults = []
 festivals = []
-requete = []
-genre = []
+festivalsResults = []
+genreFestivals = []
+genreArtists = []
 concerts = []
 url = []
 dateDeb = []
@@ -271,16 +281,16 @@ prog = []
 nationalite = []
 notoriete = []
 youtube = []
+imageFestivals=[]
 
-image=[]
 
 #GERER LES RECHERCHES SUR 'index.html'
 @app.route('/post', methods=['POST'])
 def post():
 
   del data[:]
-  del artists[:]
-  del festivals[:]
+  del artistsResults[:]
+  del festivalsResults[:]
   del requete[:]
 
   recherche = request.form['post']
@@ -324,66 +334,64 @@ def post():
   all = resultArtists.fetchall()
   print (all)
   for x in range(len(all)):
-        artists.append(all[x][0])
+        artistsResults.append(all[x][0])
 
   #Donne les Festivals du genre "recherche"
   all = resultFestivals.fetchall()
   print (all)
   for x in range(len(all)):
-        festivals.append(all[x][0])
-        print(festivals)
+        festivalsResults.append(all[x][0])
+        print(festivalsResults)
 
   #Donne l'artiste "recherche"
   all = resultArtist.fetchall()
   print (all)
   print ("je suis dans (nom artiste)")
   for x in range(len(all)):
-    artists.append(all[x][0])
-    print(artists)
+        artistsResults.append(all[x][0])
+        print(artistsResults)
 
   #Donne les festivals ou l'artiste "recherche" sera present
   all = resultArtistsBis.fetchall()
   print (all)
   for x in range(len(all)):
-        festivals.append(all[x][0])
-        print(festivals)
+        festivalsResults.append(all[x][0])
+        print(festivalsResults)
 
 
   #Donne le festival "recherche"
   all = resultFestival.fetchall()
   print (all)
   for x in range(len(all)):
-    festivals.append(all[x][0])
-    print(festivals)
+        festivalsResults.append(all[x][0])
+        print(festivalsResults)
 
   #Donne la programmation du festival "recherche"
   all = resultProg.fetchall()
   print (all)
   if (all != None):
     for x in range(len(all)):
-      artists.append(all[x][0])
-      print(artists)
+        artistsResults.append(all[x][0])
+        print(artistsResults)
 
   #Donne le festival du Lieu "recherche"
   all = resultLieu.fetchall()
   print (all)
   if (all != None):
     for x in range(len(all)):
-      festivals.append(all[x][0])
-      print(festivals)
+        festivalsResults.append(all[x][0])
+        print(festivalsResults)
 
   return redirect(url_for('results'))
 
 
 #GERER LES RECHERCHES SUR 'festivals.html'
-@app.route('/postFestivals/<requeteText>', methods=['GET','POST'])
-def postFestivals(requeteText=None):
+@app.route('/postFestivals/<requeteTextFestivals>', methods=['GET','POST'])
+def postFestivals(requeteTextFestivals=None):
 
-  del data[:]
-  del artists[:]
   del festivals[:]
-  del requete[:]
-  del genre[:]
+  del requeteFestivals[:]
+  del genreFestivals[:]
   del url[:]
   del dateDeb[:]
   del dateFin[:]
@@ -391,18 +399,18 @@ def postFestivals(requeteText=None):
   del prix[:]
   del lieu[:]
   del prog[:]
-  del image[:]
+  del imageFestivals[:]
 
   print("---")
-  print(requeteText)
+  print(requeteTextFestivals)
   print("----")
 
-  if(requeteText == 'post'):
+  if(requeteTextFestivals == 'post'):
 
     recherche = request.form['post']
-    requete.append(recherche)
+    requeteFestivals.append(recherche)
 
-    str1 = list(requete[0])
+    str1 = list(requeteFestivals[0])
     for i in range(len(str1)):
       if str1[i] == "'":
         str1[i] = "\\'"
@@ -448,8 +456,8 @@ def postFestivals(requeteText=None):
     if (all != None):
         x = []
         for x in range(len(all)):
-            genre.append(all[x][0])
-        print(genre)
+            genreFestivals.append(all[x][0])
+        print(genreFestivals)
 
     #Donne l'url du festival "recherche"
     all = resultURL.fetchone()
@@ -463,8 +471,8 @@ def postFestivals(requeteText=None):
     all = resultImage.fetchone()
     print ("IMAGE : ", all)
     if (all != None):
-        image.append(all[0])
-        print(image)
+        imageFestivals.append(all[0])
+        print(imageFestivals)
 
 
     
@@ -510,11 +518,11 @@ def postFestivals(requeteText=None):
 
   else :
 
-      recherche = request.form['requeteText']
-      print(requeteText)
-      requete.append(requeteText)
+      recherche = request.form['requeteTextFestivals']
+      print(requeteTextFestivals)
+      requeteFestivals.append(requeteTextFestivals)
 
-      str1 = list(requete[0])
+      str1 = list(requeteFestivals[0])
       for i in range(len(str1)):
         if str1[i] == "'":
             str1[i] = "\\'"
@@ -560,8 +568,8 @@ def postFestivals(requeteText=None):
       all = resultImage.fetchone()
       print ("IMAGE : ", all)
       if (all != None):
-          image.append(all[0])
-          print(image)
+          imageFestivals.append(all[0])
+          print(imageFestivals)
 
       #Donne le genre du festival "recherche"
       all = resultGenre.fetchall()
@@ -569,8 +577,8 @@ def postFestivals(requeteText=None):
       if (all != None):
           x = []
           for x in range(len(all)):
-            genre.append(all[x][0])
-          print(genre)
+            genreFestivals.append(all[x][0])
+          print(genreFestivals)
 
       #Donne l'url du festival "recherche"
       all = resultURL.fetchone()
@@ -625,36 +633,27 @@ def postFestivals(requeteText=None):
 
 
 #GERER LES RECHERCHES SUR 'artistes.html'
-@app.route('/postArtist/<requeteText>', methods=['POST'])
-def postArtist(requeteText=None):
+@app.route('/postArtist/<requeteTextArtists>', methods=['POST'])
+def postArtist(requeteTextArtists=None):
 
-  del data[:]
   del artists[:]
-  del festivals[:]
-  del requete[:]
-  del genre[:]
+  del requeteArtists[:]
+  del genreArtists[:]
   del concerts[:]
   del nationalite[:]
   del notoriete[:]
   del youtube[:]
-  del url[:]
-  del dateDeb[:]
-  del dateFin[:]
-  del taille[:]
-  del prix[:]
-  del lieu[:]
-  del prog[:]
 
   print("---")
-  print(requeteText)
+  print(requeteTextArtists)
   print("----")
 
-  if(requeteText == 'post'):
+  if(requeteTextArtists == 'post'):
 
     recherche = request.form['post']
-    requete.append(recherche)
+    requeteArtists.append(recherche)
 
-    str1 = list(requete[0])
+    str1 = list(requeteArtists[0])
     for i in range(len(str1)):
       if str1[i] == "'":
           str1[i] = "\\'"
@@ -691,8 +690,8 @@ def postArtist(requeteText=None):
     if (all != None):
         x = []
         for x in range(len(all)):
-            genre.append(all[x][0])
-        print(genre)
+            genreArtists.append(all[x][0])
+        print(genreArtists)
 
     #Donne la notoriete
     all = resultNotoriete.fetchone()
@@ -728,12 +727,10 @@ def postArtist(requeteText=None):
 
   else:
 
+      recherche = request.form['requeteTextArtists']
+      requeteArtists.append(requeteTextArtists)
 
-
-      recherche = request.form['requeteText']
-      requete.append(requeteText)
-
-      str1 = list(requete[0])
+      str1 = list(requeteArtists[0])
       for i in range(len(str1)):
         if str1[i] == "'":
           str1[i] = "\\'"
@@ -770,8 +767,8 @@ def postArtist(requeteText=None):
       if (all != None):
           x = []
           for x in range(len(all)):
-              genre.append(all[x][0])
-          print(genre)
+              genreArtists.append(all[x][0])
+          print(genreArtists)
 
       #Donne la notoriete
       all = resultNotoriete.fetchone()

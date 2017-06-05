@@ -155,7 +155,7 @@
                 <h1 class="centered"><b>Quel groupe ou artiste vous intéresse ?</b></h1>
                 <div class = "row">
                     <div class="col-sm-10">
-                        <form action="{{url_for('postArtist',requeteText='post')}}" method="POST">
+                        <form action="{{url_for('postArtist',requeteTextArtists='post')}}" method="POST">
                           <input type="text" name="post" class="form-control round-form" placeholder="Nom de l'artiste / groupe">
                         </form>
                     </div>
@@ -169,15 +169,15 @@
 
               <!-- DEBUT AFFICHAGE ARTISTES -->
               <div class="row mt centered">
-                  <h2>Votre recherche: {{requete[0]}}</h2>
+                  <h5>Votre recherche: {{requeteArtists[0]}}</h5>
               </div>
 
               <div class="row">
 
 
                   <!--  URL vers youtube artiste -->
-                  <!-- Votre festival  -->
-                  {% if (requete != nil and requete[0] != "" and genre != [] and requete[0]|length >= 2) %}
+                  <!-- Votre Artiste -->
+                  {% if (requeteArtists != nil and requeteArtists[0] != "" and genreArtists != [] and requeteArtists[0]|length >= 2) %}
 
                   <div class="row mt centered">
                       <h1><b>{{artists[0]}}</b></h1>
@@ -185,7 +185,7 @@
                       <!-- DEBUT VIDEO -->
                       {% for name in youtube %}
                       {% if name != "" %}
-                      <a href = {{ name }}><p>redirection Youtube</p></a>
+                      <a href = {{ name }}><p>-> Aller sur sa page Youtube <-</p></a>
                       {% endif %}
                       {% endfor %}
                       {% if (youtube[0] == nil) %}
@@ -201,7 +201,11 @@
                           <div class="project">
                               <div class="photo-wrapper">
                                   <div class="photo">
-                                      <a class="fancybox" href={{url_for('static',filename='assets/images/ui-sam.jpg')}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
+                                      {% for name in youtube %}
+                                      {% if name != "" %}
+                                      <a class="fancybox" href={{name}}><img class="img-responsive" src={{url_for('static',filename='assets/images/ui-sam.jpg')}} alt=""></a>
+                                      {% endif %}
+                                      {% endfor %}
                                   </div>
                                   <div class="overlay"></div>
                               </div>
@@ -215,14 +219,15 @@
 
 
                               <!-- Genre -->
-                              {% for name in genre %}
-                              {% if name != "" and genre|length == 1 %}
+                              {% for name in genreArtists %}
+                              {% if name != "" and genreArtists|length == 1 %}
                               <p class="alert alert-success">
                                   <b>
                                       {{ name }}
                                   </b>
                               </p>
-                              {%elif (name!="" and genre|length > 1) %}
+
+                              {%elif (name!="" and genreArtists|length > 1) %}
                               <p>
                                   <b>
                                       {{ name }}
@@ -232,7 +237,7 @@
                               {% endif %}
 
                               {% endfor %}
-                              {% if (genre[0] == nil) %}
+                              {% if (genreArtists[0] == nil) %}
                               <!-- show nothing -->
                               {% endif %}
 
@@ -244,7 +249,7 @@
                               {% for name in nationalite %}
                               {% if name != "" %}
                               <p>
-                                  Nationalite : {{ name }}
+                                  <b>Nationalite :</b> {{ name }}
                               </p>
                               {% endif %}
                               {% endfor %}
@@ -255,7 +260,7 @@
                               {% for name in notoriete %}
                               {% if name != "" %}
                               <p>
-                                  Notoriete (sur une echelle de 5) : {{ name }}
+                                  <b>Notoriete (sur une echelle de 1 à 5) :</b> {{ name }}
                               </p>
                               {% endif %}
                               {% endfor %}
@@ -268,9 +273,9 @@
                   </div><!-- /col-md-4-->
 
                   <!-- Note Panel -->
-                    <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                    <div class="col-lg-4 col-md-4 col-sm-4 mb centered">
                         <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
-                            <h5><b>Note:</b></h5>
+                            <h5><b>Donnez une note à cet artiste:</b></h5>
                             <select class="form-control" name="quantity">
                                 <option>1</option>
                                 <option>2</option>
@@ -293,13 +298,13 @@
               <!-- DEBUT TABLEAU RECAPITULATIF -->
               <div class="row mt">
                   <div class="col-lg-12">
-                      <div class="content-panel">
-                          <h3>Programmation</h3>
+                      <div class="content-panel centered">
+                          <h3 class="text-center">Programmation</h3>
                           <section id="unseen">
                               <table class="table table-bordered table-striped table-condensed">
                                   <thead>
                                   <tr>
-                                      <th>Artiste / Groupe </th>
+                                      <th class="text-center">Artiste / Groupe </th>
                                   </tr>
                                   </thead>
                                   <tbody>
@@ -311,7 +316,7 @@
                                           <form action="/postFestivals/{{name}}" method="POST">
 
                                               <i class="fa fa-music"></i>
-                                              <button class="btn btn-info btn-xs" name='requeteText'>{{name}}</button>
+                                              <button class="btn btn-info btn-xs" name='requeteTextFestivals'>{{name}}</button>
                                           </form>
                                           <br>
 

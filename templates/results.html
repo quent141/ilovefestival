@@ -169,7 +169,7 @@
                                 <hr>
                                 <div class="row mt centered">
                                   {% if (requete != nil and requete[0]|length >= 2) %}
-                                    <h2>{{requete[0]}}</h2>
+                                    <h2>Votre recherche: {{requete[0]}}</h2>
                                   {% else %}
                                     <h2 class="alert alert-warning">Veuillez saisir une requete plus précise...</h2>
                                   {% endif %}
@@ -187,39 +187,42 @@
                   <h1>RESULTATS ARTISTES</h1>
 
 
-                  {% for name in artists %}
-                  {% if name != "" and name != " " and requete[0]|length >=2%}
+                  {% for name in artistsResults %}
+                  {% if name != "" and name != " " and requete[0]|length >=2 %}
 
+                    <form action="/postArtist/{{name}}" method="POST">
+                      <button class="btn btn-round btn-warning" type="text" name='requeteTextArtists'>{{name}}</button>
+                    </form>
+                    <br>
 
-                  <form action="/postArtist/{{name}}" method="POST">
-                      <button class="btn btn-round btn-warning" type="text" name='requeteText'>{{name}}</button>
-                  </form>
-                  <br>
                   {% endif %}
                   {% endfor %}
 
-                  {% if (artists[0] == nil)%}
+                  {% if (artistsResults[0] == nil) %}
                   <p>Votre recherche n'a rien donné :(</p>
                   {% endif %}
+
               </aside>
 
               <aside class="col-lg-3 mt centered">
                 <h1>RESULTATS FESTIVALS</h1>
-                {% for name in festivals %}
-                {% if name != "" and name != " " and requete[0]|length >=2  %}
+
+
+                {% for name in festivalsResults %}
+                {% if name != "" and name != " " and requete[0]|length >=2 %}
+
                   <form action="/postFestivals/{{name}}" method="POST">
-                      <button class="btn btn-round btn-success" type="text" name='requeteText'>{{name}}</button>
+                      <button class="btn btn-round btn-success" type="text" name='requeteTextFestivals'>{{name}}</button>
                   </form>
                   <br>
+
                 {% endif %}
-
-
-
                 {% endfor %}
 
-                {% if (festivals[0] == nil) %}
+                {% if (festivalsResults[0] == nil) %}
                 <p>Votre recherche n'a rien donné :(</p>
                 {% endif %}
+
               </aside>
 
           </section>
