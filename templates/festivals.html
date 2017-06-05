@@ -155,7 +155,7 @@
               <h1 class="centered"><b>Quel festival vous intéresse ?</b></h1>
               <div class = "row">
                   <div class="col-sm-10">
-                      <form action="{{url_for('postFestivals',requeteText='post')}}" method="POST">
+                      <form action="{{url_for('postFestivals',requeteTextFestivals='post')}}" method="POST">
                           <input type="text" name="post" class="form-control round-form" placeholder="Nom du festival">
                       </form>
                   </div>
@@ -169,20 +169,22 @@
 
               <!-- DEBUT AFFICHAGE FESTIVAL -->
               <div class="row mt centered">
-                  <h2>Votre recherche: {{requete[0]}}</h2>
+                  <h5>Votre recherche: {{requeteFestivals[0]}}</h5>
               </div>
 
 
               <div class="row">
 
                       <!-- Votre festival  -->
-                      {% if (requete != nil and requete[0] != "" and genre != [] and requete[0]|length >= 2) %}
+                      {% if (requeteFestivals != nil and requeteFestivals[0] != "" and genreFestivals != [] and requeteFestivals[0]|length >= 2) %}
                       <div class="row mt centered">
                           <h1><b>{{festivals[0]}}</b></h1>
                           <!-- URL -->
-                          {% for name in url %}
-                          {% if name != "" %}
-                          <a href = {{ name }}><p>site web du festival</p></a>
+                          {% for redirection in url %}
+                          {% if redirection != "" %}
+                          <a href = {{redirection}}>
+                              <p>-> Aller directement sur le site <-</p>
+                          </a>
                           {% endif %}
                           {% endfor %}
                       </div>
@@ -194,12 +196,17 @@
                           <div class="project">
                               <div class="photo-wrapper">
                                   <div class="photo">
-                                      {% for name in image %}
+                                      {% for name in imageFestivals %}
                                       {% if name != "" %}
-                                      <a class="fancybox" href={{url_for('static',filename=name)}}><img class="img-responsive" src={{url_for('static',filename=name)}} alt=""></a>
+                                      <!-- URL -->
+                                        {% for redirection in url %}
+                                        {% if redirection != "" %}
+                                            <a class="fancybox" href={{redirection}}><img class="img-responsive" src={{url_for('static',filename=name)}} alt=""></a>
+                                        {% endif %}
+                                        {% endfor %}
+
                                       {% endif %}
                                       {% endfor %}
-
                                   </div>
                                   <div class="overlay"></div>
                               </div>
@@ -213,15 +220,15 @@
 
 
                               <!-- Genre -->
-                              {% for name in genre %}
-                              {% if (name != "" and genre|length == 1) %}
-                              <p>
+                              {% for name in genreFestivals %}
+                              {% if name != "" and genreFestivals|length == 1 %}
+                              <p class="alert alert-success">
                                   <b>
                                       {{ name }}
                                   </b>
                               </p>
 
-                              {%elif (name!="" and genre|length > 1) %}
+                              {%elif (name!="" and genreFestivals|length > 1) %}
                               <p>
                                   <b>
                                       {{ name }}
@@ -231,7 +238,7 @@
                               {% endif %}
 
                               {% endfor %}
-                              {% if (genre[0] == nil) %}
+                              {% if (genreFestivals[0] == nil) %}
                               <!-- show nothing -->
                               {% endif %}
 
@@ -244,7 +251,7 @@
                                   {% for name in lieu %}
                                   {% if name != "" %}
                                   <li>
-                                      Lieu : {{ name }}
+                                      <b>Lieu :</b> {{ name }}
                                   </li>
                                   {% endif %}
                                   {% endfor %}
@@ -256,7 +263,7 @@
                                   {% for nameF in dateFin %}
                                   {% if nameD != "" and nameF != "" %}
                                   <li>
-                                      Du {{ nameD }} au {{ nameF }}
+                                      Du <b>{{ nameD }}</b> au <b>{{ nameF }}</b>
                                   </li>
                                   {% endif %}
                                   {% endfor %}
@@ -272,32 +279,32 @@
                                   {% if name != "" %}
                                   {% if name == 0 %}
                                   <li>
-                                      Prix par jour : Gratuit
+                                      <b>Prix par jour :</b> Gratuit
                                   </li>
                                   {% endif %}
                                   {% if name == 1 %}
                                   <li>
-                                      Prix par jour : jusqu'à 20€
+                                      <b>Prix par jour :</b> jusqu'à 20€
                                   </li>
                                   {% endif %}
                                   {% if name == 2 %}
                                   <li>
-                                      Prix par jour : entre 20 et 40€
+                                      <b>Prix par jour :</b> entre 20 et 40€
                                   </li>
                                   {% endif %}
                                   {% if name == 3 %}
                                   <li>
-                                      Prix par jour : entre 40 et 70€
+                                      <b>Prix par jour :</b> entre 40 et 70€
                                   </li>
                                   {% endif %}
                                   {% if name == 4 %}
                                   <li>
-                                      Prix par jour : entre 70 et 100€
+                                      <b>Prix par jour :</b> entre 70 et 100€
                                   </li>
                                   {% endif %}
                                   {% if name == 5 %}
                                   <li>
-                                      Prix par jour : plus de 100€
+                                      <b>Prix par jour :</b> plus de 100€
                                   </li>
                                   {% endif %}
                                   {% endif %}
@@ -305,30 +312,33 @@
                                   {% if (prix[0] == nil) %}
                                   <!-- show nothing -->
                                   {% endif %}
-                                  <!-- Taille -->
-                                  {% for name in taille %}
-                                  {% if name != "" %}
-                                  {% if name == 1 %}
-                                  <li>
-                                      Petit festival
-                                  </li>
-                                  {% endif %}
-                                  {% if name == 2 %}
-                                  <li>
-                                      Festival de taille moyenne
-                                  </li>
-                                  {% endif %}
-                                  {% if name == 3 %}
-                                  <li>
-                                      Grand Festival
-                                  </li>
-                                  {% endif %}
-                                  {% endif %}
-                                  {% endfor %}
-                                  {% if (taille[0] == nil) %}
-                                  <!-- show nothing -->
-                                  {% endif %}
                               </ul>
+
+                              <!-- Taille -->
+                              {% for name in taille %}
+                              {% if name != "" %}
+                              {% if name == 1 %}
+
+                              <p class="text-center">
+                                  <b>Petit festival</b>
+                              </p>
+                              {% endif %}
+                              {% if name == 2 %}
+                              <p class="text-center">
+                                  <b>Festival de taille moyenne</b>
+                              </p>
+                              {% endif %}
+                              {% if name == 3 %}
+                              <p class="text-center">
+                                  <b>Grand Festival</b>
+                              </p>
+                              {% endif %}
+                              {% endif %}
+                              {% endfor %}
+                              {% if (taille[0] == nil) %}
+                              <!-- show nothing -->
+                              {% endif %}
+
 
                           </div>
 
@@ -336,9 +346,9 @@
                   </div><!-- /col-md-4-->
 
                   <!-- Note Panel -->
-                  <div class="col-lg-4 col-md-4 col-sm-4 mb">
+                  <div class="col-lg-4 col-md-4 col-sm-4 mb centered">
                       <form action="/login?from={{ from_page }}" method="POST" class="form-inline" role="form">
-                          <h5><b>Note:</b></h5>
+                          <h5><b>Donnez une note à ce festival:</b></h5>
                           <select class="form-control" name="quantity">
                               <option>1</option>
                               <option>2</option>
@@ -362,13 +372,13 @@
               <!-- DEBUT TABLEAU RECAPITULATIF -->
               <div class="row mt">
                   <div class="col-lg-12">
-                      <div class="content-panel">
-                          <h3>Programmation</h3>
+                      <div class="content-panel centered">
+                          <h3 class="text-center">Programmation</h3>
                           <section id="unseen">
                               <table class="table table-bordered table-striped table-condensed">
                                   <thead>
                                   <tr>
-                                      <th>Artiste / Groupe </th>
+                                      <th class="text-center">Artiste / Groupe </th>
                                   </tr>
                                   </thead>
                                   <tbody>
@@ -381,7 +391,7 @@
                                           <form action="/postArtist/{{name}}" method="POST">
 
                                               <i class="fa fa-music"></i>
-                                              <button class="btn btn-warning btn-xs" name='requeteText'>{{name}}</button>
+                                              <button class="btn btn-warning btn-xs" name='requeteTextArtists'>{{name}}</button>
 
                                           </form>
                                           <br>
