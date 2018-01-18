@@ -23,7 +23,7 @@ SALT = 'foo#BAR_{baz}^666'
 
 # ...................................................................................................................................................................... #
 
-engineFest = create_engine('mysql+mysqldb://root:ILF@localhost/ilovefestivals', convert_unicode=True, echo=False)
+engineFest = create_engine('mysql+mysqldb://root@localhost/ilovefestivals', convert_unicode=True, echo=False)
 metadata = MetaData()
 Base = declarative_base()
 Base.metadata.reflect(engineFest)
